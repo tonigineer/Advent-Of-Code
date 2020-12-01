@@ -28,7 +28,7 @@ def refactored(numbers, depth, targetValue=2020):
 if __name__ == "__main__":
     data = aocd.get_data(day=1, year=2020)
     numbers = list(map(int, data.splitlines()))
-    print('Fast approach')
+    print('Simple approach')
     print(f'Solution 1: {part1(numbers)}')
     print(f'Solution 2: {part2(numbers)}')
 

@@ -1,6 +1,5 @@
-# Advent of code
+# 🎄🎁☃️ Advent of Code ☃️🎁🎄
 
-Years
-- [2019](#2019)
+**Note**: The solutions provided here are far from good quality code! Due to a lack of time, it is only about solving the puzzles.
 
-Go and see for yourself at [adventofcode.com](https://adventofcode.com/)
+🦌🤶🎅 Go and see for yourself - [adventofcode.com](https://adventofcode.com/)
