@@ -3,7 +3,7 @@
 import aocd
 
 
-def determineSeatId(bp, rows=(0, 128), cols=(0, 8)):
+def determineSeatId(bp):
     """Translate code into binary."""
     bp = bp.translate(str.maketrans('FBLR', '0101'))
     return calcSeatId(int(bp[:7], 2), int(bp[7:], 2))
