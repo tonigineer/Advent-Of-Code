@@ -34,13 +34,13 @@ AOC_DIR = Path(__file__).absolute().parent.parent.parent
 
 # The directory where the image files for the tiles are stored. This should be committed to git.
 # Year directories are created in this directory, then each day is saved as 01.png, 02.png, etc.
-IMAGE_DIR = AOC_DIR / "Media"
+IMAGE_DIR = AOC_DIR / "assets"
 
 # Path to the README file where the tiles should be added
 README_PATH = AOC_DIR / "README.md"
 
 # Path to the README file where the tiles should be added
-SESSION_COOKIE_PATH = "~/.config/acod/token"
+SESSION_COOKIE_PATH = "/home/toni/.config/aocd/token"
 
 # Whether the graphic should be created for days that have not been completed yet. Note that missing days between
 # completed days will still be created.
