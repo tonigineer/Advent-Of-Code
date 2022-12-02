@@ -2,7 +2,7 @@
 
 import re
 
-with open('./2022/inputs/1.in') as f:
+with open('./2022/inputs/01.in') as f:
     lines = f.read()
 
 blank_line_regex = r"(?:\r?\n){2,}"
