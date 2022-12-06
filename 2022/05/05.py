@@ -18,7 +18,7 @@ stacks = [
 ]
 
 stacks_orig = deepcopy(stacks)
-lines = lines[10:]
+lines = lines[len(stacks)+1:]
 
 for cmd in lines:
     cmd = cmd.split()
