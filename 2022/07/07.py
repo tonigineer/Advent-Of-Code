@@ -22,7 +22,7 @@ for line in lines:
             tree['/'.join(pwd[:i+1])] += size
 
 ans = 0
-for _dir, size in tree.items():
+for size in tree.values():
     if size <= 100_000:
         ans += size
 
@@ -30,8 +30,8 @@ print(f'🎄 1. Solution: {ans}')
 
 disc_space = 70_000_000
 space_needed = 30_000_000
-current_size = tree['/']
-needed_space = space_needed - (disc_space - current_size)
+current_space = tree['/']
+space_to_free = space_needed - (disc_space - current_space)
 
-ans2 = min([size for size in tree.values() if size > needed_space])
+ans2 = min([size for size in tree.values() if size > space_to_free])
 print(f'🎅 2. Solution: {ans2}')
