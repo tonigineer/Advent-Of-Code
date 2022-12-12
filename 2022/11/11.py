@@ -1,4 +1,4 @@
-# https://adventofcode.com/2022/day/10
+# https://adventofcode.com/2022/day/11
 
 data = open('./2022/11/11.in').read()
 
