@@ -3,12 +3,6 @@
 from functools import cmp_to_key
 
 
-FILENAME = './2022/13/13.in'
-
-raw = open(FILENAME).read().strip()
-lines = [line.strip() for line in open(FILENAME)]
-
-
 def check(left, right):
     if isinstance(left, int) and isinstance(right, int):
         if left == right:
@@ -33,12 +27,19 @@ def check(left, right):
         return check([left], right)
 
 
+FILENAME = './2022/13/13.in'
+
+raw = open(FILENAME).read().strip()
+lines = [line.strip() for line in open(FILENAME)]
+
 groups = raw.split('\n\n')
 
 packets = [[[2]], [[6]]]
 ans = 0
+
 for idx, group in enumerate(groups):
     left, right = group.split('\n')
+
     left = eval(left)
     right = eval(right)
 
@@ -48,9 +49,7 @@ for idx, group in enumerate(groups):
     packets.append(left)
     packets.append(right)
 
-
 print(f'🎄 1. Solution: {ans}')
-
 
 packets = sorted(
     packets, key=cmp_to_key(lambda l, r: check(l, r)), reverse=True
