@@ -1,85 +1,88 @@
 # https://adventofcode.com/2022/day/16
 
-from copy import deepcopy
+
+from collections import deque
 from collections import defaultdict
+
 
 FILENAME = './2022/16/16.in'
 
 raw = open(FILENAME).read().strip()
 lines = [line.strip() for line in open(FILENAME)]
 
-C = defaultdict(list)
-R = defaultdict(int)
+tunnels = defaultdict(list)
+rates = defaultdict(int)
 
 for line in lines:
     parts = line.split()
-    _id = parts[1]
+    valve = parts[1]
+
     rate = int(parts[4][5:-1])
-    con = [c for c in "".join(parts[9:]).split(',')]
-    for c in con:
-        C[_id].append(c)
-    R[_id] = rate
+    rates[valve] = rate
+
+    connections = [c for c in "".join(parts[9:]).split(',')]
+    for c in connections:
+        tunnels[valve].append(c)
 
 
-S = {}
+dists = {}  # get rid of valves without pressure rates and get distance to them
+for valve in rates.keys():
+    if valve != 'AA' and rates[valve] == 0:
+        continue
+
+    dists[valve] = {valve: 0, 'AA': 0}
+    seen = {valve}
+
+    queue = deque([(0, valve)])
+
+    while queue:
+        distance, position = queue.popleft()
+        for neighbor in tunnels[position]:
+            if neighbor in seen:
+                continue
+            seen.add(neighbor)
+            if rates[neighbor]:
+                dists[valve][neighbor] = distance + 1
+            queue.append((distance + 1, neighbor))
+
+    del dists[valve][valve]
+    if valve != 'AA':
+        del dists[valve]['AA']
 
 
-def v(_id, _open, _time):
-    if _time == 0:
+cache = {}
+indices = {valve: idx for idx, valve in enumerate(dists.keys())}
+
+
+def dfs(time, valve, bit_mask):
+    if time == 0:
         return 0
 
-    key = (_id, tuple(sorted(_open)), _time)
-    if key in S:
-        return S[key]
+    if (time, valve, bit_mask) in cache:
+        return cache[(time, valve, bit_mask)]
 
-    ans = 0
+    score = 0
 
-    if _time > 0:
-        if _id not in _open and R[_id] > 0:
-            _open_new = deepcopy(_open)
-            _open_new.add(_id)
-            ans = max(
-                ans,
-                sum(R[_id] for _id in _open) + v(_id, _open_new, _time-1)
-            )
+    if time > 0:
+        bit = 1 << indices[valve]
 
-        for c in C[_id]:
-            ans = max(
-                ans,
-                sum(R[_id] for _id in _open) + v(c, _open, _time-1)
-            )
+        if not (bit_mask & bit) and rates[valve] > 0:
+            score = max(score, rates[valve]*(time - 1) + dfs(time-1, valve, bit_mask | bit))
 
-    S[key] = ans
-    return ans
+        for neighbor, distance in dists[valve].items():
+            score = max(score, dfs(time-distance, neighbor, bit_mask))
+
+    cache[(time, valve, bit_mask)] = score
+    return score
 
 
-print(f'🎄 1. Solution: {v("AA", set(), 30)}')
-
-# while Q:
-#     score, _id, _open, _time = Q.popleft()
-#     print(_time)
-#     ans = max(ans, score)
-
-#     key = (_id, tuple(sorted(_open)), _time)
-#     if key in S:
-#         # if S[key] > score:
-#         continue
-
-#     if _time > 0:
-#         score = score + sum([R[_id] for _id in _open])
-
-#         for c in C[_id]:
-#             S[(_id, tuple(sorted(_open)), _time)] = score
-#             Q.append([score, c, _open, _time - 1])
-
-#         if _id not in _open and R[_id] > 0:
-#             _open = deepcopy(_open)
-#             _open.add(_id)
-#             S[(_id, tuple(sorted(_open)), _time)] = score
-#             Q.append([score, _id, _open, _time - 1])
+print(f'🎄 1. Solution: {dfs(30, "AA", 0)}')
 
 
+wtf = (1 << len(dists)) - 1
+max_score = 0
 
-# print(ans)
-
-# print(f'🎅 2. Solution: {xn * MAX_COORD + yn}')
+for i in range((wtf + 1) // 2):
+    max_score = max(max_score, dfs(26, "AA", i) + dfs(26, "AA", wtf ^ i))
+    print(f'\r🎅 2. Solution: {max_score} ... ({i / (wtf // 2) * 100:0.1f}%)', end='')
+print(f'\r🎅 2. Solution: {max_score}')
