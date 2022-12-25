@@ -10,7 +10,7 @@
 
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  2022 - 40 ⭐
+  2022 - 50 ⭐
 </h1>
 <a href="2022/01/01.jl">
   <img src="assets/2022/01.png" width="161px">
@@ -71,6 +71,21 @@
 </a>
 <a href="2022/20/20.py">
   <img src="assets/2022/20.png" width="161px">
+</a>
+<a href="2022/21/21.py">
+  <img src="assets/2022/21.png" width="161px">
+</a>
+<a href="2022/22/22.py">
+  <img src="assets/2022/22.png" width="161px">
+</a>
+<a href="2022/23/23.py">
+  <img src="assets/2022/23.png" width="161px">
+</a>
+<a href="2022/24/24.py">
+  <img src="assets/2022/24.png" width="161px">
+</a>
+<a href="2022/25/25.py">
+  <img src="assets/2022/25.png" width="161px">
 </a>
 <h1 align="center">
   2021 - 32 ⭐
