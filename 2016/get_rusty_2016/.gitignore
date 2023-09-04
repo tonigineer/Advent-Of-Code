@@ -1,5 +1,9 @@
 # Workaround to ignore binaries
-src/bin/*
-!src/bin/*.rs
+/src/bin/*
+!/src/bin/*.rs
 
+/src/*.*
+!/src/*.rs
+
+# Folder
 target/
