@@ -44,6 +44,6 @@ fn main() {
     let input: String = fs::read_to_string("./inputs/01.in").
         expect("Could not read input file.");
 
-    print!("󰎤 {} \t", solve(&input, false));
-    print!("󰎧 {} \t", solve(&input, true));
+    print!("󰎤 {} ", solve(&input, false));
+    print!("󰎧 {} ", solve(&input, true));
 }

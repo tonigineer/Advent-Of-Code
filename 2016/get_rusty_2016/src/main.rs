@@ -12,7 +12,7 @@ fn run_day(day_num: &str) {
         .unwrap();
     let output = String::from_utf8(cmd.stdout).unwrap();
 
-    println!("Day {} | {}󰅒 {}ms", day_num, output, timer.elapsed().as_millis());
+    println!("Day {} | {} 󰅒 {}ms", day_num, output, timer.elapsed().as_millis());
 }
 
 
