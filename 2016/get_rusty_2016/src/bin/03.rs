@@ -1,18 +1,9 @@
-use std::fs;
-
-
-fn part1(input: &String) -> i32 {
+fn part1(mut input: Vec<Vec<i32>>) -> i32 {
     let mut valid_triangle = 0;
 
-    for line in input.lines() {
-        let mut sides: Vec<i32> = line
-            .split_whitespace()
-            .filter_map(|num| num.parse::<i32>().ok())
-            .collect();
-
-        sides.sort();
-
-        if sides[0] + sides[1] > sides[2] {
+    for item in input.iter_mut() {
+        item.sort();
+        if item[0] + item[1] > item[2] {
             valid_triangle += 1;
         }
     }
@@ -21,24 +12,16 @@ fn part1(input: &String) -> i32 {
 }
 
 
-fn part2(input: &String) -> i32 {
+fn part2(input: Vec<Vec<i32>>) -> i32 {
     let mut valid_triangle = 0;
-    let mut list: Vec<Vec<i32>> = vec!();
 
-    for line in input.lines() {
-        list.push(
-            line.split_whitespace()
-                .filter_map(|num| num.parse::<i32>().ok())
-                .collect()
-        );
-    }
-
-    for i in (0..list.len()).step_by(3) {
+    for i in (0..input.len()).step_by(3) {
         for k in 0..=2 {
             valid_triangle += (
-                list[i+0][k] + list[i+1][k] > list[i+2][k] &&
-                list[i+0][k] + list[i+2][k] > list[i+1][k] &&
-                list[i+2][k] + list[i+1][k] > list[i+0][k]) as i32;
+                input[i+0][k] + input[i+1][k] > input[i+2][k] &&
+                input[i+0][k] + input[i+2][k] > input[i+1][k] &&
+                input[i+2][k] + input[i+1][k] > input[i+0][k]
+            ) as i32;
         }
     }
 
@@ -47,20 +30,8 @@ fn part2(input: &String) -> i32 {
 
 
 fn main() {
-    let input: String = fs::read_to_string("./inputs/03.in").
-        expect("Could not read input file.");
+    let input = aoc::parse_multiple_items_per_line::<i32>("./inputs/03.in");
 
-    // let list = aoc::parse_one_item_per_line::<i32>("./inputs/test.in");
-
-    // for it in list.iter() {
-    //     println!("{}", it);
-    // }
-
-    // let list2 = aoc::parse_multiple_items_per_line::<i32>("./inputs/06.in");
-    // for it in list2.iter() {
-    //     println!("{}", it[0]);
-    // }
-
-    print!("󰎤 {} ", part1(&input));
-    print!("󰎧 {} ", part2(&input));
+    print!("󰎤 {} ", part1(input.clone()));
+    print!("󰎧 {} ", part2(input));
 }

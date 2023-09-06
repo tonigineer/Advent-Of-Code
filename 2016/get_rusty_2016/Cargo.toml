@@ -14,4 +14,3 @@ name = "main"
 path = "src/main.rs"
 
 [dependencies]
-anyhow = "1.0.51"
