@@ -2,12 +2,10 @@
 /src/bin/*
 !/src/bin/*.rs
 
-/src/*
-!/src/*.rs
-
 # Folder
 target/
 
 # Files
 Cargo.lock
 tempCodeRunnerFile.rs
+src/main

@@ -19,7 +19,7 @@ fn run_day(day_num: &str) {
 fn main() {
     for it in 1..=25 {
         let day_num = format!("{:0>2}", it);
-        let full_filename = format!("./inputs/{}.in", day_num);
+        let full_filename = format!("./src/bin/{}.rs", day_num);
         let path = Path::new(&full_filename);
 
         if path.exists() {
