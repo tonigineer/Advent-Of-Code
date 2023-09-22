@@ -1,5 +1,0 @@
-{
-    "code-runner.executorMap": {
-        "rust": "cargo run --bin $fileNameWithoutExt"
-    }
-}

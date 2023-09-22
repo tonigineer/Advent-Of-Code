@@ -6,6 +6,7 @@ use std::time::Instant;
 fn run_day(day_num: &str) {
     let timer = Instant::now();
 
+    // let cmd = Command::new(&["mkdir ./../", &day_num])
     let cmd = Command::new("cargo")
         .args(&["run", "--release", "--bin", &day_num])
         .output()

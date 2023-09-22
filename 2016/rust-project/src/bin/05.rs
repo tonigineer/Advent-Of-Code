@@ -1,13 +1,13 @@
 use md5;
 
 
-fn part1(id: String) -> String {
+fn part1(id: &String) -> String {
     let mut hash = String::new();
 
     for i in 0.. {
         let digest = md5::compute(format!("{id}{i}"));
 
-        // Indexing returns two values/bytes, e.g., 0xFF
+        // Indexing returns one byte, therefore two chars, e.g., 0xFF
         if digest[0] == 0 && digest[1] == 0 && digest[2] & 0xf0 == 0 {
             hash.push(
                 format!("{:x}", digest[2] & 0x0f)
@@ -24,8 +24,8 @@ fn part1(id: String) -> String {
 
 
 fn main() {
-    // let input = aoc::parse_multiple_items_per_line::<i32>("./inputs/03.in");
+    let input = aoc::parse_one_item_per_line::<String>("./inputs/05.in");
 
-    print!("󰎤 {} ", part1(String::from("uqwqemis")));
-    // print!("󰎧 {} ", part2(input));
+    print!("󰎤 {} ", part1(input.first().unwrap()));
+    print!("󰎧 {} ", "NA");
 }
