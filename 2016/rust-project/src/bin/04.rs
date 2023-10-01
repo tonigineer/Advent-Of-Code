@@ -89,11 +89,10 @@ fn solve(input: Vec<String>, part2: bool) -> u32 {
 }
 
 
-
-
 fn main() {
     let input = aoc::parse_one_item_per_line::<String>("./inputs/04.in");
 
     print!("󰎤 {} ", solve(input.clone(), false));
     print!("󰎧 {} ", solve(input, true));
 }
+

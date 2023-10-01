@@ -1,4 +1,7 @@
 .vscode
 .aoc_tiles_cache
 
+2016/*/*.rs
+!2016/rust-project/*.rs
+
 token

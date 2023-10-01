@@ -232,6 +232,24 @@
   <img src="assets/2019/13.png" width="161px">
 </a>
 <h1 align="center">
+  2016 - 9 ⭐
+</h1>
+<a href="2016/01/01.rs">
+  <img src="assets/2016/01.png" width="161px">
+</a>
+<a href="2016/02/02.rs">
+  <img src="assets/2016/02.png" width="161px">
+</a>
+<a href="2016/03/03.rs">
+  <img src="assets/2016/03.png" width="161px">
+</a>
+<a href="2016/04/04.rs">
+  <img src="assets/2016/04.png" width="161px">
+</a>
+<a href="2016/05/05.rs">
+  <img src="assets/2016/05.png" width="161px">
+</a>
+<h1 align="center">
   2015 - 4 ⭐
 </h1>
 <a href="2015/01/1.py">
