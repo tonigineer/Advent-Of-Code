@@ -1,7 +1,9 @@
 .vscode
+.venv
 .aoc_tiles_cache
 
+# Workaround for solutions with rust
+2015/*/*.rs
+!2015/rust-project/*.rs
 2016/*/*.rs
 !2016/rust-project/*.rs
-
-token
