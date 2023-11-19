@@ -267,4 +267,13 @@
 <a href="2015/05/05.rs">
   <img src="assets/2015/05.png" width="161px">
 </a>
+<a href="2015/06/06.rs">
+  <img src="assets/2015/06.png" width="161px">
+</a>
+<a href="2015/07/07.rs">
+  <img src="assets/2015/07.png" width="161px">
+</a>
+<a href="2015/08/08.rs">
+  <img src="assets/2015/08.png" width="161px">
+</a>
 <!-- AOC TILES END -->
