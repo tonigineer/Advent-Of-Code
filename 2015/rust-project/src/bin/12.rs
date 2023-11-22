@@ -19,9 +19,11 @@ fn solve(json: Value, part2: bool) -> i64 {
 
     if json.is_object() {
         let mut sum_object = 0;
-        for (_,v) in json.as_object().unwrap() {
+        for (_, v) in json.as_object().unwrap() {
             if part2 {
-                if v == "red" { return 0 }
+                if v == "red" {
+                    return 0;
+                }
             }
             sum_object += solve(v.clone(), part2);
         }

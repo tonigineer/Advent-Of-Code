@@ -12,19 +12,19 @@ impl From<&str> for Gate {
         let vec: Vec<&str> = s.split(' ').collect();
 
         if vec.len() == 1 {
-            Gate{
+            Gate {
                 op: "NONE".to_string(),
                 in1: vec[0].to_string(),
                 in2: "NONE".to_string(),
             }
         } else if vec[0] == "NOT" {
-            Gate{
+            Gate {
                 op: vec[0].to_string(),
                 in1: vec[1].to_string(),
                 in2: "NONE".to_string(),
             }
         } else {
-            Gate{
+            Gate {
                 op: vec[1].to_string(),
                 in1: vec[0].to_string(),
                 in2: vec[2].to_string(),
@@ -35,14 +35,14 @@ impl From<&str> for Gate {
 
 struct Solve {
     gates: HashMap<String, Gate>,
-    found: HashMap<String, u16>
+    found: HashMap<String, u16>,
 }
 
 impl Solve {
     fn new() -> Self {
         Self {
             gates: HashMap::new(),
-            found: HashMap::new()
+            found: HashMap::new(),
         }
     }
 
@@ -58,7 +58,7 @@ impl Solve {
         let v1 = self.get_value(self.gates.get(&output).unwrap().in1.to_string());
         let result = match self.gates.get(&output).unwrap().op.as_str() {
             "NONE" => v1,
-            "NOT" => ! v1,
+            "NOT" => !v1,
             _ => {
                 let v2 = self.get_value(self.gates.get(&output).unwrap().in2.to_string());
                 match self.gates.get(&output).unwrap().op.as_str() {
@@ -66,7 +66,7 @@ impl Solve {
                     "OR" => v1 | v2,
                     "LSHIFT" => v1 << v2,
                     "RSHIFT" => v1 >> v2,
-                    _ => panic!("Not implemented.")
+                    _ => panic!("Not implemented."),
                 }
             }
         };
@@ -88,13 +88,11 @@ fn solve(input: &str, part2: bool) -> u16 {
 
     if part2 {
         s.found = HashMap::new();
-        s.gates.entry("b".to_string()).and_modify(
-            |g| {
-                g.in1 = result.to_string();
-                g.in2 = "NONE".to_string();
-                g.op = "NONE".to_string()
-            }
-        );
+        s.gates.entry("b".to_string()).and_modify(|g| {
+            g.in1 = result.to_string();
+            g.in2 = "NONE".to_string();
+            g.op = "NONE".to_string()
+        });
 
         result = s.get_value("a".to_string());
     }
@@ -107,4 +105,3 @@ fn main() {
     print!("󰎤 {} ", solve(&input, false));
     print!("󰎧 {} ", solve(&input, true));
 }
-

@@ -250,7 +250,7 @@
   <img src="assets/2016/05.png" width="161px">
 </a>
 <h1 align="center">
-  2015 - 10 ⭐
+  2015 - 36 ⭐
 </h1>
 <a href="2015/01/01.rs">
   <img src="assets/2015/01.png" width="161px">
@@ -290,5 +290,20 @@
 </a>
 <a href="2015/13/13.rs">
   <img src="assets/2015/13.png" width="161px">
+</a>
+<a href="2015/14/14.rs">
+  <img src="assets/2015/14.png" width="161px">
+</a>
+<a href="2015/15/15.rs">
+  <img src="assets/2015/15.png" width="161px">
+</a>
+<a href="2015/16/16.rs">
+  <img src="assets/2015/16.png" width="161px">
+</a>
+<a href="2015/17/17.rs">
+  <img src="assets/2015/17.png" width="161px">
+</a>
+<a href="2015/18/18.rs">
+  <img src="assets/2015/18.png" width="161px">
 </a>
 <!-- AOC TILES END -->

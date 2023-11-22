@@ -8,16 +8,10 @@ fn run_day(day_num: &str) {
 
     // Copy files for python script that creates badges based on
     // existing files.
-    let _ = fs::create_dir(format!(
-        "../{}/",
-        &day_num
-    ));
+    let _ = fs::create_dir(format!("../{}/", &day_num));
     let _ = fs::copy(
         format!("src/bin/{}.rs", &day_num),
-        format!(
-            "../{}/{}.rs",
-            &day_num, &day_num
-        ),
+        format!("../{}/{}.rs", &day_num, &day_num),
     );
 
     // Compile and run solution
@@ -46,4 +40,3 @@ fn main() {
         }
     }
 }
-

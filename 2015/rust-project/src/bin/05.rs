@@ -8,9 +8,9 @@ fn nice_part1(line: &str) -> bool {
         static ref RE3: Regex = Regex::new(r"(ab|cd|pq|xy)").unwrap();
     }
 
-    return RE1.is_match(line).unwrap() &&
-        RE2.is_match(line).unwrap() &&
-        ! RE3.is_match(line).unwrap();
+    return RE1.is_match(line).unwrap()
+        && RE2.is_match(line).unwrap()
+        && !RE3.is_match(line).unwrap();
 }
 
 fn nice_part2(line: &str) -> bool {
@@ -19,8 +19,7 @@ fn nice_part2(line: &str) -> bool {
         static ref RE2: Regex = Regex::new(r"(.).(\1)").unwrap();
     }
 
-    return RE1.is_match(line).unwrap() &&
-        RE2.is_match(line).unwrap();
+    return RE1.is_match(line).unwrap() && RE2.is_match(line).unwrap();
 }
 
 fn main() {

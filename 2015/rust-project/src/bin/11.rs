@@ -1,8 +1,7 @@
 use fancy_regex::Regex;
-use std::collections::HashSet;
 use itertools::Itertools;
 use lazy_static::lazy_static;
-
+use std::collections::HashSet;
 
 fn is_valid(password: &str) -> bool {
     lazy_static! {
@@ -11,17 +10,22 @@ fn is_valid(password: &str) -> bool {
     };
 
     // Second criteria
-    if re2.is_match(password).unwrap() {return false};
+    if re2.is_match(password).unwrap() {
+        return false;
+    };
 
     // Third criteria
-    let matches = re1.find_iter(password)
+    let matches = re1
+        .find_iter(password)
         .map(|m| m.unwrap().as_str())
         .collect::<HashSet<&str>>();
-    if matches.len() < 2 { return false }
+    if matches.len() < 2 {
+        return false;
+    }
 
     // First criteria
     for (a, b, c) in password.chars().tuple_windows() {
-        if (c as u8 -2 == a as u8) && (b as u8 - 1 == a as u8) {
+        if (c as u8 - 2 == a as u8) && (b as u8 - 1 == a as u8) {
             return true;
         }
     }
@@ -49,7 +53,9 @@ fn solve(input: &str) -> String {
             new_password.push_str(&c.to_string());
         }
         password = new_password.chars().rev().collect::<String>();
-        if is_valid(&password) { break }
+        if is_valid(&password) {
+            break;
+        }
 
         new_password = String::new();
         flip_next = true;
@@ -61,5 +67,5 @@ fn main() {
     let input = include_str!("../../inputs/11.in").trim();
 
     print!("󰎤 {} ", solve(&input));
-    print!("󰎧 {} ", solve(&solve(&input)));  // whatever ;)
+    print!("󰎧 {} ", solve(&solve(&input))); // whatever ;)
 }

@@ -10,7 +10,7 @@ fn solve_part2(input: &str) -> usize {
         match c {
             '(' => level += 1,
             ')' => level -= 1,
-            _ => panic!("Char not defined.")
+            _ => panic!("Char not defined."),
         }
         result = i;
         if level < 0 {
@@ -26,4 +26,3 @@ fn main() {
     print!("󰎤 {} ", solve_part1(&input));
     print!("󰎧 {} ", solve_part2(&input));
 }
-

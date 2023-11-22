@@ -10,12 +10,17 @@ fn solve(input: &str, part2: bool) -> usize {
     for line in input.lines() {
         // println!("{}", line);
         code_len += line.len();
-        render_len += re.replace_all(line, "x")
+        render_len += re
+            .replace_all(line, "x")
             .replace("\\\\", "x")
-            .replace("\\\"", "x").len() - 2;
+            .replace("\\\"", "x")
+            .len()
+            - 2;
         encoded_len += line.len() + line.matches("\\").count() + line.matches("\"").count() + 2;
     }
-    if part2 { return encoded_len - code_len; }
+    if part2 {
+        return encoded_len - code_len;
+    }
     return code_len - render_len;
 }
 
@@ -25,4 +30,3 @@ fn main() {
     print!("󰎤 {} ", solve(&input, false));
     print!("󰎧 {} ", solve(&input, true));
 }
-

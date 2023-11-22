@@ -1,5 +1,5 @@
-use std::collections::{ HashMap, HashSet };
 use itertools::Itertools;
+use std::collections::{HashMap, HashSet};
 
 fn solve(input: &str, part2: bool) -> i32 {
     let mut h: HashMap<(String, String), i32> = HashMap::new();
@@ -10,14 +10,12 @@ fn solve(input: &str, part2: bool) -> i32 {
             .trim_end_matches('.')
             .replace("gain ", "")
             .replace("lose ", "-");
-        let token: Vec<&str> = modded_line
-            .split(" ")
-            .collect();
+        let token: Vec<&str> = modded_line.split(" ").collect();
 
         let (p1, p2, happiness) = (
             token[0].to_string(),
             token[9].to_string(),
-            token[2].parse().unwrap()
+            token[2].parse().unwrap(),
         );
         h.insert((p1.clone(), p2), happiness);
         p.insert(p1);
@@ -38,7 +36,9 @@ fn solve(input: &str, part2: bool) -> i32 {
             happiness += h.get(&(p1.to_string(), p2.to_string())).unwrap();
             happiness += h.get(&(p2.to_string(), p1.to_string())).unwrap();
         }
-        if happiness > max_happiness { max_happiness = happiness }
+        if happiness > max_happiness {
+            max_happiness = happiness
+        }
     }
 
     return max_happiness;

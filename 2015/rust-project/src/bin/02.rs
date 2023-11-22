@@ -1,7 +1,7 @@
 struct Present {
     l: u32,
     w: u32,
-    h: u32
+    h: u32,
 }
 
 impl Present {
@@ -10,15 +10,15 @@ impl Present {
         let w = dims[1];
         let h = dims[2];
 
-        Present {l, w, h}
+        Present { l, w, h }
     }
 
     fn paper_needed(&self) -> u32 {
-        return 3*self.l*self.w + 2*self.l*self.h + 2*self.w*self.h;
+        return 3 * self.l * self.w + 2 * self.l * self.h + 2 * self.w * self.h;
     }
 
     fn ribbon_needed(&self) -> u32 {
-        return 2*self.l + 2*self.w + self.l*self.h*self.w;
+        return 2 * self.l + 2 * self.w + self.l * self.h * self.w;
     }
 }
 
@@ -50,4 +50,3 @@ fn main() {
     print!("󰎤 {} ", solve(&input, false));
     print!("󰎧 {} ", solve(&input, true));
 }
-
