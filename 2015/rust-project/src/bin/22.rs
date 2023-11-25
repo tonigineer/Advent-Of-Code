@@ -125,7 +125,7 @@ impl Game {
 }
 
 fn main() {
-    // let input = include_str!("../../inputs/21.in").trim();
+    let _input = include_str!("../../inputs/22.in").trim();
     let game = Game {
         player_hp: 50, player_mana: 500, player_armor: 0, boss_hp: 51, boss_damage: 9,
         poison_timer: 0, shield_timer: 0, recharge_timer: 0, mana_spent: 0

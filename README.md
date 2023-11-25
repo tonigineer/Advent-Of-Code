@@ -315,7 +315,7 @@
 <a href="2015/21/21.rs">
   <img src="assets/2015/21.png" width="161px">
 </a>
-<a href="None">
+<a href="2015/22/22.rs">
   <img src="assets/2015/22.png" width="161px">
 </a>
 <!-- AOC TILES END -->
