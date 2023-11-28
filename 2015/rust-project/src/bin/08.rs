@@ -27,6 +27,6 @@ fn solve(input: &str, part2: bool) -> usize {
 fn main() {
     let input = include_str!("../../inputs/08.in").trim();
 
-    print!("󰎤 {} ", solve(&input, false));
+    print!("󰎤 {} \t", solve(&input, false));
     print!("󰎧 {} ", solve(&input, true));
 }

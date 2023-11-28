@@ -76,6 +76,6 @@ fn main() {
     let input = include_str!("../../inputs/14.in").trim();
     let mut game: Game = input.into();
 
-    print!("󰎤 {} ", game.play(2503));
+    print!("󰎤 {} \t", game.play(2503));
     print!("󰎧 {} ", game.play_for_points(2503));
 }

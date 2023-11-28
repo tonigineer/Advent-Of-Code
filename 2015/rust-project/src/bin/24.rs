@@ -25,6 +25,6 @@ fn solve(input: &str, compartments: usize) -> usize {
 fn main() {
     let input = include_str!("../../inputs/24.in").trim();
 
-    print!("󰎤 {} ", solve(input, 3));
+    print!("󰎤 {} \t", solve(input, 3));
     print!("󰎧 {} ", solve(input, 4));
 }

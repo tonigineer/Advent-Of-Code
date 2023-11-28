@@ -15,6 +15,6 @@ fn solve(input: &str, num_zeros: usize) -> u32 {
 fn main() {
     let input = include_str!("../../inputs/04.in").trim();
 
-    print!("󰎤 {} ", solve(&input, 5));
+    print!("󰎤 {} \t", solve(&input, 5));
     print!("󰎧 {} ", solve(&input, 6));
 }

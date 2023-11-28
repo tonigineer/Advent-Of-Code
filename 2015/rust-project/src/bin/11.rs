@@ -66,6 +66,6 @@ fn solve(input: &str) -> String {
 fn main() {
     let input = include_str!("../../inputs/11.in").trim();
 
-    print!("󰎤 {} ", solve(&input));
+    print!("󰎤 {} \t", solve(&input));
     print!("󰎧 {} ", solve(&solve(&input))); // whatever ;)
 }

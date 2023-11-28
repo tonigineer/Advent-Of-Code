@@ -55,6 +55,6 @@ fn solve2(input: &str) -> usize {
 fn main() {
     let input = include_str!("../../inputs/19.in").trim();
 
-    print!("󰎤 {} ", solve(input));
+    print!("󰎤 {} \t\t", solve(input));
     print!("󰎧 {} ", solve2(input));
 }

@@ -31,7 +31,6 @@ impl From<&str> for Instructions {
         match instruction {
             "jmp" => {
                 let offset = token.next().unwrap().parse().unwrap();
-                println!("{}", offset);
                 Instructions::Jump(offset)
             },
             "tpl" | "inc" | "hlf" => {
@@ -158,7 +157,7 @@ fn main() {
     let mut com: Computer = input.into();
     let mut com2 = com.clone();
 
-    print!("󰎤 {} ", com.compute());
+    print!("󰎤 {} \t\t", com.compute());
     com2.a = 1;
     print!("󰎧 {} ", com2.compute());
 }

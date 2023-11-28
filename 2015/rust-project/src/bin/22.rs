@@ -131,7 +131,7 @@ fn main() {
         poison_timer: 0, shield_timer: 0, recharge_timer: 0, mana_spent: 0
     };
 
-    print!("󰎤 {} ", game.play(false));
+    print!("󰎤 {} \t\t", game.play(false));
     print!("󰎧 {} ", game.play(true));
 }
 

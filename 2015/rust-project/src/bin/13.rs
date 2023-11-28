@@ -47,6 +47,6 @@ fn solve(input: &str, part2: bool) -> i32 {
 fn main() {
     let input = include_str!("../../inputs/13.in").trim();
 
-    print!("󰎤 {} ", solve(input, false));
+    print!("󰎤 {} \t\t", solve(input, false));
     print!("󰎧 {} ", solve(input, true));
 }

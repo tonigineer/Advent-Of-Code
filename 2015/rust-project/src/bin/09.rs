@@ -35,6 +35,6 @@ fn solve(input: &str, part2: bool) -> u32 {
 fn main() {
     let input = include_str!("../../inputs/09.in").trim();
 
-    print!("󰎤 {} ", solve(&input, false));
+    print!("󰎤 {} \t\t", solve(&input, false));
     print!("󰎧 {} ", solve(&input, true));
 }

@@ -37,6 +37,6 @@ fn main() {
     let input = include_str!("../../inputs/12.in").trim();
     let data: Value = serde_json::from_str(input).unwrap();
 
-    print!("󰎤 {} ", solve(data.clone(), false));
+    print!("󰎤 {} \t", solve(data.clone(), false));
     print!("󰎧 {} ", solve(data, true));
 }

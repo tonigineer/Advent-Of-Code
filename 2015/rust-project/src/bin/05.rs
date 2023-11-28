@@ -25,6 +25,6 @@ fn nice_part2(line: &str) -> bool {
 fn main() {
     let input = include_str!("../../inputs/05.in").trim();
 
-    print!("󰎤 {} ", input.lines().filter(|l| nice_part1(l)).count());
+    print!("󰎤 {} \t\t", input.lines().filter(|l| nice_part1(l)).count());
     print!("󰎧 {} ", input.lines().filter(|l| nice_part2(l)).count());
 }

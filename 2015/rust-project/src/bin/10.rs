@@ -19,6 +19,6 @@ fn lookandsay(input: &str, repetitions: u8) -> usize {
 fn main() {
     let input = include_str!("../../inputs/10.in").trim();
 
-    print!("󰎤 {} ", lookandsay(&input, 40));
+    print!("󰎤 {} \t", lookandsay(&input, 40));
     print!("󰎧 {} ", lookandsay(&input, 50));
 }

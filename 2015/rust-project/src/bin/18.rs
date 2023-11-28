@@ -93,6 +93,6 @@ fn main() {
         grid_part2.update(true);
     }
 
-    print!("󰎤 {} ", grid.lights_on_total());
+    print!("󰎤 {} \t\t", grid.lights_on_total());
     print!("󰎧 {} ", grid_part2.lights_on_total());
 }

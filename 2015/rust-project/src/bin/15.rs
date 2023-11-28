@@ -99,6 +99,6 @@ fn main() {
     let input = include_str!("../../inputs/15.in").trim();
     let mut dish: Dish = input.into();
 
-    print!("󰎤 {:?} ", dish.highest_score(100, false));
+    print!("󰎤 {} \t", dish.highest_score(100, false));
     print!("󰎧 {} ", dish.highest_score(100, true));
 }

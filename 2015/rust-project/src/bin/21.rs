@@ -95,7 +95,7 @@ fn solve(part2: bool) -> u32 {
 fn main() {
     // let input = include_str!("../../inputs/21.in").trim();
 
-    print!("󰎤 {} ", solve(false));
+    print!("󰎤 {} \t\t", solve(false));
     print!("󰎧 {} ", solve(true));
 }
 

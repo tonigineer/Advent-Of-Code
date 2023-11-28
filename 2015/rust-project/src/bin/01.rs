@@ -23,6 +23,6 @@ fn solve_part2(input: &str) -> usize {
 fn main() {
     let input = include_str!("../../inputs/01.in").trim();
 
-    print!("󰎤 {} ", solve_part1(&input));
+    print!("󰎤 {} \t\t", solve_part1(&input));
     print!("󰎧 {} ", solve_part2(&input));
 }
