@@ -1,0 +1,11 @@
+# Workaround to ignore binaries
+/src/bin/*
+!/src/bin/*.rs
+
+# Folder
+target/
+
+# Files
+Cargo.lock
+tempCodeRunnerFile.rs
+src/main
