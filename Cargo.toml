@@ -1,0 +1,13 @@
+[package]
+edition = "2021"
+name = "advent_of_code"
+version = "0.1.0"
+
+[workspace]
+members = ["common", "aoc_2023"]
+
+[dependencies]
+clap = { version = "4.0.29", features = ["derive"] }
+
+common = { path = "common" }
+aoc_2023 = { path = "aoc_2023" }

@@ -1,0 +1,22 @@
+name: Repo
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "common/**"
+      - "src/**"
+      - "Cargo.toml"
+
+env:
+  CRATE: advent_of_code
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: cargo build -p ${{ env.CRATE }}
+      - name: Test
+        run: cargo test -p ${{ env.CRATE }}
