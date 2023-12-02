@@ -10,6 +10,7 @@ fn main() {
     match args.command {
         Commands::Solve { year, day } => {
             let solutions = match year {
+                2015 => aoc_2015::ALL,
                 2023 => aoc_2023::ALL,
                 _ => unimplemented!()
             };
@@ -23,6 +24,7 @@ fn main() {
             };
 
             let input = common::load_input(day, year).unwrap();
+            let input = input.trim();
 
             println!(
                 "* {year}-{:0>2}  󰎤 {}  󰎧 {}",
@@ -41,6 +43,7 @@ fn main() {
             for (idx, solution) in solutions.iter().enumerate() {
                 let day = idx as u32 + 1;
                 let input = common::load_input(day, year).unwrap();
+                let input = input.trim();
 
                 let start = Instant::now();
                 let part1 = solution.part1(&input);
