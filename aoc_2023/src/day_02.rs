@@ -31,7 +31,6 @@ fn solve(input: &str, part2: bool) -> u32 {
         let mut valid = true;
         for game in games.split("; ") {
             for draw in game.split(", ") {
-                println!("{:?}", draw);
                 let (num_str, color) = draw.split_once(" ").unwrap();
                 let num = num_str.parse::<u32>().unwrap();
                 

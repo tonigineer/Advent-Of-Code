@@ -39,9 +39,9 @@ fn solve(input: &str, part2: bool) -> u32 {
         let mut numbers = "".to_string();
 
         for char in line.chars() {
-                if char.is_ascii_digit() {
-                    numbers = format!("{}{}", numbers.chars().nth(0).unwrap_or(char), char);
-                }
+            if char.is_ascii_digit() {
+                numbers = format!("{}{}", numbers.chars().nth(0).unwrap_or(char), char);
+            }
         }
 
         if numbers.len() == 1 { numbers = format!("{}{}", numbers, numbers) }
