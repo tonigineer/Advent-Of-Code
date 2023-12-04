@@ -35,6 +35,7 @@ fn main() {
         },
         Commands::List { year } => {
             let solutions = match year {
+                2015 => aoc_2015::ALL,
                 2023 => aoc_2023::ALL,
                 _ => unimplemented!()
             };

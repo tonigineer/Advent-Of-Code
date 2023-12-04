@@ -20,3 +20,9 @@ cargo run list 2023      # solve puzzles for one year
 </h1>
 
 [![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2023.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2023.yml)
+
+<h1 align="center">
+  2015 - 50 ⭐
+</h1>
+
+[![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2015.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2015.yml)

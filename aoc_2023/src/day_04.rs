@@ -19,22 +19,21 @@ impl Solution for Day04 {
 
 fn solve(input: &str, part2: bool) -> u32 {
     let mut total = 0;
-    let mut cards: [u32; 1000] = [0; 1000];  // Should be large enough :)
+    let mut cards = vec![1; input.lines().count()];
 
     for (idx, card) in input.lines().enumerate() {
-        cards[idx] += 1;
         let (_, draw) = card.split_once(": ").unwrap();
         let (win, my) = draw.split_once(" | ").unwrap();
 
-        let mut w: HashSet<u32> = HashSet::new();
-        for number in win.split_whitespace().into_iter() {
-            w.insert(number.parse::<u32>().unwrap());
-        }
+        let w: HashSet<u32> = win.split_whitespace()
+            .into_iter()
+            .map(|n| n.parse::<u32>().unwrap())
+            .collect();
 
-        let mut m: HashSet<u32> = HashSet::new();
-        for number in my.split_whitespace().into_iter() {
-            m.insert(number.parse::<u32>().unwrap());
-        }
+        let m: HashSet<u32> = my.split_whitespace()
+            .into_iter()
+            .map(|n| n.parse::<u32>().unwrap())
+            .collect();
 
         let matches = m.len() - m.difference(&w).count();
 
