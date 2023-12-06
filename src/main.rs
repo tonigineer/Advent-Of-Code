@@ -52,16 +52,16 @@ fn main() {
                 let time = start.elapsed().as_nanos() as f32 / 1e6;
 
                 println!(
-                    "{} Day {:0>2}  󰎤 {} \t 󰎧 {} \t  {:3.6}ms",
+                    "{} Day {:0>2}   󰎤 {: <10}   󰎧 {: <10}    {: >13}ms",
                     if day == solutions.len() as u32 {
                         "└"
                     } else {
                         "├"
                     },
-                    day,
-                    part1,
-                    part2,
-                    time
+                    day.to_string(),
+                    part1.to_string(),
+                    part2.to_string(),
+                    format!("{:4.6}", time)
                 );
             };
         }
