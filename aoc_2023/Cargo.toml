@@ -4,5 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+counter = "0.5.7"
+itertools = "0.12.0"
 common = { path = "../common" }
 indoc = "2.0.4"
