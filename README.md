@@ -37,10 +37,10 @@ Day  | Execution time | | Execution time | | Execution time
 
 Day  | Execution time | | Execution time | | Execution time
 --- | ---: | --- | ---: | --- | ---:
-[Day 01](aoc_2016/src/day_01.rs) | 0.024667ms ms  | [Day 10](aoc_2016/src/day_10.rs) | ms | [Day 19](aoc_2016/src/day_19.rs) |  ms
-[Day 02](aoc_2016/src/day_02.rs) | 0.034377ms ms  | [Day 11](aoc_2016/src/day_11.rs) | ms | [Day 20](aoc_2016/src/day_20.rs) |  ms
-[Day 03](aoc_2016/src/day_03.rs) | 0.229813ms ms  | [Day 12](aoc_2016/src/day_12.rs) | ms | [Day 21](aoc_2016/src/day_21.rs) |  ms
-[Day 04](aoc_2016/src/day_04.rs) | 0.167780ms ms  | [Day 13](aoc_2016/src/day_13.rs) | ms | [Day 22](aoc_2016/src/day_22.rs) |  ms
+[Day 01](aoc_2016/src/day_01.rs) | 0.024667 ms  | [Day 10](aoc_2016/src/day_10.rs) | ms | [Day 19](aoc_2016/src/day_19.rs) |  ms
+[Day 02](aoc_2016/src/day_02.rs) | 0.034377 ms  | [Day 11](aoc_2016/src/day_11.rs) | ms | [Day 20](aoc_2016/src/day_20.rs) |  ms
+[Day 03](aoc_2016/src/day_03.rs) | 0.229813 ms  | [Day 12](aoc_2016/src/day_12.rs) | ms | [Day 21](aoc_2016/src/day_21.rs) |  ms
+[Day 04](aoc_2016/src/day_04.rs) | 0.167780 ms  | [Day 13](aoc_2016/src/day_13.rs) | ms | [Day 22](aoc_2016/src/day_22.rs) |  ms
 [Day 05](aoc_2016/src/day_05.rs) | 4425.587402 ms  | [Day 14](aoc_2016/src/day_14.rs) | ms | [Day 23](aoc_2016/src/day_23.rs) |  ms
 [Day 06](aoc_2016/src/day_06.rs) | ms | [Day 15](aoc_2016/src/day_15.rs) | ms | [Day 24](aoc_2016/src/day_24.rs) |  ms
 [Day 07](aoc_2016/src/day_07.rs) | ms | [Day 16](aoc_2016/src/day_16.rs) | ms | [Day 25](aoc_2016/src/day_25.rs) |  ms
