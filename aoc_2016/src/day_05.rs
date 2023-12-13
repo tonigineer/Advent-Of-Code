@@ -19,8 +19,6 @@ impl Solution for Day05 {
     }
 }
 
-
-
 fn part1(id: &String) -> String {
     let mut hash = String::new();
 
