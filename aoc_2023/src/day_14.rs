@@ -1,6 +1,6 @@
-use common::{Answer, Solution};
-use itertools::Itertools;
-use std::collections::HashMap;
+use common::{Answer, Solution, Grid};
+// use itertools::Itertools;
+use std::collections::{HashMap, VecDeque};
 
 pub struct Day14;
 
@@ -18,14 +18,14 @@ impl Solution for Day14 {
     }
 }
 
-fn rotate_right(grid: Vec<Vec<char>>) -> Vec<Vec<char>> {
-    let mut new_grid: Vec<Vec<char>> = Vec::new();
+fn rotate_right(grid: VecDeque<VecDeque<char>>) -> VecDeque<VecDeque<char>> {
+    let mut new_grid: VecDeque<VecDeque<char>> = VecDeque::new();
     for c in 0..grid[0].len() {
-        let mut new_row: Vec<char> = Vec::new();
+        let mut new_row: VecDeque<char> = VecDeque::new();
         for r in (0..grid.len()).into_iter().rev() {
-            new_row.push(grid[r][c]);
+            new_row.push_back(grid[r][c]);
         }
-        new_grid.push(new_row);
+        new_grid.push_back(new_row);
     }
     return new_grid;
 }
@@ -36,7 +36,7 @@ fn rotate_right(grid: Vec<Vec<char>>) -> Vec<Vec<char>> {
 //     }
 // }
 
-fn roll_rocks(grid: &mut Vec<Vec<char>>) {
+fn roll_rocks(grid: &mut VecDeque<VecDeque<char>>) {
     for r in 1..grid.len() {
         for c in 0..grid[0].len() {
             if grid[r][c] == 'O' {
@@ -53,9 +53,9 @@ fn roll_rocks(grid: &mut Vec<Vec<char>>) {
 }
 
 fn solve(input: &str, part2: bool) -> u64 {
-    let mut grid = common::string_to_grid(input);
+    let mut g: Grid = input.into();
 
-    let mut cache: HashMap<Vec<Vec<char>>, u64> = HashMap::new();
+    let mut cache: HashMap<VecDeque<VecDeque<char>>, u64> = HashMap::new();
     let mut it = 0;
 
     const CYCLES: u64 = 1000000000;
@@ -65,33 +65,33 @@ fn solve(input: &str, part2: bool) -> u64 {
             it += 1;
 
             for _ in 0..4 {
-                roll_rocks(&mut grid);
-                grid = rotate_right(grid);
+                roll_rocks(&mut g.grid);
+                g.grid = rotate_right(g.grid);
             }
 
-            if cache.get(&grid).is_some() {
-                let first_it = cache.get(&grid).unwrap();
+            if cache.get(&g.grid).is_some() {
+                let first_it = cache.get(&g.grid).unwrap();
                 it = CYCLES - ((CYCLES - first_it) % (it - first_it));
                 cache.clear();
             }
 
-            cache.insert(grid.clone(), it as u64);
+            cache.insert(g.grid.clone(), it as u64);
 
             if it == CYCLES {
                 break;
             }
         }
     } else {
-        roll_rocks(&mut grid);
+        roll_rocks(&mut g.grid);
     }
 
     // grid_pretty_print(&grid);
 
-    return grid
+    return g.grid
         .iter()
         .enumerate()
         .map(| (idx, row) |
-            row.iter().filter(|c| c == &&'O').count() * (grid.len() - idx)
+            row.iter().filter(|c| c == &&'O').count() * (g.grid.len() - idx)
         )
         .sum::<usize>() as u64;
 
