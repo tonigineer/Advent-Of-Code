@@ -20,11 +20,8 @@ impl Solution for Day15 {
 }
 
 fn hash(input: &str) -> u32 {
-    let mut value = 0;
-    for c in input.chars() {
-        value = ((value + c as u32) * 17) % 256;
-    }
-    value
+    input.chars()
+        .fold(0, |acc, c| ((acc + c as u32) * 17) % 256 )
 }
 
 fn solve(input: &str, part2: bool) -> usize {
