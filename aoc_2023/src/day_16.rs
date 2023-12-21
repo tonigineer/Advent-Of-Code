@@ -1,6 +1,5 @@
 use common::{Answer, Solution, Grid };
 
-use itertools::Itertools;
 use std::collections::{HashSet, VecDeque};
 
 pub struct Day16;
