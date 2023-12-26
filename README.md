@@ -15,7 +15,7 @@ cargo run --release solve 2023 1   # solve single puzzle
 cargo run --release list 2023      # solve puzzles for one year
 ```
 
-## [2023](https://adventofcode.com/2023) - 37 ⭐ (rust)
+## [2023](https://adventofcode.com/2023) - 41 ⭐ (rust)
 
 [![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2023.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2023.yml)
 
