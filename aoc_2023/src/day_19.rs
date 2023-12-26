@@ -1,8 +1,8 @@
 use common::{ Answer, Solution };
 
-pub struct Day18;
+pub struct Day19;
 
-impl Solution for Day18 {
+impl Solution for Day19 {
     fn name(&self) -> &'static str {
         "Lavaduct Lagoon"
     }

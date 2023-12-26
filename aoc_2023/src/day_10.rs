@@ -158,7 +158,7 @@ mod tests {
     "};
 
     #[test]
-    fn example_part2a() {
+    fn example_part2() {
         assert_eq!(solve(SAMPLE2, true), 8);
         assert_eq!(solve(SAMPLE3, true), 4);
     }
