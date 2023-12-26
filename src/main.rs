@@ -54,7 +54,7 @@ fn main() {
                 let time = start.elapsed().as_nanos() as f32 / 1e6;
 
                 println!(
-                    "{} Day {:0>2}   󰎤 {: <13}   󰎧 {: <13}    {: >13}ms",
+                    "{} Day {:0>2}   󰎤 {: <16}   󰎧 {: <16}    {: >13}ms",
                     if day == solutions.len() as u32 {
                         "└"
                     } else {

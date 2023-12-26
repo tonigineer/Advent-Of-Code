@@ -21,7 +21,7 @@ cargo run --release list 2023      # solve puzzles for one year
 
 Day  | Execution time | | Execution time | | Execution time
 --- | ---: | --- | ---: | --- | ---:
-[Day 01](aoc_2023/src/day_01.rs) | 0.437317 ms  | [Day 10](aoc_2023/src/day_10.rs) | 1.947981 ms | [Day 19](aoc_2023/src/day_19.rs) |  ms
+[Day 01](aoc_2023/src/day_01.rs) | 0.437317 ms  | [Day 10](aoc_2023/src/day_10.rs) | 1.947981 ms | [Day 19](aoc_2023/src/day_19.rs) | 0.727139 ms
 [Day 02](aoc_2023/src/day_02.rs) | 0.091654 ms  | [Day 11](aoc_2023/src/day_11.rs) | 126.089882 ms | [Day 20](aoc_2023/src/day_20.rs) |  ms
 [Day 03](aoc_2023/src/day_03.rs) | 0.244984 ms  | [Day 12](aoc_2023/src/day_12.rs) | 132.311951 ms | [Day 21](aoc_2023/src/day_21.rs) |  ms
 [Day 04](aoc_2023/src/day_04.rs) | 0.402009 ms  | [Day 13](aoc_2023/src/day_13.rs) | 0.669978 ms | [Day 22](aoc_2023/src/day_22.rs) |  ms
@@ -29,7 +29,7 @@ Day  | Execution time | | Execution time | | Execution time
 [Day 06](aoc_2023/src/day_06.rs) | 33.531979 ms | [Day 15](aoc_2023/src/day_15.rs) | 0.269064 ms | [Day 24](aoc_2023/src/day_24.rs) |  1633.447266 ms
 [Day 07](aoc_2023/src/day_07.rs) | 0.931649 ms  | [Day 16](aoc_2023/src/day_16.rs) | 331.654999 ms | [Day 25](aoc_2023/src/day_25.rs) |  175.994934 ms
 [Day 08](aoc_2023/src/day_08.rs) | 9.221034 ms  | [Day 17](aoc_2023/src/day_17.rs) | 350.803192 ms
-[Day 09](aoc_2023/src/day_09.rs) | 0.231507 ms  | [Day 18](aoc_2023/src/day_18.rs) | ms
+[Day 09](aoc_2023/src/day_09.rs) | 0.231507 ms  | [Day 18](aoc_2023/src/day_18.rs) | 0.075380 ms
 
 ## [2016](https://adventofcode.com/2016) - 10 ⭐ (rust)
 
