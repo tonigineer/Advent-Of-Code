@@ -11,9 +11,27 @@
 ## How to
 
 ```bash
-cargo run --release solve 2023 1   # solve single puzzle
-cargo run --release list 2023      # solve puzzles for one year
+cargo build --release
+
+target/release/advent_of_code solve 2023 1   # solve single puzzle
+target/release/advent_of_code list 2023      # solve puzzles for one year
 ```
+
+## [2024](https://adventofcode.com/2023) - 02 ⭐ (rust)
+
+[![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2024.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2024.yml)
+
+Day  | Execution time | | Execution time | | Execution time
+--- | ---: | --- | ---: | --- | ---:
+[Day 01](aoc_2024/src/day_01.rs) | 0.437317 ms  | [Day 10](aoc_2024/src/day_10.rs) | 1.947981 ms | [Day 19](aoc_2024/src/day_19.rs) |
+[Day 02](aoc_2024/src/day_02.rs) |  | [Day 11](aoc_2024/src/day_11.rs) |  | [Day 20](aoc_2024/src/day_20.rs) |
+[Day 03](aoc_2024/src/day_03.rs) |  | [Day 12](aoc_2024/src/day_12.rs) |  | [Day 21](aoc_2024/src/day_21.rs) |
+[Day 04](aoc_2024/src/day_04.rs) |  | [Day 13](aoc_2024/src/day_13.rs) |  | [Day 22](aoc_2024/src/day_22.rs) |
+[Day 05](aoc_2024/src/day_05.rs) |  | [Day 14](aoc_2024/src/day_14.rs) |  | [Day 23](aoc_2024/src/day_23.rs) |
+[Day 06](aoc_2024/src/day_06.rs) |  | [Day 15](aoc_2024/src/day_15.rs) |  | [Day 24](aoc_2024/src/day_24.rs) |
+[Day 07](aoc_2024/src/day_07.rs) |  | [Day 16](aoc_2024/src/day_16.rs) |  | [Day 25](aoc_2024/src/day_25.rs) |
+[Day 08](aoc_2024/src/day_08.rs) |  | [Day 17](aoc_2024/src/day_17.rs) |
+[Day 09](aoc_2024/src/day_09.rs) |  | [Day 18](aoc_2024/src/day_18.rs) |
 
 ## [2023](https://adventofcode.com/2023) - 50 ⭐ (rust)
 

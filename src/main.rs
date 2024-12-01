@@ -1,6 +1,6 @@
-use std::time::Instant;
-use clap::Parser;
 use args::{Args, Commands};
+use clap::Parser;
+use std::time::Instant;
 
 mod args;
 
@@ -13,14 +13,18 @@ fn main() {
                 2015 => aoc_2015::ALL,
                 2016 => aoc_2016::ALL,
                 2023 => aoc_2023::ALL,
-                _ => unimplemented!()
+                2024 => aoc_2024::ALL,
+                _ => unimplemented!(),
             };
 
-            let solution =  match solutions.get(day as usize - 1) {
+            let solution = match solutions.get(day as usize - 1) {
                 Some(s) => s,
                 None => {
-                    println!("There is not solution implemented for Day: {} of Year: {}.", day, year);
-                    return
+                    println!(
+                        "There is not solution implemented for Day: {} of Year: {}.",
+                        day, year
+                    );
+                    return;
                 }
             };
 
@@ -33,13 +37,14 @@ fn main() {
                 solution.part1(&input),
                 solution.part2(&input)
             );
-        },
+        }
         Commands::List { year } => {
             let solutions = match year {
                 2015 => aoc_2015::ALL,
                 2016 => aoc_2016::ALL,
                 2023 => aoc_2023::ALL,
-                _ => unimplemented!()
+                2024 => aoc_2024::ALL,
+                _ => unimplemented!(),
             };
 
             println!("AOC {}", year);
@@ -65,7 +70,7 @@ fn main() {
                     part2.to_string(),
                     format!("{:4.6}", time)
                 );
-            };
+            }
         }
     }
 }

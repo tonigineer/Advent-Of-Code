@@ -1,0 +1,9 @@
+[package]
+name = "aoc_2024"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+common = { path = "../common" }
+itertools = "0.12.0"
+indoc = "2.0.4"
