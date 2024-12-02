@@ -8,11 +8,11 @@ impl Solution for Day01 {
     }
 
     fn part1(&self, input: &str) -> Answer {
-        return solve(input, false).into();
+        solve(input, false).into()
     }
 
     fn part2(&self, input: &str) -> Answer {
-        return solve(input, true).into();
+        solve(input, true).into()
     }
 }
 
@@ -38,11 +38,10 @@ fn solve(input: &str, part2: bool) -> u32 {
             .sum::<u32>();
     }
 
-    return left
-        .into_iter()
+    left.into_iter()
         .zip(right)
         .map(|(l, r)| if l > r { l - r } else { r - l })
-        .sum::<u32>();
+        .sum::<u32>()
 }
 
 #[cfg(test)]

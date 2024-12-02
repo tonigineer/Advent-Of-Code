@@ -8,11 +8,11 @@ impl Solution for Day02 {
     }
 
     fn part1(&self, input: &str) -> Answer {
-        return solve(input, false).into();
+        solve(input, false).into()
     }
 
     fn part2(&self, input: &str) -> Answer {
-        return solve(input, true).into();
+        solve(input, true).into()
     }
 }
 
@@ -45,19 +45,14 @@ fn solve(input: &str, part2: bool) -> u32 {
         }
     }
 
-    return ans;
+    ans
 }
 
-fn is_safe(report: &Vec<i32>) -> bool {
+fn is_safe(report: &[i32]) -> bool {
     let diffs: Vec<i32> = report.windows(2).map(|pair| pair[0] - pair[1]).collect();
 
-    if diffs.iter().all(|v| v > &0) || diffs.iter().all(|v| v < &0) {
-        if diffs.iter().map(|&x| x.abs()).max().unwrap() <= 3 {
-            return true;
-        }
-    }
-
-    false
+    (diffs.iter().all(|v| v > &0) || diffs.iter().all(|v| v < &0))
+        && diffs.iter().map(|&x| x.abs()).max().unwrap() <= 3
 }
 
 #[cfg(test)]

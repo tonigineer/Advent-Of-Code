@@ -8,6 +8,7 @@ members = ["common", "aoc_2015", "aoc_2016", "aoc_2023", "aoc_2024"]
 
 [dependencies]
 clap = { version = "4.0.29", features = ["derive"] }
+aoc-cli = "0.12.0"
 
 common = { path = "common" }
 aoc_2015 = { path = "aoc_2015" }
