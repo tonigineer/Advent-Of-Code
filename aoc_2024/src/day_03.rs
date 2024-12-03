@@ -18,35 +18,25 @@ impl Solution for Day03 {
 }
 
 fn solve(input: &str, part2: bool) -> u32 {
-    let mut enable_table: Vec<bool> = vec![true; input.len()];
-    let re_do = Regex::new(r"do\(\)|don\'t\(\)").unwrap();
- 
-    for cap in re_do.captures_iter(input) {
-        if let Some(matched) = cap.get(0) {
-            if matched.as_str() == "do()" {
-                enable_table[matched.start()..].fill(true);
-            }
-            if matched.as_str() == "don't()" {
-                enable_table[matched.start()..].fill(false);
-            }
-        }
-    }
-    
     let mut ans = 0;
-    let re_mul = Regex::new(r"mul\((\d+),\s*(\d+)\)").unwrap();
+    let mut toggle = true;
+
+    let re_mul = Regex::new(r"mul\((\d+),\s*(\d+)\)|do\(\)|don't\(\)").unwrap();
 
     for cap in re_mul.captures_iter(input) {
-        if part2 {
-            if let Some(matched) = cap.get(0) {
-                if enable_table[matched.start()] == false {continue}
+        if &cap[0] == "do()" {
+            toggle = true;
+        } else if &cap[0] == "don't()" {
+            toggle = false;
+        } else {
+            if toggle || !part2 {
+                let x1 = &cap[1].parse::<u32>().unwrap();
+                let x2 = &cap[2].parse::<u32>().unwrap();
+                ans += x1 * x2;
             }
         }
-        
-        let x1 = &cap[1].parse::<u32>().unwrap();
-        let x2 = &cap[2].parse::<u32>().unwrap();
-        ans += x1 * x2;
     }
-    
+
     ans
 }
 
