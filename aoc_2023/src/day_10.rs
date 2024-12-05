@@ -1,6 +1,6 @@
-use common::{Answer, Solution, Grid};
+use common::{grid::Grid, Answer, Solution};
 
-use std::collections::{VecDeque, HashSet};
+use std::collections::{HashSet, VecDeque};
 
 pub struct Day10;
 
@@ -19,12 +19,12 @@ impl Solution for Day10 {
 }
 
 fn solve(input: &str, part2: bool) -> u64 {
-    let g: Grid = input.into();
+    let g: Grid<char> = input.into();
     let mut start: (usize, usize) = (0, 0);
 
-    for r in 0..g.grid.len() {
-        for c in 0..g.grid[r].len() {
-            if g.grid[r][c] == 'S' {
+    for r in 0..g.data.len() {
+        for c in 0..g.data[r].len() {
+            if g.data[r][c] == 'S' {
                 start = (r, c);
                 // break out all for loops
             }
@@ -37,7 +37,9 @@ fn solve(input: &str, part2: bool) -> u64 {
     queue.push_back((start, false));
 
     while let Some((pos, moving_vertical)) = queue.pop_front() {
-        if seen.contains(&pos) { continue };
+        if seen.contains(&pos) {
+            continue;
+        };
 
         seen.insert(pos);
         let (r, c) = pos;
@@ -45,49 +47,29 @@ fn solve(input: &str, part2: bool) -> u64 {
         if moving_vertical {
             if r >= 1 {
                 let dr = r - 1;
-                if "S|F7".contains(g.grid[dr][c]) && "S|LJ".contains(g.grid[r][c]) {
-                    queue.push_back(
-                        (
-                            (dr, c),
-                            if g.grid[dr][c] == '|' {true} else {false}
-                        )
-                    );
+                if "S|F7".contains(g.data[dr][c]) && "S|LJ".contains(g.data[r][c]) {
+                    queue.push_back(((dr, c), if g.data[dr][c] == '|' { true } else { false }));
                 }
             }
 
             let dr = r + 1;
-            if dr < g.grid.len() {
-                if "S|LJ".contains(g.grid[dr][c]) && "S|F7".contains(g.grid[r][c]) {
-                    queue.push_back(
-                        (
-                            (dr, c),
-                            if g.grid[dr][c] == '|' {true} else {false}
-                        )
-                    );
+            if dr < g.data.len() {
+                if "S|LJ".contains(g.data[dr][c]) && "S|F7".contains(g.data[r][c]) {
+                    queue.push_back(((dr, c), if g.data[dr][c] == '|' { true } else { false }));
                 }
             }
         } else {
             if c >= 1 {
                 let dc = c - 1;
-                if "S-LF".contains(g.grid[r][dc]) && "S-J7".contains(g.grid[r][c]) {
-                    queue.push_back(
-                        (
-                            (r, dc),
-                            if g.grid[r][dc] == '-' {false} else {true}
-                        )
-                    );
+                if "S-LF".contains(g.data[r][dc]) && "S-J7".contains(g.data[r][c]) {
+                    queue.push_back(((r, dc), if g.data[r][dc] == '-' { false } else { true }));
                 }
             }
 
             let dc = c + 1;
-            if dc < g.grid[0].len() {
-                if "S-7J".contains(g.grid[r][dc]) && "S-FL".contains(g.grid[r][c]) {
-                    queue.push_back(
-                        (
-                            (r, dc),
-                            if g.grid[r][dc] == '-' {false} else {true}
-                        )
-                    );
+            if dc < g.data[0].len() {
+                if "S-7J".contains(g.data[r][dc]) && "S-FL".contains(g.data[r][c]) {
+                    queue.push_back(((r, dc), if g.data[r][dc] == '-' { false } else { true }));
                 }
             }
         }
@@ -96,11 +78,11 @@ fn solve(input: &str, part2: bool) -> u64 {
     if part2 {
         let mut p: HashSet<(usize, usize)> = HashSet::new();
 
-        for r in 0..g.grid.len() {
+        for r in 0..g.data.len() {
             let mut is_inside = false;
-            for c in 0..g.grid[r].len() {
+            for c in 0..g.data[r].len() {
                 // if S represents a facing north char, replace it in input
-                if seen.contains(&(r, c)) && "LJ|".contains(g.grid[r][c]) {
+                if seen.contains(&(r, c)) && "LJ|".contains(g.data[r][c]) {
                     is_inside = !is_inside;
                 } else if !seen.contains(&(r, c)) && is_inside {
                     p.insert((r, c));
@@ -116,8 +98,8 @@ fn solve(input: &str, part2: bool) -> u64 {
 
 #[cfg(test)]
 mod tests {
-    use indoc::indoc;
     use super::solve;
+    use indoc::indoc;
 
     const SAMPLE: &str = indoc! {
         "-L|F7

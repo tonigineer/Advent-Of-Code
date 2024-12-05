@@ -1,4 +1,4 @@
-use common::{Answer, Solution, Grid };
+use common::{grid::Grid, Answer, Solution};
 
 use std::collections::{HashSet, VecDeque};
 
@@ -10,15 +10,15 @@ impl Solution for Day16 {
     }
 
     fn part1(&self, input: &str) -> Answer {
-        let g: Grid = input.into();
-        let grid = g.grid;
+        let g: Grid<char> = input.into();
+        let grid = g.data;
 
         return solve(&grid, (0, -1, 0, 1)).into();
     }
 
     fn part2(&self, input: &str) -> Answer {
-        let g: Grid = input.into();
-        let grid = g.grid;
+        let g: Grid<char> = input.into();
+        let grid = g.data;
         let mut ans = 0;
 
         for r in 0..grid.len() {
@@ -41,17 +41,19 @@ fn solve(grid: &VecDeque<VecDeque<char>>, initial: (isize, isize, isize, isize))
 
     queue.push_back(initial);
 
-    while ! queue.is_empty() {
-        let (mut r, mut c, mut dr, mut dc) = queue. pop_front().unwrap();
+    while !queue.is_empty() {
+        let (mut r, mut c, mut dr, mut dc) = queue.pop_front().unwrap();
 
         r = r + dr;
         c = c + dc;
 
-        if r < 0 || r >= grid.len() as isize || c < 0 || c >= grid[0].len() as isize { continue };
+        if r < 0 || r >= grid.len() as isize || c < 0 || c >= grid[0].len() as isize {
+            continue;
+        };
 
         let ch: char = grid[r as usize][c as usize];
-        if (dr == 0 && ch == '-') || (dc == 0 && ch == '|') || ch =='.' {
-            if ! seen.contains(&(r, c, dr, dc)) {
+        if (dr == 0 && ch == '-') || (dc == 0 && ch == '|') || ch == '.' {
+            if !seen.contains(&(r, c, dr, dc)) {
                 queue.push_back((r, c, dr, dc));
                 seen.insert((r, c, dr, dc));
             }
@@ -59,7 +61,7 @@ fn solve(grid: &VecDeque<VecDeque<char>>, initial: (isize, isize, isize, isize))
             let t = dr;
             dr = -dc;
             dc = -t;
-            if ! seen.contains(&(r, c, dr, dc)) {
+            if !seen.contains(&(r, c, dr, dc)) {
                 queue.push_back((r, c, dr, dc));
                 seen.insert((r, c, dr, dc));
             }
@@ -67,7 +69,7 @@ fn solve(grid: &VecDeque<VecDeque<char>>, initial: (isize, isize, isize, isize))
             let t = dr;
             dr = dc;
             dc = t;
-            if ! seen.contains(&(r, c, dr, dc)) {
+            if !seen.contains(&(r, c, dr, dc)) {
                 queue.push_back((r, c, dr, dc));
                 seen.insert((r, c, dr, dc));
             }
@@ -77,23 +79,23 @@ fn solve(grid: &VecDeque<VecDeque<char>>, initial: (isize, isize, isize, isize))
                     for dir in [(0, 1), (0, -1)] {
                         dr = dir.0;
                         dc = dir.1;
-                        if ! seen.contains(&(r, c, dr, dc)) {
+                        if !seen.contains(&(r, c, dr, dc)) {
                             queue.push_back((r, c, dr, dc));
                             seen.insert((r, c, dr, dc));
                         }
                     }
-                },
+                }
                 '|' => {
                     for dir in [(1, 0), (-1, 0)] {
                         dr = dir.0;
                         dc = dir.1;
-                        if ! seen.contains(&(r, c, dr, dc)) {
+                        if !seen.contains(&(r, c, dr, dc)) {
                             queue.push_back((r, c, dr, dc));
                             seen.insert((r, c, dr, dc));
                         }
                     }
-                },
-                _ => panic!{"Not supposed to happen, ffs!"}
+                }
+                _ => panic! {"Not supposed to happen, ffs!"},
             }
         }
     }

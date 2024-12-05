@@ -1,4 +1,4 @@
-use common::{Answer, Solution, Grid};
+use common::{grid::Grid, Answer, Solution};
 // use itertools::Itertools;
 use std::collections::{HashMap, VecDeque};
 
@@ -41,11 +41,15 @@ fn roll_rocks(grid: &mut VecDeque<VecDeque<char>>) {
         for c in 0..grid[0].len() {
             if grid[r][c] == 'O' {
                 for i in 1.. {
-                    if i > r { break }
-                    if "O#".contains(grid[r-i][c]) { break }
+                    if i > r {
+                        break;
+                    }
+                    if "O#".contains(grid[r - i][c]) {
+                        break;
+                    }
 
-                    grid[r-i][c] = 'O';
-                    grid[r-i+1][c] = '.';
+                    grid[r - i][c] = 'O';
+                    grid[r - i + 1][c] = '.';
                 }
             }
         }
@@ -53,7 +57,7 @@ fn roll_rocks(grid: &mut VecDeque<VecDeque<char>>) {
 }
 
 fn solve(input: &str, part2: bool) -> u64 {
-    let mut g: Grid = input.into();
+    let mut g: Grid<char> = input.into();
 
     let mut cache: HashMap<VecDeque<VecDeque<char>>, u64> = HashMap::new();
     let mut it = 0;
@@ -65,42 +69,40 @@ fn solve(input: &str, part2: bool) -> u64 {
             it += 1;
 
             for _ in 0..4 {
-                roll_rocks(&mut g.grid);
-                g.grid = rotate_right(g.grid);
+                roll_rocks(&mut g.data);
+                g.data = rotate_right(g.data);
             }
 
-            if cache.get(&g.grid).is_some() {
-                let first_it = cache.get(&g.grid).unwrap();
+            if cache.get(&g.data).is_some() {
+                let first_it = cache.get(&g.data).unwrap();
                 it = CYCLES - ((CYCLES - first_it) % (it - first_it));
                 cache.clear();
             }
 
-            cache.insert(g.grid.clone(), it as u64);
+            cache.insert(g.data.clone(), it as u64);
 
             if it == CYCLES {
                 break;
             }
         }
     } else {
-        roll_rocks(&mut g.grid);
+        roll_rocks(&mut g.data);
     }
 
     // grid_pretty_print(&grid);
 
-    return g.grid
+    return g
+        .data
         .iter()
         .enumerate()
-        .map(| (idx, row) |
-            row.iter().filter(|c| c == &&'O').count() * (g.grid.len() - idx)
-        )
+        .map(|(idx, row)| row.iter().filter(|c| c == &&'O').count() * (g.data.len() - idx))
         .sum::<usize>() as u64;
-
 }
 
 #[cfg(test)]
 mod tests {
-    use indoc::indoc;
     use super::solve;
+    use indoc::indoc;
 
     const SAMPLE: &str = indoc! {"O....#....
 O.OO#....#

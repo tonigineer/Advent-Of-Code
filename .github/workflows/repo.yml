@@ -19,4 +19,4 @@ jobs:
       - name: Build
         run: cargo build -p ${{ env.CRATE }}
       - name: Test
-        run: cargo test -p ${{ env.CRATE }}
+        run: cargo test --workspace
