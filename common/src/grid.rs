@@ -120,7 +120,7 @@ impl Direction {
 /// - Checking bounds for coordinates.
 /// - Finding adjacent elements (cardinal, diagonal, or all).
 /// - Creating grids from string input.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Grid<T> {
     pub rows: usize,
     pub cols: usize,

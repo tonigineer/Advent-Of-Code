@@ -1,4 +1,4 @@
-use common::{grid, Answer, Solution};
+use common::{grid, grid::Direction, Answer, Solution};
 
 pub struct Day04;
 
@@ -46,32 +46,26 @@ fn solve(input: &str, part2: bool) -> u32 {
         return ans;
     }
 
-    for (r, row) in g.data.iter().enumerate().map(|(i, v)| (i as i32, v)) {
-        for (c, chr) in row.iter().enumerate().map(|(i, v)| (i as i32, v)) {
+    for (r, row) in g.data.iter().enumerate().map(|(i, v)| (i as isize, v)) {
+        for (c, chr) in row.iter().enumerate().map(|(i, v)| (i as isize, v)) {
             if *chr != 'X' {
                 continue;
             }
 
-            for dr in -1..=1 {
-                for dc in -1..=1 {
-                    if dr == 0 && dc == 0 {
-                        continue;
-                    }
+            for (dc, dr) in Direction::all().map(|v| v.as_delta()) {
+                if r + dr * 3 < 0 || r + dr * 3 >= g.rows as isize {
+                    continue;
+                }
 
-                    if r + dr * 3 < 0 || r + dr * 3 >= g.data.len() as i32 {
-                        continue;
-                    }
+                if c + dc * 3 < 0 || c + dc * 3 >= g.cols as isize {
+                    continue;
+                }
 
-                    if c + dc * 3 < 0 || c + dc * 3 >= g.data[0].len() as i32 {
-                        continue;
-                    }
-
-                    if g.data[(r + dr) as usize][(c + dc) as usize] == 'M'
-                        && g.data[(r + 2 * dr) as usize][(c + 2 * dc) as usize] == 'A'
-                        && g.data[(r + 3 * dr) as usize][(c + 3 * dc) as usize] == 'S'
-                    {
-                        ans += 1
-                    }
+                if g.data[(r + dr) as usize][(c + dc) as usize] == 'M'
+                    && g.data[(r + 2 * dr) as usize][(c + 2 * dc) as usize] == 'A'
+                    && g.data[(r + 3 * dr) as usize][(c + 3 * dc) as usize] == 'S'
+                {
+                    ans += 1
                 }
             }
         }
