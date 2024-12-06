@@ -31,9 +31,9 @@ fn find_guard(grid: &Grid<char>) -> (isize, isize) {
 
 fn solve_part1(input: &str) -> u32 {
     let grid: Grid<char> = input.into();
+    let mut guard = find_guard(&grid);
     let mut dc = 0;
     let mut dr = -1;
-    let mut guard = find_guard(&grid);
 
     let mut visited: HashSet<(isize, isize)> = HashSet::new();
     visited.insert(guard);
@@ -47,10 +47,7 @@ fn solve_part1(input: &str) -> u32 {
         }
 
         if grid.data[nr as usize][nc as usize] == '#' {
-            let dc_temp = dc;
-            dc = -dr;
-            dr = dc_temp;
-
+            (dc, dr) = (-dr, dc);
             continue;
         }
 
@@ -62,11 +59,12 @@ fn solve_part1(input: &str) -> u32 {
 }
 
 fn is_loop(grid: &Grid<char>, start: &(isize, isize)) -> bool {
-    let mut visited: HashSet<(isize, isize, isize, isize)> = HashSet::new();
+    let mut guard = (start.0, start.1);
     let mut dc = 0;
     let mut dr = -1;
-    let mut guard = start.clone();
-    visited.insert((guard.0 as isize, guard.1 as isize, dc, dr));
+
+    let mut visited: HashSet<(isize, isize, isize, isize)> = HashSet::new();
+    visited.insert((guard.0, guard.1, dc, dr));
 
     loop {
         let nc = guard.0 + dc;
@@ -77,10 +75,7 @@ fn is_loop(grid: &Grid<char>, start: &(isize, isize)) -> bool {
         }
 
         if grid.data[nr as usize][nc as usize] == '#' {
-            let dc_temp = dc;
-            dc = -dr;
-            dr = dc_temp;
-
+            (dc, dr) = (-dr, dc);
             continue;
         }
 
