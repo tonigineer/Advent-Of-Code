@@ -51,8 +51,8 @@ fn solve(input: &str, part2: bool) -> u32 {
                     let dr = r2 - r1;
                     let dc = c2 - c1;
 
-                    while c >= 0 && c < (grid.cols as isize) && r >= 0 && r < (grid.rows as isize) {
-                        antinodes.insert((c.clone(), r.clone()));
+                    while grid.in_bounds(c, r) {
+                        antinodes.insert((c, r));
                         c = dc + c;
                         r = dr + r;
                     }
@@ -74,9 +74,7 @@ fn solve(input: &str, part2: bool) -> u32 {
 
     antinodes
         .iter()
-        .filter(|(c, r)| {
-            c >= &0 && c < &(grid.cols as isize) && r >= &0 && r < &(grid.rows as isize)
-        })
+        .filter(|(c, r)| grid.in_bounds(*c, *r))
         .count() as u32
 }
 

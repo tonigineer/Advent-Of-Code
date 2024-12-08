@@ -17,7 +17,7 @@ target/release/advent_of_code solve 2024 1   # solve single puzzle
 target/release/advent_of_code list 2024      # solve puzzles for one year
 ```
 
-## [2024](https://adventofcode.com/2024) - 14 ⭐ (rust)
+## [2024](https://adventofcode.com/2024) - 16 ⭐ (rust)
 
 [![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2024.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2024.yml)
 
@@ -30,7 +30,7 @@ Day  | Execution time | | Execution time | | Execution time
 [Day 05](aoc_2024/src/day_05.rs) |    0.380088 ms | [Day 14](aoc_2024/src/day_14.rs) |  | [Day 23](aoc_2024/src/day_23.rs) |
 [Day 06](aoc_2024/src/day_06.rs) | 4517.902127 ms | [Day 15](aoc_2024/src/day_15.rs) |  | [Day 24](aoc_2024/src/day_24.rs) |
 [Day 07](aoc_2024/src/day_07.rs) |    1.621122 ms| [Day 16](aoc_2024/src/day_16.rs) |  | [Day 25](aoc_2024/src/day_25.rs) |
-[Day 08](aoc_2024/src/day_08.rs) |  | [Day 17](aoc_2024/src/day_17.rs) |
+[Day 08](aoc_2024/src/day_08.rs) |    0.171103 ms| [Day 17](aoc_2024/src/day_17.rs) |
 [Day 09](aoc_2024/src/day_09.rs) |  | [Day 18](aoc_2024/src/day_18.rs) |
 
 ## [2023](https://adventofcode.com/2023) - 50 ⭐ (rust)
