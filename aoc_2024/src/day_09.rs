@@ -27,19 +27,19 @@ fn solve_part1(input: &str) -> i64 {
             }
         } else {
             for _ in 0..num {
-                disc.push_back(-1 as i64);
+                disc.push_back(-1_i64);
             }
         }
     }
 
     let mut disc_arranged: VecDeque<i64> = VecDeque::new();
 
-    while disc.len() > 0 {
+    while !disc.is_empty() {
         let left = disc.pop_front().unwrap();
         if left != -1 {
             disc_arranged.push_back(left);
         } else {
-            while disc.len() > 0 {
+            while !disc.is_empty() {
                 let right = disc.pop_back().unwrap();
                 if right != -1 {
                     disc_arranged.push_back(right);
@@ -89,12 +89,7 @@ fn solve_part2(input: &str) -> usize {
     files
         .keys()
         .zip(files.values())
-        .map(|(id, (pos, len))| {
-            (*pos..*pos + *len as usize)
-                .into_iter()
-                .map(|p| p * id)
-                .sum::<usize>()
-        })
+        .map(|(id, (pos, len))| (*pos..*pos + *len as usize).map(|p| p * id).sum::<usize>())
         .sum()
 }
 

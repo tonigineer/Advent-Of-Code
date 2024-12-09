@@ -5,7 +5,6 @@ use std::time::Instant;
 use clap::Subcommand;
 
 #[derive(Parser, Debug)]
-
 pub struct Args {
     #[command(subcommand)]
     pub command: Commands,

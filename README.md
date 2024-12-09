@@ -11,6 +11,10 @@
 ## How to
 
 ```bash
+make                                        # test and solve current day 
+make help                                   # check out other options
+
+# manually with cargo
 cargo build --release
 
 target/release/advent_of_code solve 2024 1   # solve single puzzle
