@@ -35,17 +35,15 @@ fn solve_part1(input: &str) -> i64 {
     let mut disc_arranged: VecDeque<i64> = VecDeque::new();
 
     while disc.len() > 0 {
-        while disc.len() > 0 {
-            let left = disc.pop_front().unwrap();
-            if left != -1 {
-                disc_arranged.push_back(left);
-            } else {
-                while disc.len() > 0 {
-                    let right = disc.pop_back().unwrap();
-                    if right != -1 {
-                        disc_arranged.push_back(right);
-                        break;
-                    }
+        let left = disc.pop_front().unwrap();
+        if left != -1 {
+            disc_arranged.push_back(left);
+        } else {
+            while disc.len() > 0 {
+                let right = disc.pop_back().unwrap();
+                if right != -1 {
+                    disc_arranged.push_back(right);
+                    break;
                 }
             }
         }
@@ -75,13 +73,13 @@ fn solve_part2(input: &str) -> usize {
     for id in (0..files.len()).rev() {
         let (pos, length) = files[&id];
 
-        for (id_space, (pos_space, length_space)) in spaces.clone().iter().enumerate() {
-            if pos < *pos_space {
+        for (id_space, (pos_space, length_space)) in spaces.clone().into_iter().enumerate() {
+            if pos < pos_space {
                 break;
             }
 
-            if length <= *length_space {
-                files.insert(id, (pos_space.clone(), length));
+            if length <= length_space {
+                files.insert(id, (pos_space, length));
                 spaces[id_space] = (pos_space + length as usize, length_space - length);
                 break;
             }
@@ -104,8 +102,7 @@ fn solve_part2(input: &str) -> usize {
 mod tests {
     use super::{solve_part1, solve_part2};
 
-    const SAMPLE: &str = indoc::indoc! {"
-    2333133121414131402"};
+    const SAMPLE: &str = indoc::indoc! {"2333133121414131402"};
 
     #[test]
     fn example_part1() {
