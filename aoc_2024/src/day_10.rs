@@ -19,40 +19,42 @@ impl Solution for Day10 {
 
 fn solve(input: &str, part2: bool) -> u32 {
     let mut ans = 0;
-    let grid: Grid<isize> = Grid::from(input);
+    let grid: Grid<usize> = Grid::from(input);
 
     for r in 0..grid.rows {
         for c in 0..grid.cols {
             if grid.data[r][c] == 0 {
-                ans += find_trails(&grid, &c, &r, part2);
+                ans += find_trails(&grid, c, r, part2);
             }
         }
     }
+
     ans
 }
 
-fn find_trails(grid: &Grid<isize>, c: &usize, r: &usize, part2: bool) -> u32 {
+fn find_trails(grid: &Grid<usize>, c: usize, r: usize, part2: bool) -> u32 {
     let mut trails = 0;
 
-    let mut q: VecDeque<(isize, isize)> = VecDeque::new();
-    q.push_back((*c as isize, *r as isize));
+    let mut q: VecDeque<(usize, usize)> = VecDeque::new();
+    q.push_back((c, r));
 
     while !q.is_empty() {
         let (c, r) = q.pop_front().unwrap();
 
-        if grid.data[r as usize][c as usize] == 9 {
+        if grid.data[r][c] == 9 {
             trails += 1;
             continue;
         }
 
-        for (nc, nr) in grid.adjacent_cardinals(c as usize, r as usize) {
-            if grid.data[r as usize][c as usize] + 1 == grid.data[(nr) as usize][nc] {
-                if !q.contains(&(nc as isize, nr as isize)) || part2 {
-                    q.push_back((nc as isize, nr as isize));
+        for (nc, nr) in grid.adjacent_cardinals(c, r) {
+            if grid.data[r][c] + 1 == grid.data[nr][nc] {
+                if !q.contains(&(nc, nr)) || part2 {
+                    q.push_back((nc, nr));
                 }
             }
         }
     }
+
     trails
 }
 
