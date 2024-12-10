@@ -96,17 +96,16 @@ fn download_input(
     year: &u32,
     input_path: &String,
 ) -> Result<(), Box<dyn Error + 'static>> {
-    let home_dir = std::env::var("HOME")?;
-    let session_path = format!("{}/adventofcode.session", home_dir);
+    let session_path = format!("adventofcode.session");
 
     if !Path::new(&session_path).exists() {
-        return Err("Please provide the Cookies in $HOME/adventofcode.session".into());
+        return Err("Please provide the Cookies in ./adventofcode.session".into());
     }
 
     let command = format!(
         "curl \"https://adventofcode.com/{}/day/{:0>1}/input\" \
-    -s --fail --cookie \"session=$(<{}/adventofcode.session)\"",
-        year, day, home_dir
+    -s --fail --cookie \"session=$(<adventofcode.session)\"",
+        year, day
     );
 
     let output = Command::new("bash").arg("-c").arg(command).output()?;

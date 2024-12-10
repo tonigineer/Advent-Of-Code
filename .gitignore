@@ -1,9 +1,8 @@
 .vscode
 .venv
-
 target
-old
 
+adventofcode.session
 Cargo.lock
 
 *.in

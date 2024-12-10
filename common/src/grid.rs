@@ -142,7 +142,7 @@ impl<T: Clone> Grid<T> {
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let grid: Grid<u32> = Grid::from("1 2\n3 4");
+    /// let grid: Grid<u32> = Grid::from_delimiter("1 2\n3 4", " ");
     /// assert!(grid.in_bounds(0, 0));
     /// assert!(!grid.in_bounds(10, 10));
     /// ```
@@ -194,7 +194,7 @@ impl<T: Clone> Grid<T> {
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let grid: Grid<u32> = Grid::from("1 2\n3 4");
+    /// let grid: Grid<u32> = Grid::from_delimiter("1 2\n3 4", " ");
     /// let cardinals = grid.adjacent_cardinals(0, 0);
     /// assert_eq!(cardinals, vec![(1, 0), (0, 1)]);
     /// ```
@@ -215,7 +215,7 @@ impl<T: Clone> Grid<T> {
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let grid: Grid<u32> = Grid::from("1 2\n3 4");
+    /// let grid: Grid<u32> = Grid::from_delimiter("1 2\n3 4", " ");
     /// let diagonals = grid.adjacent_diagonals(0, 0);
     /// assert_eq!(diagonals, vec![(1, 1)]);
     /// ```
@@ -236,7 +236,7 @@ impl<T: Clone> Grid<T> {
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let grid: Grid<u32> = Grid::from("1 2\n3 4");
+    /// let grid: Grid<u32> = Grid::from_delimiter("1 2\n3 4", " ");
     /// let all_adjacent = grid.adjacent_eight(0, 0);
     /// assert_eq!(all_adjacent, vec![(1, 0), (1, 1), (0, 1)]);
     /// ```
@@ -258,7 +258,7 @@ impl<T: Clone> Grid<T> {
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let mut grid: Grid<u32> = Grid::from("1 2 3\n4 5 6");
+    /// let mut grid: Grid<u32> = Grid::from_delimiter("1 2 3\n4 5 6", " ");
     /// grid.transpose();
     /// assert_eq!(grid.data, vec![
     ///     vec![1, 4],
@@ -298,7 +298,7 @@ where
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let grid: Grid<u32> = Grid::from("1 2\n3 4");
+    /// let grid: Grid<u32> = Grid::from("12\n34");
     /// assert_eq!(grid.rows, 2);
     /// assert_eq!(grid.cols, 2);
     /// assert_eq!(grid.data[0][0], 1);
@@ -314,15 +314,49 @@ where
         let data: VecDeque<VecDeque<T>> = input
             .lines()
             .map(|line| {
-                if std::any::TypeId::of::<T>() == std::any::TypeId::of::<char>() {
-                    line.chars()
-                        .map(|c| c.to_string().parse::<T>().unwrap())
-                        .collect()
-                } else {
-                    line.split_ascii_whitespace()
-                        .map(|v| v.parse::<T>().unwrap())
-                        .collect()
-                }
+                line.chars()
+                    .map(|c| c.to_string().parse::<T>().unwrap())
+                    .collect()
+            })
+            .collect();
+
+        let rows = data.len();
+        let cols = data[0].len();
+
+        Grid { rows, cols, data }
+    }
+}
+
+impl<T> Grid<T>
+where
+    T: FromStr,
+    T::Err: std::fmt::Debug,
+{
+    /// Creates a grid from a string input using a specified delimiter.
+    ///
+    /// # Arguments
+    ///
+    /// - `input`: A multi-line string where each line represents a row.
+    /// - `delimiter`: The delimiter to split each line into elements.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// use common::grid::Grid;
+    ///
+    /// let grid = Grid::<u32>::from_delimiter("1 2 3\n4 5 6", " ");
+    /// assert_eq!(grid.rows, 2);
+    /// assert_eq!(grid.cols, 3);
+    /// assert_eq!(grid.data[0][0], 1);
+    /// assert_eq!(grid.data[1][2], 6);
+    /// ```
+    pub fn from_delimiter(input: &str, delimiter: &str) -> Grid<T> {
+        let data: VecDeque<VecDeque<T>> = input
+            .lines()
+            .map(|line| {
+                line.split(delimiter)
+                    .map(|v| v.parse::<T>().unwrap())
+                    .collect()
             })
             .collect();
 
@@ -340,7 +374,7 @@ impl<T: std::fmt::Display> std::fmt::Display for Grid<T> {
     /// ```
     /// use common::grid::Grid;
     ///
-    /// let grid: Grid<u32> = Grid::from("1 2\n3 4");
+    /// let grid: Grid<u32> = Grid::from_delimiter("1 2\n3 4", " ");
     /// println!("{}", grid);
     /// ```
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
