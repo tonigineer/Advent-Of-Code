@@ -82,7 +82,7 @@ fn main() {
                 let input = input.trim();
 
                 println!(
-                    "* {year}-{:0>2}  󰎤 {}  󰎧 {}",
+                   "\x1b[35m     {year}-{:0>2}\x1b[0m  󰎤 {}  󰎧 {}",
                     day,
                     solution.part1(input),
                     solution.part2(input)

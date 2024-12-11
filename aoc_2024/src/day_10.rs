@@ -47,10 +47,8 @@ fn find_trails(grid: &Grid<usize>, c: usize, r: usize, part2: bool) -> u32 {
         }
 
         for (nc, nr) in grid.adjacent_cardinals(c, r) {
-            if grid.data[r][c] + 1 == grid.data[nr][nc] {
-                if !q.contains(&(nc, nr)) || part2 {
-                    q.push_back((nc, nr));
-                }
+            if grid.data[r][c] + 1 == grid.data[nr][nc] && (!q.contains(&(nc, nr)) || part2) {
+                q.push_back((nc, nr));
             }
         }
     }
