@@ -39,10 +39,9 @@ fn solve(stone: u64, steps: u8) -> u64 {
         return solve(1, steps - 1);
     }
 
-    if stone.clone().to_string().len() % 2 == 0 {
-        let i = stone.to_string().len() / 2;
-        let stone_str = stone.to_string();
-        let (left, right) = stone_str.split_at(i);
+    let stone_str = stone.to_string();
+    if stone_str.len() % 2 == 0 {
+        let (left, right) = stone_str.split_at(stone_str.len() / 2);
 
         return solve(left.parse::<u64>().unwrap(), steps - 1)
             + solve(right.parse::<u64>().unwrap(), steps - 1);
