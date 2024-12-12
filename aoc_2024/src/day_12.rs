@@ -36,7 +36,7 @@ fn solve(input: &str, part2: bool) -> u32 {
     if part2 {
         return gardens
             .iter()
-            .map(|g| count_sides(g, &grid) * g.len() as u32)
+            .map(|g| count_corners(g) * g.len() as u32)
             .sum();
     }
 
@@ -62,7 +62,7 @@ fn count_perimiter(garden: &HashSet<(usize, usize)>, grid: &Grid<char>) -> u32 {
     perimiter
 }
 
-fn count_sides(garden: &HashSet<(usize, usize)>, grid: &Grid<char>) -> u32 {
+fn count_corners(garden: &HashSet<(usize, usize)>) -> u32 {
     let mut corners = 0;
 
     for (c, r) in garden {
@@ -72,25 +72,18 @@ fn count_sides(garden: &HashSet<(usize, usize)>, grid: &Grid<char>) -> u32 {
             (Direction::Bottom, Direction::Left, Direction::BottomLeft),
             (Direction::Left, Direction::Top, Direction::TopLeft),
         ] {
-            let (dc2, dr2) = cardinal1.as_delta();
-            let (dc3, dr3) = cardinal2.as_delta();
+            let mut foreigners = 0;
 
-            let mut foreigners = 2;
-
-            if grid.in_bounds(*c as isize + dc2, *r as isize + dr2) {
-                let cc = *c as isize + dc2;
-                let rr = *r as isize + dr2;
-                if garden.contains(&(cc as usize, rr as usize)) {
-                    foreigners -= 1;
-                }
+            // Note: Converting `isize` to `usize` causes negative values to wrap to large positive numbers.
+            // These out-of-bounds values will not exist in the HashMap, eliminating the need for explicit in-bounds checks.
+            let (nc, nr) = cardinal1.as_coordinate(c, r);
+            if !garden.contains(&(nc as usize, nr as usize)) {
+                foreigners += 1;
             }
 
-            if grid.in_bounds(*c as isize + dc3, *r as isize + dr3) {
-                let cc = *c as isize + dc3;
-                let rr = *r as isize + dr3;
-                if garden.contains(&(cc as usize, rr as usize)) {
-                    foreigners -= 1;
-                }
+            let (nc, nr) = cardinal2.as_coordinate(c, r);
+            if !garden.contains(&(nc as usize, nr as usize)) {
+                foreigners += 1;
             }
 
             if foreigners == 2 {
@@ -98,20 +91,15 @@ fn count_sides(garden: &HashSet<(usize, usize)>, grid: &Grid<char>) -> u32 {
             }
 
             if foreigners == 0 {
-                let (dc4, dr4) = diagonal.as_delta();
-                if grid.in_bounds(*c as isize + dc4, *r as isize + dr4) {
-                    let cc = *c as isize + dc4;
-                    let rr = *r as isize + dr4;
-
-                    if !garden.contains(&(cc as usize, rr as usize)) {
-                        corners += 1;
-                    }
+                let (nc, nr) = diagonal.as_coordinate(c, r);
+                if !garden.contains(&(nc as usize, nr as usize)) {
+                    corners += 1;
                 }
             }
         }
     }
 
-    corners as u32
+    corners
 }
 
 fn fill_garden(

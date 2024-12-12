@@ -46,6 +46,34 @@ impl Direction {
         }
     }
 
+    /// Computes the new coordinates by applying the direction's delta to the given position.
+    ///
+    /// # Parameters
+    /// - `col`: A reference to the current column index.
+    /// - `row`: A reference to the current row index.
+    ///
+    /// # Tuple Structure
+    /// - `x`: The new column index after applying the direction's horizontal movement.
+    /// - `y`: The new row index after applying the direction's vertical movement.
+    ///
+    /// # Example
+    /// ```
+    /// use common::grid::Direction::*;
+    ///
+    /// let col = 3;
+    /// let row = 3;
+    ///
+    /// assert_eq!(Top.as_coordinate(&col, &row), (3, 2));        // Move up
+    /// assert_eq!(Right.as_coordinate(&col, &row), (4, 3));      // Move right
+    /// assert_eq!(BottomLeft.as_coordinate(&col, &row), (2, 4)); // Move diagonally bottom-left
+    /// ```
+    pub fn as_coordinate(self, col: &usize, row: &usize) -> (isize, isize) {
+        (
+            *col as isize + self.as_delta().0,
+            *row as isize + self.as_delta().1,
+        )
+    }
+
     /// Returns an iterator over the cardinal directions: Top, Right, Bottom, Left.
     ///
     /// # Example
@@ -111,6 +139,66 @@ impl Direction {
         ]
         .iter()
         .copied()
+    }
+
+    /// Returns an iterator over the directions constituting the top-right corner: Top, TopRight, Right.
+    ///
+    /// # Example
+    /// ```
+    /// use common::grid::{Direction, Direction::*};
+    ///
+    /// let top_right: Vec<_> = Direction::corner_top_right().collect();
+    /// assert_eq!(top_right, vec![Top, TopRight, Right]);
+    /// ```
+    pub fn corner_top_right() -> impl Iterator<Item = Self> {
+        [Direction::Top, Direction::TopRight, Direction::Right]
+            .iter()
+            .copied()
+    }
+
+    /// Returns an iterator over the directions constituting the bottom-right corner: Right, BottomRight, Bottom.
+    ///
+    /// # Example
+    /// ```
+    /// use common::grid::{Direction, Direction::*};
+    ///
+    /// let bottom_right: Vec<_> = Direction::corner_bottom_right().collect();
+    /// assert_eq!(bottom_right, vec![Right, BottomRight, Bottom]);
+    /// ```
+    pub fn corner_bottom_right() -> impl Iterator<Item = Self> {
+        [Direction::Right, Direction::BottomRight, Direction::Bottom]
+            .iter()
+            .copied()
+    }
+
+    /// Returns an iterator over the directions constituting the bottom-left corner: Bottom, BottomLeft, Left.
+    ///
+    /// # Example
+    /// ```
+    /// use common::grid::{Direction, Direction::*};
+    ///
+    /// let bottom_left: Vec<_> = Direction::corner_bottom_left().collect();
+    /// assert_eq!(bottom_left, vec![Bottom, BottomLeft, Left]);
+    /// ```
+    pub fn corner_bottom_left() -> impl Iterator<Item = Self> {
+        [Direction::Bottom, Direction::BottomLeft, Direction::Left]
+            .iter()
+            .copied()
+    }
+
+    /// Returns an iterator over the directions constituting the top-left corner: Left, TopLeft, Top.
+    ///
+    /// # Example
+    /// ```
+    /// use common::grid::{Direction, Direction::*};
+    ///
+    /// let top_left: Vec<_> = Direction::corner_top_left().collect();
+    /// assert_eq!(top_left, vec![Left, TopLeft, Top]);
+    /// ```
+    pub fn corner_top_left() -> impl Iterator<Item = Self> {
+        [Direction::Left, Direction::TopLeft, Direction::Top]
+            .iter()
+            .copied()
     }
 }
 
