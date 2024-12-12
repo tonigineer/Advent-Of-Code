@@ -47,19 +47,16 @@ fn solve(input: &str, part2: bool) -> u32 {
 }
 
 fn count_perimiter(garden: &HashSet<(usize, usize)>, grid: &Grid<char>) -> u32 {
-    let mut perimiter = 0;
-
-    for (c, r) in garden {
-        perimiter += 4; // Adjancent_cardinals does not provide the point outside the grid
-
-        for (dc, dr) in grid.adjacent_cardinals(*c, *r) {
-            if garden.contains(&(dc, dr)) {
-                perimiter -= 1;
-            }
-        }
-    }
-
-    perimiter
+    garden
+        .iter()
+        .map(|&(c, r)| {
+            4 - grid
+                .adjacent_cardinals(c, r)
+                .iter()
+                .filter(|&x| garden.contains(x))
+                .count()
+        })
+        .sum::<usize>() as u32
 }
 
 fn count_corners(garden: &HashSet<(usize, usize)>) -> u32 {
