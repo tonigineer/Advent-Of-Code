@@ -15,6 +15,7 @@ mod day_12;
 mod day_13;
 mod day_14;
 mod day_15;
+mod day_16;
 
 #[rustfmt::skip]
 pub const ALL: &[&dyn Solution] = &[
@@ -33,4 +34,5 @@ pub const ALL: &[&dyn Solution] = &[
     &day_13::Day13, 
     &day_14::Day14, 
     &day_15::Day15, 
+    &day_16::Day16, 
 ];

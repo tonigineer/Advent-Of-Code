@@ -53,34 +53,42 @@ fn solve(input: &str, part2: bool) -> usize {
 
         while !q.is_empty() {
             let (c, r) = q.pop_front().unwrap();
-            let (nc, nr) = dir.as_coordinate(&c, &r);
+            let (nc, nr) = (
+                (c as isize + dir.as_delta().0) as usize,
+                (r as isize + dir.as_delta().1) as usize,
+            );
 
             if !pushes.insert((c, r)) {
                 continue;
             }
 
-            match grid.data[nr as usize][nc as usize] {
+            match grid.data[nr][nc] {
                 '#' => continue 'moves_loop,
-                'O' => q.push_back((nc as usize, nr as usize)),
-                '[' => q.extend([(nc as usize, nr as usize), ((nc + 1) as usize, nr as usize)]),
-                ']' => q.extend([(nc as usize, nr as usize), ((nc - 1) as usize, nr as usize)]),
+                'O' => q.push_back((nc, nr)),
+                '[' => q.extend([(nc, nr), (nc + 1 as usize, nr)]),
+                ']' => q.extend([(nc, nr), (nc - 1 as usize, nr)]),
                 _ => continue,
             }
         }
 
         while !pushes.is_empty() {
             for (c, r) in pushes.clone().iter() {
-                let (nc, nr) = dir.as_coordinate(c, r);
-                if !pushes.contains(&(nc as usize, nr as usize)) {
-                    grid.data[nr as usize][nc as usize] = grid.data[*r as usize][*c as usize];
-                    grid.data[*r as usize][*c as usize] = '.';
+                let (nc, nr) = (
+                    (*c as isize + dir.as_delta().0) as usize,
+                    (*r as isize + dir.as_delta().1) as usize,
+                );
+                if !pushes.contains(&(nc, nr)) {
+                    grid.data[nr][nc] = grid.data[*r][*c];
+                    grid.data[*r][*c] = '.';
                     pushes.remove(&(*c, *r));
                 }
             }
         }
 
-        let (nc, nr) = dir.as_coordinate(&c, &r);
-        (c, r) = (nc as usize, nr as usize);
+        (c, r) = (
+            (c as isize + dir.as_delta().0) as usize,
+            (r as isize + dir.as_delta().1) as usize,
+        );
     }
 
     (0..grid.rows)
