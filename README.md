@@ -21,20 +21,20 @@ target/release/advent_of_code solve 2024 1   # solve single puzzle
 target/release/advent_of_code list 2024      # solve puzzles for one year
 ```
 
-## [2024](https://adventofcode.com/2024) - 30 ⭐ (rust)
+## [2024](https://adventofcode.com/2024) - 34 ⭐ (rust)
 
 [![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2024.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc_2024.yml)
 
 Day  | Execution time | | Execution time | | Execution time
 --- | ---: | --- | ---: | --- | ---:
-[Day 01](aoc_2024/src/day_01.rs) |    0.124538 ms | [Day 10](aoc_2024/src/day_10.rs) |   0.711000 ms | [Day 19](aoc_2024/src/day_19.rs) |
-[Day 02](aoc_2024/src/day_02.rs) |    0.305096 ms | [Day 11](aoc_2024/src/day_11.rs) |  19.581000 ms | [Day 20](aoc_2024/src/day_20.rs) |
-[Day 03](aoc_2024/src/day_03.rs) |    0.604985 ms | [Day 12](aoc_2024/src/day_12.rs) | 117.082900 ms | [Day 21](aoc_2024/src/day_21.rs) |
-[Day 04](aoc_2024/src/day_04.rs) |    0.340896 ms | [Day 13](aoc_2024/src/day_13.rs) |   0.060800 ms | [Day 22](aoc_2024/src/day_22.rs) |
-[Day 05](aoc_2024/src/day_05.rs) |    0.380088 ms | [Day 14](aoc_2024/src/day_14.rs) |  46.435900 ms | [Day 23](aoc_2024/src/day_23.rs) |
-[Day 06](aoc_2024/src/day_06.rs) | 4517.902127 ms | [Day 15](aoc_2024/src/day_15.rs) |   6.049400 ms | [Day 24](aoc_2024/src/day_24.rs) |
-[Day 07](aoc_2024/src/day_07.rs) |    1.621122 ms | [Day 16](aoc_2024/src/day_16.rs) |               | [Day 25](aoc_2024/src/day_25.rs) |
-[Day 08](aoc_2024/src/day_08.rs) |    0.171103 ms | [Day 17](aoc_2024/src/day_17.rs) |
+[Day 01](aoc_2024/src/day_01.rs) |    0.124538 ms | [Day 10](aoc_2024/src/day_10.rs) |    0.711000 ms | [Day 19](aoc_2024/src/day_19.rs) |
+[Day 02](aoc_2024/src/day_02.rs) |    0.305096 ms | [Day 11](aoc_2024/src/day_11.rs) |   19.581000 ms | [Day 20](aoc_2024/src/day_20.rs) |
+[Day 03](aoc_2024/src/day_03.rs) |    0.604985 ms | [Day 12](aoc_2024/src/day_12.rs) |  117.082900 ms | [Day 21](aoc_2024/src/day_21.rs) |
+[Day 04](aoc_2024/src/day_04.rs) |    0.340896 ms | [Day 13](aoc_2024/src/day_13.rs) |    0.060800 ms | [Day 22](aoc_2024/src/day_22.rs) |
+[Day 05](aoc_2024/src/day_05.rs) |    0.380088 ms | [Day 14](aoc_2024/src/day_14.rs) |   46.435900 ms | [Day 23](aoc_2024/src/day_23.rs) |
+[Day 06](aoc_2024/src/day_06.rs) | 4517.902127 ms | [Day 15](aoc_2024/src/day_15.rs) |    6.049400 ms | [Day 24](aoc_2024/src/day_24.rs) |
+[Day 07](aoc_2024/src/day_07.rs) |    1.621122 ms | [Day 16](aoc_2024/src/day_16.rs) | 8154.103300 ms | [Day 25](aoc_2024/src/day_25.rs) |
+[Day 08](aoc_2024/src/day_08.rs) |    0.171103 ms | [Day 17](aoc_2024/src/day_17.rs) |    0.010100 ms
 [Day 09](aoc_2024/src/day_09.rs) |   30.917536 ms | [Day 18](aoc_2024/src/day_18.rs) |
 
 ## [2023](https://adventofcode.com/2023) - 50 ⭐ (rust)
