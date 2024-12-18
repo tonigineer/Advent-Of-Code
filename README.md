@@ -35,7 +35,7 @@ Day  | Execution time | | Execution time | | Execution time
 [Day 06](aoc_2024/src/day_06.rs) | 4517.902127 ms | [Day 15](aoc_2024/src/day_15.rs) |    6.049400 ms | [Day 24](aoc_2024/src/day_24.rs) |
 [Day 07](aoc_2024/src/day_07.rs) |    1.621122 ms | [Day 16](aoc_2024/src/day_16.rs) | 8154.103300 ms | [Day 25](aoc_2024/src/day_25.rs) |
 [Day 08](aoc_2024/src/day_08.rs) |    0.171103 ms | [Day 17](aoc_2024/src/day_17.rs) |    0.010100 ms
-[Day 09](aoc_2024/src/day_09.rs) |   30.917536 ms | [Day 18](aoc_2024/src/day_18.rs) | 1135.501600 ms
+[Day 09](aoc_2024/src/day_09.rs) |   30.917536 ms | [Day 18](aoc_2024/src/day_18.rs) |   51.588600 ms
 
 ## [2023](https://adventofcode.com/2023) - 50 ⭐ (rust)
 

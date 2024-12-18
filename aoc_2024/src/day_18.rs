@@ -21,7 +21,7 @@ impl Solution for Day18 {
 fn solve(inp: &str, part2: bool) -> String {
     // Differentiate between tests and puzzle
     let dim = if inp.lines().count() == 25 { 6 } else { 70 };
-    let mut n = if inp.lines().count() == 25 { 12 } else { 1024 };
+    let n = if inp.lines().count() == 25 { 12 } else { 1024 };
 
     let mut corrupt: VecDeque<(i64, i64)> = VecDeque::new();
 
@@ -34,25 +34,34 @@ fn solve(inp: &str, part2: bool) -> String {
         corrupt.push_back((r, c));
     }
 
-    'outer: loop {
+    let mut lo = n;
+    let mut hi = corrupt.len();
+
+    if !part2 {
+        lo = n - 2;
+        hi = n;
+    }
+
+    while lo < hi {
+        let mi = (hi + lo) / 2;
+
         let mut q = VecDeque::new();
         let mut visited = HashSet::new();
 
-        q.push_back((0, 0, vec![]));
+        q.push_back((0, 0, 0));
+
+        let mut connected = false;
 
         while !q.is_empty() {
-            let (r, c, path) = q.pop_front().unwrap();
+            let (r, c, dist) = q.pop_front().unwrap();
 
             if (r, c) == (dim, dim) {
                 if !part2 {
-                    return path.len().to_string();
+                    return dist.to_string();
                 }
 
-                while !path.contains(corrupt.iter().take(n).last().unwrap()) {
-                    n += 1;
-                }
-
-                continue 'outer;
+                connected = true;
+                break;
             }
 
             if !visited.insert((r, c)) {
@@ -62,7 +71,7 @@ fn solve(inp: &str, part2: bool) -> String {
             for (dr, dc) in [(0, 1), (1, 0), (0, -1), (-1, 0)] {
                 let (nr, nc) = (r + dr, c + dc);
 
-                if corrupt.iter().take(n).contains(&&(nr, nc)) {
+                if corrupt.iter().take(mi + 1).contains(&&(nr, nc)) {
                     continue;
                 }
 
@@ -70,16 +79,19 @@ fn solve(inp: &str, part2: bool) -> String {
                     continue;
                 }
 
-                let mut new_path = path.clone();
-                new_path.push((nr, nc));
-
-                q.push_back((nr, nc, new_path));
+                q.push_back((nr, nc, dist + 1));
             }
         }
 
-        let point = corrupt.iter().take(n).last().unwrap();
-        return format!("{},{}", point.1, point.0);
+        if connected {
+            lo = mi + 1;
+        } else {
+            hi = mi;
+        }
     }
+
+    let point = corrupt.iter().take(lo + 1).last().unwrap();
+    format!("{},{}", point.1, point.0)
 }
 
 #[cfg(test)]
