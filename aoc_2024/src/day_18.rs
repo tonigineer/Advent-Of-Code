@@ -35,7 +35,7 @@ fn solve(inp: &str, part2: bool) -> String {
     }
 
     let mut lo = n;
-    let mut hi = corrupt.len();
+    let mut hi = corrupt.len() - 1;
 
     if !part2 {
         lo = n - 2;
@@ -43,7 +43,7 @@ fn solve(inp: &str, part2: bool) -> String {
     }
 
     while lo < hi {
-        let mi = (hi + lo) / 2;
+        let mi = (hi + lo) / 2 + 1;
 
         let mut q = VecDeque::new();
         let mut visited = HashSet::new();
@@ -71,11 +71,12 @@ fn solve(inp: &str, part2: bool) -> String {
             for (dr, dc) in [(0, 1), (1, 0), (0, -1), (-1, 0)] {
                 let (nr, nc) = (r + dr, c + dc);
 
-                if corrupt.iter().take(mi + 1).contains(&&(nr, nc)) {
-                    continue;
-                }
-
-                if nr < 0 || nr > dim || nc < 0 || nc > dim {
+                if corrupt.iter().take(mi).contains(&&(nr, nc))
+                    || nr < 0
+                    || nr > dim
+                    || nc < 0
+                    || nc > dim
+                {
                     continue;
                 }
 
@@ -84,13 +85,13 @@ fn solve(inp: &str, part2: bool) -> String {
         }
 
         if connected {
-            lo = mi + 1;
+            lo = mi;
         } else {
-            hi = mi;
+            hi = mi - 1;
         }
     }
 
-    let point = corrupt.iter().take(lo + 1).last().unwrap();
+    let point = corrupt.iter().nth(lo).unwrap();
     format!("{},{}", point.1, point.0)
 }
 
