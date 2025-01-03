@@ -50,10 +50,10 @@ pub fn load_input(day: u32, year: u32) -> io::Result<String> {
     if !Path::new(&input_path).exists() {
         match download_input(&day, &year, &input_path) {
             Ok(_) => println!(
-                "\x1b[35m Downloading\x1b[0m Input for Day \x1b[30m{}\x1b[0m of Year \x1b[30m{}\x1b[0m was successfully downloaded.",
+                "\x1b[35m downloading\x1b[0m Input for Day \x1b[30m{}\x1b[0m of Year \x1b[30m{}\x1b[0m was successfully downloaded.",
                 day, year
             ),
-            Err(e) => eprintln!("Error downloading file: {}", e),
+            Err(e) => eprintln!("\x1b[31m Error downloading file:\x1b[0m {}", e),
         }
     }
 
