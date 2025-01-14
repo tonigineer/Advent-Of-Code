@@ -5,14 +5,14 @@ pub struct Day25;
 
 impl Solution for Day25 {
     fn name(&self) -> &'static str {
-        ""
+        "Code Chronicle"
     }
 
     fn part1(&self, input: &str) -> Answer {
         solve(input).into()
     }
 
-    fn part2(&self, input: &str) -> Answer {
+    fn part2(&self, _input: &str) -> Answer {
         "NO PUZZLE".into()
     }
 }

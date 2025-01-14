@@ -1,11 +1,10 @@
 use common::{Answer, Solution};
-use std::collections::HashMap;
 
 pub struct Day21;
 
 impl Solution for Day21 {
     fn name(&self) -> &'static str {
-        ""
+        "Keypad Conundrum"
     }
 
     fn part1(&self, input: &str) -> Answer {
@@ -17,7 +16,7 @@ impl Solution for Day21 {
     }
 }
 
-fn solve(input: &str, part2: bool) -> usize {
+fn solve(_input: &str, _part2: bool) -> usize {
     1
 }
 

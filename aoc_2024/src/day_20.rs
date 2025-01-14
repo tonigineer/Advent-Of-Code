@@ -1,6 +1,6 @@
-use common::{grid::Direction, grid::Grid, Answer, Solution};
+use common::{grid::Grid, Answer, Solution};
 use itertools::Itertools;
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashSet, VecDeque};
 
 pub struct Day20;
 
@@ -64,10 +64,6 @@ fn solve(input: &str, part2: bool, min_save: isize) -> usize {
             q.push_back((nr as usize, nc as usize, d + 1));
         }
     }
-
-    // for row in new_grid.iter() {
-    //     println!("{:?}", row);
-    // }
 
     let mut ans = 0;
     for r in 0..grid.rows {

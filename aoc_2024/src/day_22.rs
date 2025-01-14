@@ -6,7 +6,7 @@ pub struct Day22;
 
 impl Solution for Day22 {
     fn name(&self) -> &'static str {
-        ""
+        "Monkey Market"
     }
 
     fn part1(&self, input: &str) -> Answer {
@@ -24,7 +24,7 @@ fn solve(input: &str, part2: bool) -> i64 {
 
     let mut cache = HashSet::new();
 
-    let mut cache2 = HashMap::new();
+    // let mut cache2 = HashMap::new();
 
     for line in input.lines() {
         let mut num = line.parse::<i64>().unwrap();
@@ -40,24 +40,30 @@ fn solve(input: &str, part2: bool) -> i64 {
         ans += num;
 
         cache.clear();
-        cache2.clear();
-
-        for (a, b, c, d, e) in nums.into_iter().tuple_windows() {
-            // let k = (b - a) + (c - b) * 100 + (d - c) * 10000 + (e - d) * 1000000;
-            if cache.insert((b - a, c - b, d - c, e - d)) {
-                cache2.insert((b - a, c - b, d - c, e - d), e);
-                *prices.entry((b - a, c - b, d - c, e - d)).or_insert(0) += e;
-            } else {
-                if let Some(v) = cache2.get(&(b - a, c - b, d - c, e - d)) {
-                    if v < &e {
-                        *prices.entry((b - a, c - b, d - c, e - d)).or_insert(0) += e - v;
-                        cache2
-                            .entry((b - a, c - b, d - c, e - d))
-                            .and_modify(|val| *val = e);
-                    }
-                }
+        for (a, b, c, d, e) in nums.iter().tuple_windows() {
+            let k = (b - a) + (c - b) * 20 + (d - c) * 400 + (e - d) * 8000;
+            if cache.insert(k) {
+                *prices.entry(k).or_default() += *e;
             }
         }
+        // cache2.clear();
+
+        // for (a, b, c, d, e) in nums.into_iter().tuple_windows() {
+        //     // let k = (b - a) + (c - b) * 100 + (d - c) * 10000 + (e - d) * 1000000;
+        //     if cache.insert((b - a, c - b, d - c, e - d)) {
+        //         cache2.insert((b - a, c - b, d - c, e - d), e);
+        //         *prices.entry((b - a, c - b, d - c, e - d)).or_insert(0) += e;
+        //     } else {
+        //         if let Some(v) = cache2.get(&(b - a, c - b, d - c, e - d)) {
+        //             if v < &e {
+        //                 *prices.entry((b - a, c - b, d - c, e - d)).or_insert(0) += e - v;
+        //                 cache2
+        //                     .entry((b - a, c - b, d - c, e - d))
+        //                     .and_modify(|val| *val = e);
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     if part2 {
