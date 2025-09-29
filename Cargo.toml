@@ -1,16 +1,23 @@
 [package]
-edition = "2021"
-name = "advent_of_code"
-version = "0.1.0"
+name = "aoc"
+version = "2025.9.26"
+edition = "2024"
+rust-version = "1.90"
 
-[workspace]
-members = ["common", "aoc_2015", "aoc_2016", "aoc_2023", "aoc_2024"]
+# Speed up benchmarking by not recompiling everything when only a single file changes.
+[profile.bench]
+incremental = true
+
+[lints.rustdoc]
+private_intra_doc_links = "allow"
+
+[dev-dependencies]
+criterion = "0.7.0"
+
+[[bench]]
+name = "benchmarks"
+harness = false
 
 [dependencies]
-clap = { version = "4.0.29", features = ["derive"] }
+criterion = "0.7.0"
 
-common = { path = "common" }
-aoc_2015 = { path = "aoc_2015" }
-aoc_2016 = { path = "aoc_2016" }
-aoc_2023 = { path = "aoc_2023" }
-aoc_2024 = { path = "aoc_2024" }

@@ -1,128 +1,102 @@
-use clap::Parser;
-use common::input::load_input;
-use std::time::Instant;
+use aoc::common::ansi::*;
+use aoc::common::input::read_puzzle_input;
+use aoc::*;
 
-use clap::Subcommand;
+use std::env::args;
+use std::iter::empty;
+use std::time::{Duration, Instant};
 
-#[derive(Parser, Debug)]
-pub struct Args {
-    #[command(subcommand)]
-    pub command: Commands,
+struct Puzzle {
+    year: u32,
+    day: u32,
+    wrapper: fn(String) -> (String, String),
 }
 
-#[derive(Subcommand, Debug)]
-pub enum Commands {
-    #[command(about = "Solve a puzzles for a day.")]
-    Solve { year: u32, day: u32 },
-    #[command(about = "List results for a year.")]
-    List { year: u32 },
-}
-
-/// Main entry point of the Advent of Code solver.
-///
-/// This program parses command-line arguments to either solve a specific day's puzzle or list all
-/// solutions for a particular year. It supports years 2015, 2016, 2023, and 2024.
-///
-/// # Commands
-///
-/// - `solve`: Solves the puzzle for a specified `year` and `day`.
-///   - Loads the input for the given day and year.
-///   - Executes `part1` and `part2` of the solution.
-///   - Prints the results for both parts.
-/// - `list`: Lists all solutions for the specified `year`.
-///   - Iterates over all implemented solutions for that year.
-///   - Loads inputs and executes both parts of each solution.
-///   - Measures and displays the execution time for each day's solution.
-///
-/// # Usage
-///
-/// To solve a specific day's puzzle:
-/// ```bash
-/// cargo run --release solve YEAR DAY
-/// ```
-///
-/// To list all solutions for a year:
-/// ```bash
-/// cargo run --release list YEAR
-/// ```
-///
-/// # Examples
-///
-/// Solve Day 1 of 2023:
-/// ```bash
-/// cargo run --release solve 2023 1
-/// ```
-///
-/// List all solutions for 2023:
-/// ```bash
-/// cargo run --release list 2023
-/// ```
 fn main() {
-    let args = Args::parse();
+    let mut args = args().skip(1);
 
-    let solutions = match &args.command {
-        Commands::Solve { year, .. } | Commands::List { year } => match year {
-            2015 => aoc_2015::ALL,
-            2016 => aoc_2016::ALL,
-            2023 => aoc_2023::ALL,
-            2024 => aoc_2024::ALL,
-            _ => {
-                println!("No solutions implemented for Year: {}.", year);
-                return;
-            }
-        },
-    };
+    let joined = std::env::args().skip(1).collect::<Vec<_>>().join(" ");
 
-    match args.command {
-        Commands::Solve { year, day } => {
-            if let Some(solution) = solutions.get((day - 1) as usize) {
-                let input = load_input(day, year).unwrap_or_else(|_| {
-                    panic!("Failed to load input for Day: {} of Year: {}.", day, year)
-                });
-                let input = input.trim();
-
-                println!(
-                   "\x1b[35m     {year}-{:0>2}\x1b[0m  󰎤 {}  󰎧 {}",
-                    day,
-                    solution.part1(input),
-                    solution.part2(input)
-                );
-            } else {
-                println!(
-                    "No solution implemented for Day: {} of Year: {}.",
-                    day, year
-                );
-            }
+    let day: Option<u32> = joined.rsplit_once("day").and_then(|(_, tail)| {
+        let digits: String = tail.chars().take_while(|c| c.is_ascii_digit()).collect();
+        if digits.is_empty() {
+            None
+        } else {
+            digits.parse::<u32>().ok()
         }
+    });
+    let year: Option<u32> = joined.rsplit_once("year").and_then(|(_, tail)| {
+        let digits: String = tail.chars().take_while(|c| c.is_ascii_digit()).collect();
+        if digits.is_empty() {
+            None
+        } else {
+            digits.parse::<u32>().ok()
+        }
+    });
 
-        Commands::List { year } => {
-            println!("AOC {}", year);
-            for (idx, solution) in solutions.iter().enumerate() {
-                let day = idx as u32 + 1;
-                let input = load_input(day, year).unwrap_or_else(|_| {
-                    panic!("Failed to load input for Day: {} of Year: {}.", day, year)
-                });
-                let input = input.trim();
+    let (stars, duration) = empty()
+        .chain(year2015())
+        .chain(year2024())
+        .filter(|puzzle| year.is_none_or(|y| y == puzzle.year))
+        .filter(|puzzle| day.is_none_or(|d| d == puzzle.day))
+        .fold(
+            (0, Duration::ZERO),
+            |(stars, duration), Puzzle { year, day, wrapper }| {
+                if let Ok(data) = read_puzzle_input(&day, &year) {
+                    let instant = Instant::now();
+                    let (part1, part2) = wrapper(data);
+                    let elapsed = instant.elapsed();
 
-                let start = Instant::now();
-                let part1 = solution.part1(input);
-                let part2 = solution.part2(input);
-                let elapsed = start.elapsed();
-                let time_ms = elapsed.as_secs_f64() * 1000.0;
+                    print!(
+                        " {YELLOW}{}{RESET} Day {GREEN}{:0>2}{RESET} {: >7} µs",
+                        year,
+                        day,
+                        elapsed.as_micros()
+                    );
+                    print!(" [{BOLD}{part1}{RESET}/{BOLD}{part2}{RESET}]");
+                    println!();
 
-                println!(
-                    "{} Day {:0>2}   󰎤 {: <16}   󰎧 {: <16}    {: >11.6} ms",
-                    if day == solutions.len() as u32 {
-                        "└"
-                    } else {
-                        "├"
-                    },
-                    day,
-                    part1.to_string(),
-                    part2.to_string(),
-                    time_ms
-                );
-            }
+                    (stars + 2, duration + elapsed)
+                } else {
+                    (stars, duration)
+                }
+            },
+        );
+
+    println!(
+        "\n\n   {BOLD}SUMMARY   {YELLOW}{}{RESET} Stars in {BOLD}{GREEN}{}{RESET} ms",
+        stars,
+        duration.as_millis()
+    );
+}
+
+macro_rules! season {
+    ($year:tt $($day:tt),*) => {
+        fn $year() -> Vec<Puzzle> {
+            vec![$({
+                // TODO: parse function for strings to get one or all signed and unsigned
+                let year: u32 = stringify!($year)["year".len()..].parse().unwrap();
+                let day: u32 = stringify!($day)["day".len()..].parse().unwrap();
+                let wrapper = |data: String| {
+                    use $year::$day::*;
+
+                    let input = parse(&data);
+                    let part1 = part1(&input);
+                    let part2 = part2(&input);
+
+                    (part1.to_string(), part2.to_string())
+                };
+
+                Puzzle { year, day, wrapper }
+            },)*]
         }
     }
 }
+
+season!(year2015
+    day01, day02, day03
+);
+
+season!(year2024
+    day01
+);
