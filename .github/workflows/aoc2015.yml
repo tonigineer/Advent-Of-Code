@@ -1,13 +1,13 @@
-name: AdventOfCode-2024
+name: AdventOfCode-2015
 on:
   workflow_dispatch:
   push:
     paths:
-      - "common/**"
-      - "aoc_2024/**"
+      - "src/common/**"
+      - "src/year2015/**"
 
 env:
-  CRATE: aoc_2024
+  YEAR: 2015
 
 jobs:
   build:
@@ -16,6 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build
-        run: cargo build -p ${{ env.CRATE }}
+        run: cargo build --release
       - name: Test
-        run: cargo test -p ${{ env.CRATE }}
+        run: cargo test year${{ env.YEAR }}

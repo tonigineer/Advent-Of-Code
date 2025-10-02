@@ -7,9 +7,10 @@ macro_rules! benchmark {
                 {
                     use aoc::$year::$day::*;
                     use aoc::common::input::*;
+                    use aoc::common::parse::*;
 
-                    let day: u32 = stringify!($day)["day".len()..].parse().unwrap();
-                    let year: u32 = stringify!($year)["year".len()..].parse().unwrap();
+                    let day: u32 = stringify!($day).parse_uint::<u32>();
+                    let year: u32 = stringify!($year).parse_uint::<u32>();
 
                     if let Ok(data) = read_puzzle_input(&day, &year) {
                         let input = parse(&data);
@@ -35,11 +36,17 @@ macro_rules! benchmark {
 }
 
 benchmark!(year2015
-    day01, day02
+    day01, day02, day03, day04, day05, day06, day07, day08,
+    day09, day10, day11, day12, day13, day14, day15, day16,
+    day17, day18, day19, day20, day21, day22, day23, day24,
+    day25
 );
 
 benchmark!(year2024
-    day01,
+    day01, day02, day03, day04, day05, day06, day07, day08,
+    day09, day10, day11, day12, day13, day14, day15, day16,
+    day17, day18, day19, day20, day21, day22, day23, day24,
+    day25
 );
 
 criterion_group!(year2015_group, year2015);

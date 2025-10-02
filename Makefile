@@ -69,24 +69,39 @@ pub fn part2(input: &str) -> u32 {\n\
 $(POSSIBLE_DAYS): %:
 	$(Q)$(MAKE) tests/year$(YEAR)/day$@.rs
 	$(Q)$(MAKE) src/year$(YEAR)/day$@.rs
-	$(Q)cargo test --release year$(YEAR)::day$@ -- --nocapture
-	$(Q)cargo run  --release year$(YEAR)::day$@
+
+	$(Q)cargo build --release
+	$(Q)cargo test year$(YEAR)::day$@ -- --nocapture
+	$(Q)cargo run --release year$(YEAR)::day$@
 
 new:
 	$(Q)$(MAKE) tests/year$(YEAR)/day$(DAY).rs
 	$(Q)$(MAKE) src/year$(YEAR)/day$(DAY).rs
 
 test:
-	$(Q)cargo test --release year$(YEAR)::day$(DAY) -- --nocapture
+	$(Q)cargo test year$(YEAR)::day$(DAY) -- --nocapture
 
 solve:
 	$(Q)cargo run --release year$(YEAR)::day$(DAY)
+
+year:
+	$(Q)cargo build --release
+	$(Q)cargo test year$(YEAR)
+	$(Q)cargo run --release year$(YEAR)
+
+all:
+	$(Q)cargo build --release
+	$(Q)cargo test
+	$(Q)cargo run --release
 
 bench:
 	$(Q)cargo bench -- year$(YEAR)
 
 clean:
 	$(Q)cargo clean
+
+format:
+	$(Q)cargo clippy --all-targets --all-features
 
 help:
 	@echo "Advent of Code — Make targets"
@@ -110,6 +125,7 @@ help:
 	@echo "  solve      Run the solution for DAY/YEAR."
 	@echo "  bench      Run Criterion benchmarks for YEAR."
 	@echo "  clean      Remove build artifacts."
+	@echo "  format     Run clippy on everything."
 	@echo "  help       Show this help."
 	@echo
 	@echo "EXAMPLES"
@@ -120,5 +136,5 @@ help:
 	@echo "  make bench YEAR=2024            # run benches for 2024"
 	@echo
 
-.PHONY: $(POSSIBLE_DAYS) new test solve bench clean help
+.PHONY: $(POSSIBLE_DAYS) bench clean format help new solve test
 
