@@ -2,7 +2,7 @@
   🎄 Advent of Code 🎄
 </h1>
 
-[![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/repo.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/repo.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code)
+[![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/repo.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/repo.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code) [![Clippy](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml)
 
 > <cite> [Advent of Code](https://adventofcode.com/)
 >
