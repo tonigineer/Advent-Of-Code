@@ -4,7 +4,7 @@ use std::process::Command;
 use std::{fs, io};
 
 pub fn read_puzzle_input(day: &u32, year: &u32) -> Result<String> {
-    let file_path = generate_file_path(&day, &year);
+    let file_path = generate_file_path(day, year);
 
     if !file_path.exists() {
         if let Some(parent) = file_path.parent() {
@@ -43,14 +43,11 @@ fn download_input(day: &u32, year: &u32, file_path: &Path) -> Result<()> {
     if !output.status.success() {
         let status = output.status;
         let stderr = String::from_utf8_lossy(&output.stderr);
-        return Err(io::Error::new(
-            io::ErrorKind::Other,
-            if stderr.is_empty() {
-                format!("curl failed ({status})")
-            } else {
-                format!("curl failed ({status}) — {stderr}")
-            },
-        ));
+        return Err(io::Error::other(if stderr.is_empty() {
+            format!("curl failed ({status})")
+        } else {
+            format!("curl failed ({status}) — {stderr}")
+        }));
     }
 
     fs::write(file_path, &output.stdout)?;

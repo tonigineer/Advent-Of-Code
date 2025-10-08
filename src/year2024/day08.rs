@@ -49,15 +49,15 @@ fn solve(input: &str, part2: bool) -> u32 {
 
                     // NOTE: Since each pair is looped twice, only one direction
                     // is checked here.
-                    let mut c = c1.clone();
-                    let mut r = r1.clone();
+                    let mut c = *c1;
+                    let mut r = *r1;
                     let dr = r2 - r1;
                     let dc = c2 - c1;
 
                     while grid.in_bounds(c, r) {
                         antinodes.insert((c, r));
-                        c = dc + c;
-                        r = dr + r;
+                        c += dc;
+                        r += dr;
                     }
                 }
             }

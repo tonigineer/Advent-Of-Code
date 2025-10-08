@@ -35,5 +35,5 @@ fn solve(input: &str, part2: bool) -> usize {
     if part2 {
         return encoded_len - code_len;
     }
-    return code_len - render_len;
+    code_len - render_len
 }

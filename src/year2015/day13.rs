@@ -54,5 +54,5 @@ fn solve(input: &str, part2: bool) -> i32 {
         }
     }
 
-    return max_happiness;
+    max_happiness
 }

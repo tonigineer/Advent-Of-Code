@@ -57,7 +57,7 @@ fn solve(input: &str, part2: bool) -> u32 {
     ans
 }
 
-fn has_correct_order(sequence: &Vec<u32>, rules: &HashMap<(u32, u32), i32>) -> bool {
+fn has_correct_order(sequence: &[u32], rules: &HashMap<(u32, u32), i32>) -> bool {
     for i in 0..sequence.len() {
         for j in i + 1..sequence.len() {
             let key = (sequence[i], sequence[j]);

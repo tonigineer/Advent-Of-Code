@@ -168,6 +168,7 @@ impl Game {
             queue.push_back((state, Spells::Poison));
             queue.push_back((state, Spells::Recharge));
         }
-        return least_mana_spent;
+
+        least_mana_spent
     }
 }

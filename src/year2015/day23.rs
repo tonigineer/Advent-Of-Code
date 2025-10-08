@@ -28,11 +28,11 @@ enum Register {
 
 impl From<&str> for Register {
     fn from(s: &str) -> Self {
-        return match s {
+        match s {
             "a" | "a," => Self::A,
             "b" | "b," => Self::B,
             _ => panic!("Not implemented.s"),
-        };
+        }
     }
 }
 
@@ -88,24 +88,24 @@ struct Computer {
 
 impl Computer {
     fn get_register(&mut self, r: Register) -> &mut usize {
-        return match r {
+        match r {
             Register::A => &mut self.a,
             Register::B => &mut self.b,
-        };
+        }
     }
 
     fn register_is_even(&self, r: Register) -> bool {
-        return match r {
-            Register::A => self.a % 2 == 0,
-            Register::B => self.b % 2 == 0,
-        };
+        match r {
+            Register::A => self.a.is_multiple_of(2),
+            Register::B => self.b.is_multiple_of(2),
+        }
     }
 
     fn register_is_one(&self, r: Register) -> bool {
-        return match r {
+        match r {
             Register::A => self.a == 1,
             Register::B => self.b == 1,
-        };
+        }
     }
 
     fn jump(&mut self, offset: isize) {
@@ -155,7 +155,7 @@ impl Computer {
             }
         }
 
-        return *self.get_register(Register::B);
+        *self.get_register(Register::B)
     }
 }
 
@@ -166,6 +166,6 @@ impl From<&str> for Computer {
             instructions.push(line.into())
         }
 
-        return Computer { a: 0, b: 0, instruction_pointer: 0, instructions: instructions };
+        Computer { a: 0, b: 0, instruction_pointer: 0, instructions }
     }
 }

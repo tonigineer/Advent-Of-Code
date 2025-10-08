@@ -16,19 +16,19 @@ pub fn parse(input: &str) -> Vec<Reindeer> {
         .collect()
 }
 
-pub fn part1(input: &Vec<Reindeer>) -> i32 {
+pub fn part1(input: &[Reindeer]) -> i32 {
     part1_for_test(input, 2503)
 }
 
-pub fn part2(input: &Vec<Reindeer>) -> i32 {
+pub fn part2(input: &[Reindeer]) -> i32 {
     part2_for_test(input, 2503)
 }
 
-pub fn part1_for_test(input: &Vec<Reindeer>, t_sim: i32) -> i32 {
+pub fn part1_for_test(input: &[Reindeer], t_sim: i32) -> i32 {
     input.iter().map(|&r| simulate(r, t_sim)).max().unwrap()
 }
 
-pub fn part2_for_test(input: &Vec<Reindeer>, t_sim: i32) -> i32 {
+pub fn part2_for_test(input: &[Reindeer], t_sim: i32) -> i32 {
     let mut scores = vec![0; input.len()];
     let mut distances = vec![0; input.len()];
 

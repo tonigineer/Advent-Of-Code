@@ -75,7 +75,7 @@ impl Solve {
         };
 
         self.found.insert(output.to_string(), result);
-        return result;
+        result
     }
 }
 
@@ -99,5 +99,5 @@ fn solve(input: &str, part2: bool) -> u16 {
 
         result = s.get_value("a".to_string());
     }
-    return result;
+    result
 }

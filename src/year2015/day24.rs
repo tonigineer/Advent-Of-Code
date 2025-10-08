@@ -32,13 +32,14 @@ fn solve(input: &str, compartments: usize) -> usize {
             .copied()
             .combinations(i)
             .filter(|c| c.iter().sum::<usize>() == total_weight)
-            .sorted_by_key(|c| c.iter().fold(1, |a, b| a * *b as i64))
+            .sorted_by_key(|c| c.iter().product::<usize>())
             .min();
 
-        if !c.is_none() {
-            entanglement = c.unwrap().iter().fold(1, |a, b| a * b);
+        if let Some(c) = c {
+            entanglement = c.iter().product::<usize>();
             break;
         }
     }
-    return entanglement;
+
+    entanglement
 }

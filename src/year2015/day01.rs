@@ -28,5 +28,5 @@ pub fn part2(input: &str) -> usize {
             break;
         }
     }
-    return result + 1;
+    result + 1
 }

@@ -24,7 +24,7 @@ pub fn parse(input: &str) -> (Vec<u32>, Vec<u32>) {
 }
 
 pub fn part1(sides: &(Vec<u32>, Vec<u32>)) -> u32 {
-    sides.0.iter().zip(&sides.1).map(|(l, r)| if l > r { l - r } else { r - l }).sum::<u32>()
+    sides.0.iter().zip(&sides.1).map(|(l, r)| l.abs_diff(*r)).sum::<u32>()
 }
 
 pub fn part2(sides: &(Vec<u32>, Vec<u32>)) -> u32 {

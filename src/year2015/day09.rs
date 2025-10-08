@@ -45,5 +45,5 @@ fn solve(input: &str, part2: bool) -> u32 {
         target_distance =
             if part2 { max(target_distance, distance) } else { min(target_distance, distance) };
     }
-    return target_distance;
+    target_distance
 }

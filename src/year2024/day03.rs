@@ -30,12 +30,10 @@ fn solve(input: &str, part2: bool) -> u32 {
             toggle = true;
         } else if &cap[0] == "don't()" {
             toggle = false;
-        } else {
-            if toggle || !part2 {
-                let x1 = &cap[1].parse::<u32>().unwrap();
-                let x2 = &cap[2].parse::<u32>().unwrap();
-                ans += x1 * x2;
-            }
+        } else if toggle || !part2 {
+            let x1 = &cap[1].parse::<u32>().unwrap();
+            let x2 = &cap[2].parse::<u32>().unwrap();
+            ans += x1 * x2;
         }
     }
 

@@ -92,18 +92,18 @@ fn solve(part2: bool) -> u32 {
     if part2 {
         return iproduct!(&weapons, &armors, &rings, &rings)
             .filter(|(_, _, r1, r2)| r1.costs != r2.costs)
-            .map(|(w, a, r1, r2)| Character::new(&w, &a, &r1, &r2))
+            .map(|(w, a, r1, r2)| Character::new(w, a, r1, r2))
             .filter(|h| !h.battle(&boss))
             .max_by(|a, b| a.costs.cmp(&b.costs))
             .unwrap()
             .costs;
     }
 
-    return iproduct!(&weapons, &armors, &rings, &rings)
+    iproduct!(&weapons, &armors, &rings, &rings)
         .filter(|(_, _, r1, r2)| r1.costs != r2.costs)
-        .map(|(w, a, r1, r2)| Character::new(&w, &a, &r1, &r2))
+        .map(|(w, a, r1, r2)| Character::new(w, a, r1, r2))
         .filter(|h| h.battle(&boss))
         .min_by(|a, b| a.costs.cmp(&b.costs))
         .unwrap()
-        .costs;
+        .costs
 }

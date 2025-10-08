@@ -36,5 +36,5 @@ fn solve(input: &str, part2: bool) -> usize {
         }
     }
 
-    return houses.iter().position(|h| h >= &presents).unwrap();
+    houses.iter().position(|h| h >= &presents).unwrap()
 }

@@ -34,15 +34,15 @@ fn solve(input: &str, part2: bool) -> u64 {
     ans
 }
 
-fn are_equal(target: u64, nums: &Vec<u64>, part2: bool) -> bool {
+fn are_equal(target: u64, nums: &[u64], part2: bool) -> bool {
     if nums.len() == 1 {
         return target == nums[0];
     }
 
-    let mut nums_new = nums.clone();
+    let mut nums_new = nums.to_owned();
     let last_elem = nums_new.pop().unwrap();
 
-    if (target % last_elem) == 0 && are_equal(target / last_elem, &nums_new, part2) {
+    if target.is_multiple_of(last_elem) && are_equal(target / last_elem, &nums_new, part2) {
         return true;
     }
     if target > last_elem && are_equal(target - last_elem, &nums_new, part2) {
@@ -52,13 +52,11 @@ fn are_equal(target: u64, nums: &Vec<u64>, part2: bool) -> bool {
     let mut target_str = target.to_string();
     let elem_str = last_elem.to_string();
 
-    if part2 && target_str.len() > elem_str.len() {
-        if target_str.ends_with(&elem_str) {
-            target_str.truncate(target_str.len() - elem_str.len());
+    if part2 && target_str.len() > elem_str.len() && target_str.ends_with(&elem_str) {
+        target_str.truncate(target_str.len() - elem_str.len());
 
-            if are_equal(target_str.parse::<u64>().unwrap(), &nums_new, part2) {
-                return true;
-            }
+        if are_equal(target_str.parse::<u64>().unwrap(), &nums_new, part2) {
+            return true;
         }
     }
 

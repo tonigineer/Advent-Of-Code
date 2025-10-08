@@ -37,14 +37,14 @@ impl From<&str> for Ingredient {
     fn from(s: &str) -> Ingredient {
         let mod_s = s.replace(":", "").replace(",", "");
         let token = mod_s.split(" ").collect::<Vec<_>>();
-        return Ingredient {
+        Ingredient {
             name: token[0].to_string(),
             capacity: token[2].parse().unwrap(),
             durability: token[4].parse().unwrap(),
             flavor: token[6].parse().unwrap(),
             texture: token[8].parse().unwrap(),
             calories: token[10].parse().unwrap(),
-        };
+        }
     }
 }
 
@@ -65,14 +65,14 @@ impl From<&str> for Dish {
             let i: Ingredient = line.into();
             ingredients.insert(i.name.to_string(), i);
         }
-        return Dish {
-            ingredients: ingredients,
+        Dish {
+            ingredients,
             capacity_total: 0,
             durability_total: 0,
             flavor_total: 0,
             texture_total: 0,
             calories_total: 0,
-        };
+        }
     }
 }
 
@@ -103,13 +103,13 @@ impl Dish {
                 * max(self.flavor_total, 0)
                 * max(self.texture_total, 0)) as i64;
 
-            if part2 {
-                if score > highest_score && self.calories_total == 500 {
-                    highest_score = score
-                }
-            } else {
-                if score > highest_score {
-                    highest_score = score
+            if score > highest_score {
+                if part2 {
+                    if self.calories_total == 500 {
+                        highest_score = score;
+                    }
+                } else {
+                    highest_score = score;
                 }
             }
 
@@ -120,6 +120,6 @@ impl Dish {
             self.calories_total = 0;
         }
 
-        return highest_score;
+        highest_score
     }
 }

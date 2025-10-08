@@ -43,29 +43,19 @@ impl From<&str> for Grid {
             }
         }
 
-        return Grid {
-            grid: grid,
+        Grid {
+            grid,
             rows: s.lines().count() as isize,
             cols: s.lines().next().unwrap().chars().count() as isize,
-        };
+        }
     }
 }
 
 impl Grid {
-    // fn visualize(&self) {
-    //     println!("-- Visualize");
-    //     for r in 0..self.rows {
-    //         for c in 0..self.cols {
-    //             print!("{}", if *self.grid.get(&(r, c)).unwrap()  {'#'} else {'.'});
-    //         }
-    //         println!("");
-    //     }
-    // }
-
     fn lights_on_neighbors(&self, key: (isize, isize)) -> i32 {
         let mut num_lights_on = 0;
-        for dr in -1..=1 as isize {
-            for dc in -1..=1 as isize {
+        for dr in -1..=1_isize {
+            for dc in -1..=1_isize {
                 if dr == 0 && dc == 0 {
                     continue;
                 }
@@ -74,7 +64,7 @@ impl Grid {
                 }
             }
         }
-        return num_lights_on;
+        num_lights_on
     }
 
     fn update(&mut self, part2: bool) {
@@ -104,6 +94,6 @@ impl Grid {
     }
 
     fn lights_on_total(&self) -> i32 {
-        return self.grid.values().filter(|l| **l).count() as i32;
+        self.grid.values().filter(|l| **l).count() as i32
     }
 }

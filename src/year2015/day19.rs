@@ -30,14 +30,14 @@ fn solve(input: &str) -> usize {
             if molecule[i..i + pattern.len()].to_string() == pattern {
                 distinct_molecules.insert(format!(
                     "{}{}{}",
-                    molecule[0..i].to_string(),
+                    &molecule[0..i],
                     substitute,
-                    molecule[i + pattern.len()..molecule.len()].to_string()
+                    &molecule[i + pattern.len()..molecule.len()]
                 ));
             }
         }
     }
-    return distinct_molecules.len();
+    distinct_molecules.len()
 }
 
 fn solve2(input: &str) -> usize {
@@ -49,8 +49,8 @@ fn solve2(input: &str) -> usize {
         rm.insert(substitute, pattern);
     }
 
-    let mut sorted_keys: Vec<&&str> = rm.keys().into_iter().collect::<Vec<_>>();
-    sorted_keys.sort_by(|a, b| b.len().cmp(&a.len()));
+    let mut sorted_keys: Vec<&&str> = rm.keys().collect::<Vec<_>>();
+    sorted_keys.sort_by_key(|b| std::cmp::Reverse(b.len()));
 
     let mut current_molecule: String = molecule.to_string();
     let mut count = 0;
@@ -68,5 +68,5 @@ fn solve2(input: &str) -> usize {
             break;
         }
     }
-    return count;
+    count
 }

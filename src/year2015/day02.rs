@@ -17,7 +17,7 @@ pub fn part1(input: &str) -> u32 {
         paper += p.paper_needed();
     }
 
-    return paper;
+    paper
 }
 pub fn part2(input: &str) -> u32 {
     let mut ribbon: u32 = 0;
@@ -30,7 +30,7 @@ pub fn part2(input: &str) -> u32 {
         ribbon += p.ribbon_needed();
     }
 
-    return ribbon;
+    ribbon
 }
 
 struct Present {
@@ -49,10 +49,10 @@ impl Present {
     }
 
     fn paper_needed(&self) -> u32 {
-        return 3 * self.l * self.w + 2 * self.l * self.h + 2 * self.w * self.h;
+        3 * self.l * self.w + 2 * self.l * self.h + 2 * self.w * self.h
     }
 
     fn ribbon_needed(&self) -> u32 {
-        return 2 * self.l + 2 * self.w + self.l * self.h * self.w;
+        2 * self.l + 2 * self.w + self.l * self.h * self.w
     }
 }

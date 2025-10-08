@@ -44,23 +44,17 @@ fn solve(input: &str, part2: bool) -> usize {
 
             // More nesting! :D
             if part2 {
-                if ["cats", "trees"].contains(&token[i]) {
-                    if *target >= actual {
-                        found = false;
-                    }
+                if ["cats", "trees"].contains(&token[i]) && *target >= actual {
+                    found = false;
                 } else if ["pomeranians", "goldfish"].contains(&token[i]) {
                     if *target <= actual {
                         found = false;
                     }
-                } else {
-                    if *target != actual {
-                        found = false;
-                    }
-                }
-            } else {
-                if *target != actual {
+                } else if *target != actual {
                     found = false;
                 }
+            } else if *target != actual {
+                found = false;
             }
         }
         if found {

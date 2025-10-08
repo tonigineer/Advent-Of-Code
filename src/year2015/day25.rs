@@ -39,5 +39,5 @@ fn solve(input: &str) -> u64 {
         code = code * multiplier % divider;
     }
 
-    return code;
+    code
 }

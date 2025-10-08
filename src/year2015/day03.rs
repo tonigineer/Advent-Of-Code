@@ -60,5 +60,5 @@ fn solve(input: &str, part2: bool) -> u32 {
     if part2 {
         return visited_part2.len() as u32;
     };
-    return visited.len() as u32;
+    visited.len() as u32
 }

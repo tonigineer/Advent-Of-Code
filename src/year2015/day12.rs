@@ -12,11 +12,11 @@ pub fn parse(input: &str) -> &str {
 }
 
 pub fn part1(input: &str) -> i64 {
-    solve(serde_json::from_str(input).unwrap(), false).into()
+    solve(serde_json::from_str(input).unwrap(), false)
 }
 
 pub fn part2(input: &str) -> i64 {
-    solve(serde_json::from_str(input).unwrap(), true).into()
+    solve(serde_json::from_str(input).unwrap(), true)
 }
 
 fn solve(json: Value, part2: bool) -> i64 {
@@ -39,15 +39,13 @@ fn solve(json: Value, part2: bool) -> i64 {
     if json.is_object() {
         let mut sum_object = 0;
         for (_, v) in json.as_object().unwrap() {
-            if part2 {
-                if v == "red" {
-                    return 0;
-                }
+            if part2 && v == "red" {
+                return 0;
             }
             sum_object += solve(v.clone(), part2);
         }
         return sum_object;
     }
 
-    return 0;
+    0
 }

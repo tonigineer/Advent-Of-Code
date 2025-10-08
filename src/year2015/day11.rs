@@ -46,7 +46,7 @@ fn is_valid(password: &str) -> bool {
         }
     }
 
-    return false;
+    false
 }
 
 fn solve(input: &str) -> String {
@@ -59,14 +59,14 @@ fn solve(input: &str) -> String {
             if flip_next {
                 if c == 'z' {
                     flip_next = true;
-                    new_password.push_str("a")
+                    new_password.push('a')
                 } else {
                     flip_next = false;
-                    new_password.push_str(&((c as u8 + 1) as char).to_string());
+                    new_password.push((c as u8 + 1) as char);
                 }
                 continue;
             }
-            new_password.push_str(&c.to_string());
+            new_password.push(c);
         }
         password = new_password.chars().rev().collect::<String>();
         if is_valid(&password) {
@@ -76,5 +76,5 @@ fn solve(input: &str) -> String {
         new_password = String::new();
         flip_next = true;
     }
-    return password;
+    password
 }
