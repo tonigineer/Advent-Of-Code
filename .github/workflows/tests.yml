@@ -1,0 +1,15 @@
+name: Tests
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  test-stable:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: rustup default 1.90
+    - run: cargo test

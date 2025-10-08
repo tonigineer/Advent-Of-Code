@@ -10,7 +10,7 @@
 //! This module provides methods to extract a single integer (`parse_uint`, `parse_int`)
 //! or iterate over all integers (`parse_uint_iter`, `parse_int_iter`).
 //!
-//! Source: https://github.com/maneatingape/advent-of-code-rust/blob/main/src/util/parse.rs
+//! Source: <https://github.com/maneatingape/advent-of-code-rust/blob/main/src/util/parse.rs>
 
 use crate::common::integer::{Signed, Unsigned};
 use std::marker::PhantomData;
@@ -91,17 +91,11 @@ impl ParseInteger for &str {
     }
 
     fn parse_uint_iter<T: Unsigned<T>>(&self) -> ParseUnsigned<'_, T> {
-        ParseUnsigned {
-            bytes: self.bytes(),
-            phantom: PhantomData,
-        }
+        ParseUnsigned { bytes: self.bytes(), phantom: PhantomData }
     }
 
     fn parse_int_iter<T: Signed<T>>(&self) -> ParseSigned<'_, T> {
-        ParseSigned {
-            bytes: self.bytes(),
-            phantom: PhantomData,
-        }
+        ParseSigned { bytes: self.bytes(), phantom: PhantomData }
     }
 }
 

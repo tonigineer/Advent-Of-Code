@@ -2,7 +2,7 @@
   🎄 Advent of Code 🎄
 </h1>
 
-[![Repo](https://github.com/tonigineer/advent-of-code/actions/workflows/repo.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/repo.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code) [![Clippy](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml)
+[![Tests](https://github.com/tonigineer/advent-of-code/actions/workflows/build.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/build.yml) [![Checks](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code)
 
 > <cite> [Advent of Code](https://adventofcode.com/)
 >
@@ -26,9 +26,9 @@ make format                   # Run Clippy for linting
 
 Input files are downloaded automatically. To enable this, create a file named `adventofcode.session` in the project root containing your Advent of Code session cookie.
 
-### [2024](https://adventofcode.com/2024) — 50 ⭐ ✨ _(completed)_
+### [2024](https://adventofcode.com/2024) — 50 ⭐
 
-[![CI](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc2024.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc2024.yml)
+[![CI](https://github.com/tonigineer/advent-of-code/actions/workflows/test2024.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/test2024.yml)
 
 | Day                             | Day                             | Day                             |
 | ------------------------------- | ------------------------------- | ------------------------------- |
@@ -42,9 +42,9 @@ Input files are downloaded automatically. To enable this, create a file named `a
 | [Day 22](src/year2024/day22.rs) | [Day 23](src/year2024/day23.rs) | [Day 24](src/year2024/day24.rs) |
 | [Day 25](src/year2024/day25.rs) |                                 |                                 |
 
-### [2015](https://adventofcode.com/2015) — 50 ⭐ ✨ _(completed)_
+### [2015](https://adventofcode.com/2015) — 50 ⭐
 
-[![CI](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc2015.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/aoc2015.yml)
+[![CI](https://github.com/tonigineer/advent-of-code/actions/workflows/test2015.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/test2015.yml)
 
 | Day                             | Day                             | Day                             |
 | ------------------------------- | ------------------------------- | ------------------------------- |

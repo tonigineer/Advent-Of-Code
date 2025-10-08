@@ -4,12 +4,8 @@ version = "2025.9.26"
 edition = "2024"
 rust-version = "1.90"
 
-# Speed up benchmarking by not recompiling everything when only a single file changes.
 [profile.bench]
 incremental = true
-
-[lints.rustdoc]
-private_intra_doc_links = "allow"
 
 [dev-dependencies]
 criterion = "0.7.0"
