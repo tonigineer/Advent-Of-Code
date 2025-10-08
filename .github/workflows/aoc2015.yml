@@ -1,4 +1,4 @@
-name: AdventOfCode-2015
+name: 2015 Tests
 on:
   workflow_dispatch:
   push:
