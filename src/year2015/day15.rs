@@ -98,10 +98,10 @@ impl Dish {
                         * amount as i64;
             }
 
-            let score = (max(self.capacity_total, 0)
+            let score = max(self.capacity_total, 0)
                 * max(self.durability_total, 0)
                 * max(self.flavor_total, 0)
-                * max(self.texture_total, 0)) as i64;
+                * max(self.texture_total, 0);
 
             if score > highest_score {
                 if part2 {
