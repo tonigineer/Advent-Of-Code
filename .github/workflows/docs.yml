@@ -1,0 +1,32 @@
+name: Docs
+
+on:
+  push:
+    branches: main
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup default 1.90
+      - run: cargo doc
+        env:
+          RUSTDOCFLAGS: "--document-private-items --default-theme=ayu-dark --deny warnings"
+      - run: rm target/doc/.lock
+      - run: cp docs/* target/doc
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'target/doc'
+      - uses: actions/configure-pages@v4
+      - uses: actions/deploy-pages@v4
+        id: deployment
