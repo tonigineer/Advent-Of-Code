@@ -25,17 +25,11 @@ fn solve(input: &str, part2: bool) -> i32 {
     let mut p: HashSet<String> = HashSet::new();
 
     for line in input.lines() {
-        let modded_line = line
-            .trim_end_matches('.')
-            .replace("gain ", "")
-            .replace("lose ", "-");
+        let modded_line = line.trim_end_matches('.').replace("gain ", "").replace("lose ", "-");
         let token: Vec<&str> = modded_line.split(" ").collect();
 
-        let (p1, p2, happiness) = (
-            token[0].to_string(),
-            token[9].to_string(),
-            token[2].parse().unwrap(),
-        );
+        let (p1, p2, happiness) =
+            (token[0].to_string(), token[9].to_string(), token[2].parse().unwrap());
         h.insert((p1.clone(), p2), happiness);
         p.insert(p1);
     }

@@ -52,11 +52,7 @@ fn solve_part1(input: &str) -> i64 {
         }
     }
 
-    disc_arranged
-        .iter()
-        .enumerate()
-        .map(|(id, v)| id as i64 * v)
-        .sum()
+    disc_arranged.iter().enumerate().map(|(id, v)| id as i64 * v).sum()
 }
 
 fn solve_part2(input: &str) -> usize {

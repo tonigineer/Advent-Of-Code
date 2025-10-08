@@ -12,19 +12,11 @@ pub fn parse(input: &str) -> &str {
 }
 
 pub fn part1(input: &str) -> u64 {
-    input
-        .trim()
-        .split(" ")
-        .map(|stone| solve(stone.parse::<u64>().unwrap(), 25))
-        .sum()
+    input.trim().split(" ").map(|stone| solve(stone.parse::<u64>().unwrap(), 25)).sum()
 }
 
 pub fn part2(input: &str) -> u64 {
-    input
-        .trim()
-        .split(" ")
-        .map(|stone| solve(stone.parse::<u64>().unwrap(), 75))
-        .sum()
+    input.trim().split(" ").map(|stone| solve(stone.parse::<u64>().unwrap(), 75)).sum()
 }
 
 #[cached]
@@ -38,7 +30,7 @@ fn solve(stone: u64, steps: u8) -> u64 {
     }
 
     let stone_str = stone.to_string();
-    if stone_str.len() % 2 == 0 {
+    if stone_str.len().is_multiple_of(2) {
         let (left, right) = stone_str.split_at(stone_str.len() / 2);
 
         return solve(left.parse::<u64>().unwrap(), steps - 1)

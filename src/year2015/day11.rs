@@ -34,10 +34,7 @@ fn is_valid(password: &str) -> bool {
     };
 
     // Third criteria
-    let matches = RE1
-        .find_iter(password)
-        .map(|m| m.unwrap().as_str())
-        .collect::<HashSet<&str>>();
+    let matches = RE1.find_iter(password).map(|m| m.unwrap().as_str()).collect::<HashSet<&str>>();
     if matches.len() < 2 {
         return false;
     }

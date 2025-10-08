@@ -63,11 +63,7 @@ impl From<&str> for Grid<u8> {
         let mut bytes = Vec::with_capacity((width * height) as usize);
         raw.iter().for_each(|slice| bytes.extend_from_slice(slice));
 
-        Grid {
-            width,
-            height,
-            bytes,
-        }
+        Grid { width, height, bytes }
     }
 }
 

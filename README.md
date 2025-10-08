@@ -21,7 +21,7 @@ make test DAY=05              # Run only tests for Day 05 (for current year)
 make solve YEAR=2023 DAY=14   # Solve Day 14 for Year 2023
 make bench YEAR=2024          # Benchmark entire Year
 
-make format                   # Run Clippy for linting
+make checks                   # Run clippy and fmt with cargo
 ```
 
 Input files are downloaded automatically. To enable this, create a file named `adventofcode.session` in the project root containing your Advent of Code session cookie.

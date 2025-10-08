@@ -24,10 +24,7 @@ fn solve(input: &str, part2: bool) -> u64 {
         let (left, right) = line.split_once(": ").unwrap();
 
         let target = left.parse::<u64>().unwrap();
-        let nums: Vec<u64> = right
-            .split_whitespace()
-            .map(|v| v.parse::<u64>().unwrap())
-            .collect();
+        let nums: Vec<u64> = right.split_whitespace().map(|v| v.parse::<u64>().unwrap()).collect();
 
         if are_equal(target, &nums, part2) {
             ans += target;

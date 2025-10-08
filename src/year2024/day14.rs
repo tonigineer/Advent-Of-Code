@@ -33,10 +33,7 @@ fn solve(input: &str, width: isize, height: isize, part2: bool) -> usize {
     if !part2 {
         for (x, y, vx, vy) in robots.iter() {
             tiles
-                .entry((
-                    (x + vx * 100).rem_euclid(width),
-                    (y + vy * 100).rem_euclid(height),
-                ))
+                .entry(((x + vx * 100).rem_euclid(width), (y + vy * 100).rem_euclid(height)))
                 .and_modify(|v| *v += 1)
                 .or_insert(1);
         }
@@ -62,10 +59,7 @@ fn solve(input: &str, width: isize, height: isize, part2: bool) -> usize {
 
         for (x, y, vx, vy) in robots.iter() {
             tiles
-                .entry((
-                    (x + vx * i).rem_euclid(width),
-                    (y + vy * i).rem_euclid(height),
-                ))
+                .entry(((x + vx * i).rem_euclid(width), (y + vy * i).rem_euclid(height)))
                 .and_modify(|v| *v += 1)
                 .or_insert(1);
         }

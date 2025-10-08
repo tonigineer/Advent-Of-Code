@@ -31,11 +31,7 @@ fn solve(input: &str, part2: bool) -> u32 {
     visited_part2.insert(pos, 1);
 
     for (i, c) in input.chars().enumerate() {
-        current = if i % 2 == 0 {
-            &mut pos_santa
-        } else {
-            &mut pos_robo
-        };
+        current = if i % 2 == 0 { &mut pos_santa } else { &mut pos_robo };
 
         match c {
             '^' => {
@@ -58,10 +54,7 @@ fn solve(input: &str, part2: bool) -> u32 {
         }
 
         visited.entry(pos).and_modify(|n| *n += 1).or_insert(1);
-        visited_part2
-            .entry(*current)
-            .and_modify(|n| *n += 1)
-            .or_insert(1);
+        visited_part2.entry(*current).and_modify(|n| *n += 1).or_insert(1);
     }
 
     if part2 {

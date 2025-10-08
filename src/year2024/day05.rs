@@ -33,10 +33,8 @@ fn solve(input: &str, part2: bool) -> u32 {
     }
 
     for line in updates_str.lines() {
-        let mut sequence: Vec<u32> = line
-            .split(',')
-            .map(|num| num.parse::<u32>().unwrap())
-            .collect();
+        let mut sequence: Vec<u32> =
+            line.split(',').map(|num| num.parse::<u32>().unwrap()).collect();
 
         let is_correct = has_correct_order(&sequence, &rules);
 

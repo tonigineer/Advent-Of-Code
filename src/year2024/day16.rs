@@ -27,9 +27,8 @@ pub fn parse(input: &str) -> (i64, i64) {
             break;
         }
 
-        for new_dir in 0..4 {
-            let delta = [RIGHT, DOWN, LEFT, UP][new_dir];
-            let new_position = position.clone() + delta;
+        for (new_dir, delta) in CARDINALS.iter().enumerate() {
+            let new_position = position + *delta;
 
             if grid[new_position] == b'#' {
                 continue;
@@ -58,7 +57,7 @@ pub fn parse(input: &str) -> (i64, i64) {
         for new_dir in 0..4 {
             let new_score = score - if dir == new_dir { 1 } else { 1001 };
 
-            let delta = [RIGHT, DOWN, LEFT, UP][dir];
+            let delta = CARDINALS[dir];
             let new_position = position - delta;
 
             if *seen.get(&(new_position, new_dir)).unwrap_or(&i64::MAX) == new_score {

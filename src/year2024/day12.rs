@@ -34,27 +34,17 @@ fn solve(input: &str, part2: bool) -> u32 {
     }
 
     if part2 {
-        return gardens
-            .iter()
-            .map(|g| count_corners(g) * g.len() as u32)
-            .sum();
+        return gardens.iter().map(|g| count_corners(g) * g.len() as u32).sum();
     }
 
-    gardens
-        .iter()
-        .map(|g| count_perimiter(g, &grid) * g.len() as u32)
-        .sum()
+    gardens.iter().map(|g| count_perimiter(g, &grid) * g.len() as u32).sum()
 }
 
 fn count_perimiter(garden: &HashSet<(usize, usize)>, grid: &Grid<char>) -> u32 {
     garden
         .iter()
         .map(|&(c, r)| {
-            4 - grid
-                .adjacent_cardinals(c, r)
-                .iter()
-                .filter(|&x| garden.contains(x))
-                .count()
+            4 - grid.adjacent_cardinals(c, r).iter().filter(|&x| garden.contains(x)).count()
         })
         .sum::<usize>() as u32
 }

@@ -21,10 +21,7 @@ fn solve(input: &str, part2: bool) -> u32 {
     let mut ans = 0;
 
     for line in input.lines() {
-        let report: Vec<i32> = line
-            .split_whitespace()
-            .map(|v| v.parse::<i32>().unwrap())
-            .collect();
+        let report: Vec<i32> = line.split_whitespace().map(|v| v.parse::<i32>().unwrap()).collect();
 
         if is_safe(&report) {
             ans += 1;

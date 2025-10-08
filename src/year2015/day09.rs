@@ -42,11 +42,8 @@ fn solve(input: &str, part2: bool) -> u32 {
         for i in 0..route.len() - 1 {
             distance += routes.get(&(route[i], route[i + 1])).unwrap();
         }
-        target_distance = if part2 {
-            max(target_distance, distance)
-        } else {
-            min(target_distance, distance)
-        };
+        target_distance =
+            if part2 { max(target_distance, distance) } else { min(target_distance, distance) };
     }
     return target_distance;
 }

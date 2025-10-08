@@ -166,11 +166,6 @@ impl From<&str> for Computer {
             instructions.push(line.into())
         }
 
-        return Computer {
-            a: 0,
-            b: 0,
-            instruction_pointer: 0,
-            instructions: instructions,
-        };
+        return Computer { a: 0, b: 0, instruction_pointer: 0, instructions: instructions };
     }
 }

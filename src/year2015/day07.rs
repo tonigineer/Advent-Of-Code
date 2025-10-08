@@ -30,23 +30,11 @@ impl From<&str> for Gate {
         let vec: Vec<&str> = s.split(' ').collect();
 
         if vec.len() == 1 {
-            Gate {
-                op: "NONE".to_string(),
-                in1: vec[0].to_string(),
-                in2: "NONE".to_string(),
-            }
+            Gate { op: "NONE".to_string(), in1: vec[0].to_string(), in2: "NONE".to_string() }
         } else if vec[0] == "NOT" {
-            Gate {
-                op: vec[0].to_string(),
-                in1: vec[1].to_string(),
-                in2: "NONE".to_string(),
-            }
+            Gate { op: vec[0].to_string(), in1: vec[1].to_string(), in2: "NONE".to_string() }
         } else {
-            Gate {
-                op: vec[1].to_string(),
-                in1: vec[0].to_string(),
-                in2: vec[2].to_string(),
-            }
+            Gate { op: vec[1].to_string(), in1: vec[0].to_string(), in2: vec[2].to_string() }
         }
     }
 }
@@ -58,10 +46,7 @@ struct Solve {
 
 impl Solve {
     fn new() -> Self {
-        Self {
-            gates: HashMap::new(),
-            found: HashMap::new(),
-        }
+        Self { gates: HashMap::new(), found: HashMap::new() }
     }
 
     fn get_value(&mut self, output: String) -> u16 {

@@ -67,16 +67,13 @@ fn solve(input: &str, part2: bool) -> u32 {
     }
 
     for locations in antennas.values() {
-        for (i, (c1, r1)) in locations.into_iter().enumerate() {
-            for (c2, r2) in locations.into_iter().skip(i + 1) {
+        for (i, (c1, r1)) in locations.iter().enumerate() {
+            for (c2, r2) in locations.iter().skip(i + 1) {
                 antinodes.insert((2 * c1 - c2, 2 * r1 - r2));
                 antinodes.insert((2 * c2 - c1, 2 * r2 - r1));
             }
         }
     }
 
-    antinodes
-        .iter()
-        .filter(|(c, r)| grid.in_bounds(*c, *r))
-        .count() as u32
+    antinodes.iter().filter(|(c, r)| grid.in_bounds(*c, *r)).count() as u32
 }

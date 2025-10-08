@@ -68,10 +68,7 @@ impl Direction {
     /// assert_eq!(BottomLeft.as_coordinate(&col, &row), (2, 4)); // Move diagonally bottom-left
     /// ```
     pub fn as_coordinate(self, col: &usize, row: &usize) -> (isize, isize) {
-        (
-            *col as isize + self.as_delta().0,
-            *row as isize + self.as_delta().1,
-        )
+        (*col as isize + self.as_delta().0, *row as isize + self.as_delta().1)
     }
 
     /// Returns an iterator over the cardinal directions: Top, Right, Bottom, Left.
@@ -84,14 +81,7 @@ impl Direction {
     /// assert_eq!(cardinals, vec![Top, Right, Bottom, Left]);
     /// ```
     pub fn cardinals() -> impl Iterator<Item = Self> {
-        [
-            Direction::Top,
-            Direction::Right,
-            Direction::Bottom,
-            Direction::Left,
-        ]
-        .iter()
-        .copied()
+        [Direction::Top, Direction::Right, Direction::Bottom, Direction::Left].iter().copied()
     }
 
     /// Returns an iterator over the diagonal directions: TopLeft, TopRight, BottomLeft, BottomRight.
@@ -104,14 +94,9 @@ impl Direction {
     /// assert_eq!(diagonals, vec![TopRight, BottomRight, BottomLeft, TopLeft]);
     /// ```
     pub fn diagonals() -> impl Iterator<Item = Self> {
-        [
-            Direction::TopRight,
-            Direction::BottomRight,
-            Direction::BottomLeft,
-            Direction::TopLeft,
-        ]
-        .iter()
-        .copied()
+        [Direction::TopRight, Direction::BottomRight, Direction::BottomLeft, Direction::TopLeft]
+            .iter()
+            .copied()
     }
 
     /// Returns an iterator over all directions (cardinal and diagonal).
@@ -151,9 +136,7 @@ impl Direction {
     /// assert_eq!(top_right, vec![Top, TopRight, Right]);
     /// ```
     pub fn corner_top_right() -> impl Iterator<Item = Self> {
-        [Direction::Top, Direction::TopRight, Direction::Right]
-            .iter()
-            .copied()
+        [Direction::Top, Direction::TopRight, Direction::Right].iter().copied()
     }
 
     /// Returns an iterator over the directions constituting the bottom-right corner: Right, BottomRight, Bottom.
@@ -166,9 +149,7 @@ impl Direction {
     /// assert_eq!(bottom_right, vec![Right, BottomRight, Bottom]);
     /// ```
     pub fn corner_bottom_right() -> impl Iterator<Item = Self> {
-        [Direction::Right, Direction::BottomRight, Direction::Bottom]
-            .iter()
-            .copied()
+        [Direction::Right, Direction::BottomRight, Direction::Bottom].iter().copied()
     }
 
     /// Returns an iterator over the directions constituting the bottom-left corner: Bottom, BottomLeft, Left.
@@ -181,9 +162,7 @@ impl Direction {
     /// assert_eq!(bottom_left, vec![Bottom, BottomLeft, Left]);
     /// ```
     pub fn corner_bottom_left() -> impl Iterator<Item = Self> {
-        [Direction::Bottom, Direction::BottomLeft, Direction::Left]
-            .iter()
-            .copied()
+        [Direction::Bottom, Direction::BottomLeft, Direction::Left].iter().copied()
     }
 
     /// Returns an iterator over the directions constituting the top-left corner: Left, TopLeft, Top.
@@ -196,9 +175,7 @@ impl Direction {
     /// assert_eq!(top_left, vec![Left, TopLeft, Top]);
     /// ```
     pub fn corner_top_left() -> impl Iterator<Item = Self> {
-        [Direction::Left, Direction::TopLeft, Direction::Top]
-            .iter()
-            .copied()
+        [Direction::Left, Direction::TopLeft, Direction::Top].iter().copied()
     }
 }
 
@@ -260,11 +237,7 @@ impl<T: Clone> Grid<T> {
                 let nc = col as isize + dir.as_delta().0;
                 let nr = row as isize + dir.as_delta().1;
 
-                if self.in_bounds(nc, nr) {
-                    Some((nc as usize, nr as usize))
-                } else {
-                    None
-                }
+                if self.in_bounds(nc, nr) { Some((nc as usize, nr as usize)) } else { None }
             })
             .collect()
     }
@@ -401,11 +374,7 @@ where
     fn from(input: &str) -> Grid<T> {
         let data: VecDeque<VecDeque<T>> = input
             .lines()
-            .map(|line| {
-                line.chars()
-                    .map(|c| c.to_string().parse::<T>().unwrap())
-                    .collect()
-            })
+            .map(|line| line.chars().map(|c| c.to_string().parse::<T>().unwrap()).collect())
             .collect();
 
         let rows = data.len();
@@ -441,11 +410,7 @@ where
     pub fn from_delimiter(input: &str, delimiter: &str) -> Grid<T> {
         let data: VecDeque<VecDeque<T>> = input
             .lines()
-            .map(|line| {
-                line.split(delimiter)
-                    .map(|v| v.parse::<T>().unwrap())
-                    .collect()
-            })
+            .map(|line| line.split(delimiter).map(|v| v.parse::<T>().unwrap()).collect())
             .collect();
 
         let rows = data.len();
@@ -467,11 +432,7 @@ impl<T: std::fmt::Display> std::fmt::Display for Grid<T> {
     /// ```
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for row in self.data.iter() {
-            writeln!(
-                f,
-                "{:?}",
-                row.iter().map(ToString::to_string).collect::<Vec<_>>()
-            )?;
+            writeln!(f, "{:?}", row.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
         Ok(())
     }

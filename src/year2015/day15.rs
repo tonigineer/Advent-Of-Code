@@ -79,42 +79,23 @@ impl From<&str> for Dish {
 impl Dish {
     fn highest_score(&mut self, num_ingredients: usize, part2: bool) -> i64 {
         let mut highest_score: i64 = 0;
-        for com in self
-            .ingredients
-            .keys()
-            .combinations_with_replacement(num_ingredients)
-        {
+        for com in self.ingredients.keys().combinations_with_replacement(num_ingredients) {
             for (amount, ingredient_name) in com.iter().dedup_with_count() {
-                self.capacity_total += self
-                    .ingredients
-                    .get(&ingredient_name.to_string())
-                    .unwrap()
-                    .capacity
-                    * amount as i64;
-                self.durability_total += self
-                    .ingredients
-                    .get(&ingredient_name.to_string())
-                    .unwrap()
-                    .durability
-                    * amount as i64;
-                self.flavor_total += self
-                    .ingredients
-                    .get(&ingredient_name.to_string())
-                    .unwrap()
-                    .flavor
-                    * amount as i64;
-                self.texture_total += self
-                    .ingredients
-                    .get(&ingredient_name.to_string())
-                    .unwrap()
-                    .texture
-                    * amount as i64;
-                self.calories_total += self
-                    .ingredients
-                    .get(&ingredient_name.to_string())
-                    .unwrap()
-                    .calories
-                    * amount as i64;
+                self.capacity_total +=
+                    self.ingredients.get(&ingredient_name.to_string()).unwrap().capacity
+                        * amount as i64;
+                self.durability_total +=
+                    self.ingredients.get(&ingredient_name.to_string()).unwrap().durability
+                        * amount as i64;
+                self.flavor_total +=
+                    self.ingredients.get(&ingredient_name.to_string()).unwrap().flavor
+                        * amount as i64;
+                self.texture_total +=
+                    self.ingredients.get(&ingredient_name.to_string()).unwrap().texture
+                        * amount as i64;
+                self.calories_total +=
+                    self.ingredients.get(&ingredient_name.to_string()).unwrap().calories
+                        * amount as i64;
             }
 
             let score = (max(self.capacity_total, 0)

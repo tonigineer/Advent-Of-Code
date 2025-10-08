@@ -61,110 +61,33 @@ struct Item {
 
 fn solve(part2: bool) -> u32 {
     let weapons: Vec<Item> = vec![
-        Item {
-            costs: 8,
-            damage: 4,
-            armor: 0,
-        },
-        Item {
-            costs: 10,
-            damage: 5,
-            armor: 0,
-        },
-        Item {
-            costs: 25,
-            damage: 6,
-            armor: 0,
-        },
-        Item {
-            costs: 40,
-            damage: 7,
-            armor: 0,
-        },
-        Item {
-            costs: 74,
-            damage: 8,
-            armor: 0,
-        },
+        Item { costs: 8, damage: 4, armor: 0 },
+        Item { costs: 10, damage: 5, armor: 0 },
+        Item { costs: 25, damage: 6, armor: 0 },
+        Item { costs: 40, damage: 7, armor: 0 },
+        Item { costs: 74, damage: 8, armor: 0 },
     ];
 
     let armors: Vec<Item> = vec![
-        Item {
-            costs: 13,
-            damage: 0,
-            armor: 1,
-        },
-        Item {
-            costs: 31,
-            damage: 0,
-            armor: 2,
-        },
-        Item {
-            costs: 53,
-            damage: 0,
-            armor: 3,
-        },
-        Item {
-            costs: 75,
-            damage: 0,
-            armor: 4,
-        },
-        Item {
-            costs: 102,
-            damage: 0,
-            armor: 5,
-        },
-        Item {
-            costs: 0,
-            damage: 0,
-            armor: 0,
-        },
+        Item { costs: 13, damage: 0, armor: 1 },
+        Item { costs: 31, damage: 0, armor: 2 },
+        Item { costs: 53, damage: 0, armor: 3 },
+        Item { costs: 75, damage: 0, armor: 4 },
+        Item { costs: 102, damage: 0, armor: 5 },
+        Item { costs: 0, damage: 0, armor: 0 },
     ];
 
     let rings: Vec<Item> = vec![
-        Item {
-            costs: 25,
-            damage: 1,
-            armor: 0,
-        },
-        Item {
-            costs: 50,
-            damage: 2,
-            armor: 0,
-        },
-        Item {
-            costs: 100,
-            damage: 3,
-            armor: 0,
-        },
-        Item {
-            costs: 20,
-            damage: 0,
-            armor: 1,
-        },
-        Item {
-            costs: 40,
-            damage: 0,
-            armor: 2,
-        },
-        Item {
-            costs: 80,
-            damage: 0,
-            armor: 3,
-        },
-        Item {
-            costs: 0,
-            damage: 0,
-            armor: 0,
-        },
+        Item { costs: 25, damage: 1, armor: 0 },
+        Item { costs: 50, damage: 2, armor: 0 },
+        Item { costs: 100, damage: 3, armor: 0 },
+        Item { costs: 20, damage: 0, armor: 1 },
+        Item { costs: 40, damage: 0, armor: 2 },
+        Item { costs: 80, damage: 0, armor: 3 },
+        Item { costs: 0, damage: 0, armor: 0 },
     ];
 
-    let boss = Character {
-        hp: 109,
-        damage: 8,
-        armor: 2,
-        costs: 0,
-    };
+    let boss = Character { hp: 109, damage: 8, armor: 2, costs: 0 };
 
     if part2 {
         return iproduct!(&weapons, &armors, &rings, &rings)

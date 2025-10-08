@@ -100,8 +100,9 @@ bench:
 clean:
 	$(Q)cargo clean
 
-format:
-	$(Q)cargo clippy --all-targets --all-features
+checks:
+	$(Q)cargo fmt --check -- `find . -name "*.rs"`
+	$(Q)cargo clippy --all-targets --all-features -- --deny warnings
 
 help:
 	@echo "Advent of Code — Make targets"
@@ -125,7 +126,7 @@ help:
 	@echo "  solve      Run the solution for DAY/YEAR."
 	@echo "  bench      Run Criterion benchmarks for YEAR."
 	@echo "  clean      Remove build artifacts."
-	@echo "  format     Run clippy on everything."
+	@echo "  checks     Run clippy and fmt with cargo"
 	@echo "  help       Show this help."
 	@echo
 	@echo "EXAMPLES"
@@ -136,5 +137,5 @@ help:
 	@echo "  make bench YEAR=2024            # run benches for 2024"
 	@echo
 
-.PHONY: $(POSSIBLE_DAYS) bench clean format help new solve test
+.PHONY: $(POSSIBLE_DAYS) bench checks clean help new solve test
 

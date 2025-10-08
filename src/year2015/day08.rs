@@ -29,12 +29,7 @@ fn solve(input: &str, part2: bool) -> usize {
     for line in input.lines() {
         // println!("{}", line);
         code_len += line.len();
-        render_len += re
-            .replace_all(line, "x")
-            .replace("\\\\", "x")
-            .replace("\\\"", "x")
-            .len()
-            - 2;
+        render_len += re.replace_all(line, "x").replace("\\\\", "x").replace("\\\"", "x").len() - 2;
         encoded_len += line.len() + line.matches("\\").count() + line.matches("\"").count() + 2;
     }
     if part2 {
