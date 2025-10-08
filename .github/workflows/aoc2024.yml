@@ -1,4 +1,5 @@
-name: 2024 Tests
+name: Tests
+
 on:
   workflow_dispatch:
   push:
