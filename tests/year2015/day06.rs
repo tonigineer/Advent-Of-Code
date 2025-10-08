@@ -12,11 +12,11 @@ toggle 0,0 through 999,999";
 #[test]
 fn part1_test() {
     let input = parse(FIRST_EXAMPLE);
-    assert_eq!(part1(&input), 998996);
+    assert_eq!(part1(input), 998996);
 }
 
 #[test]
 fn part2_test() {
     let input = parse(SECOND_EXAMPLE);
-    assert_eq!(part2(&input), 2000001);
+    assert_eq!(part2(input), 2000001);
 }

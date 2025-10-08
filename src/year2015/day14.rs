@@ -1,104 +1,60 @@
 //! Reindeer Olympics
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Nothing fancy here. Simlation function to get time specific results.
 
-use std::cmp::min;
+use crate::common::parse::*;
+use itertools::Itertools;
 
-pub fn parse(input: &str) -> &str {
-    input.trim()
+type Reindeer = [i32; 3];
+
+pub fn parse(input: &str) -> Vec<Reindeer> {
+    input
+        .trim()
+        .parse_int_iter::<i32>()
+        .tuples::<(i32, i32, i32)>()
+        .map(|(a, b, c)| [a, b, c])
+        .collect()
 }
 
-pub fn part1_for_test(input: &str) -> u32 {
-    let game: Game = input.into();
-    game.play(1000)
+pub fn part1(input: &Vec<Reindeer>) -> i32 {
+    part1_for_test(input, 2503)
 }
 
-pub fn part2_for_test(input: &str) -> u32 {
-    let mut game: Game = input.into();
-    game.play_for_points(1000)
+pub fn part2(input: &Vec<Reindeer>) -> i32 {
+    part2_for_test(input, 2503)
 }
 
-pub fn part1(input: &str) -> u32 {
-    let game: Game = input.into();
-    game.play(2503)
+pub fn part1_for_test(input: &Vec<Reindeer>, t_sim: i32) -> i32 {
+    input.iter().map(|&r| simulate(r, t_sim)).max().unwrap()
 }
 
-pub fn part2(input: &str) -> u32 {
-    let mut game: Game = input.into();
-    game.play_for_points(2503)
-}
+pub fn part2_for_test(input: &Vec<Reindeer>, t_sim: i32) -> i32 {
+    let mut scores = vec![0; input.len()];
+    let mut distances = vec![0; input.len()];
 
-#[derive(Debug)]
-struct Deer {
-    _name: String,
-    speed: u32,
-    fly_time: u32,
-    pause_time: u32,
-    points: u32,
-}
+    for dt in 0..t_sim {
+        let mut max_distance = 0;
 
-impl From<&str> for Deer {
-    fn from(s: &str) -> Deer {
-        let token = s.trim_end_matches(".").split(" ").collect::<Vec<&str>>();
-        return Deer {
-            _name: token[0].to_string(),
-            speed: token[3].parse().unwrap(),
-            fly_time: token[6].parse().unwrap(),
-            pause_time: token[13].parse().unwrap(),
-            points: 0,
-        };
-    }
-}
-
-impl Deer {
-    fn get_distance(&self, t: u32) -> u32 {
-        let cycle_time = self.fly_time + self.pause_time;
-        let num_full_cycle = t / cycle_time;
-        let t_remain = t % cycle_time;
-        return num_full_cycle * self.fly_time * self.speed
-            + min(t_remain, self.fly_time) * self.speed;
-    }
-}
-
-#[derive(Debug)]
-struct Game {
-    deer: Vec<Deer>,
-}
-
-impl From<&str> for Game {
-    fn from(s: &str) -> Game {
-        let mut deer: Vec<Deer> = Vec::new();
-        for line in s.lines() {
-            let d: Deer = line.into();
-            deer.push(d);
+        for (idx, &reindeer) in input.iter().enumerate() {
+            let next = simulate(reindeer, dt + 1);
+            max_distance = max_distance.max(next);
+            distances[idx] = next;
         }
-        return Game { deer: deer };
+
+        for (score, &distance) in scores.iter_mut().zip(&distances) {
+            if distance == max_distance {
+                *score += 1;
+            }
+        }
     }
+
+    *scores.iter().max().unwrap()
 }
 
-impl Game {
-    fn play(&self, target_time: u32) -> u32 {
-        return self
-            .deer
-            .iter()
-            .max_by_key(|d| d.get_distance(target_time))
-            .unwrap()
-            .get_distance(target_time); // one extra calc, but should be fine :)
-    }
+fn simulate([v, t_fly, t_rest]: Reindeer, t_sim: i32) -> i32 {
+    let t_cycle = t_fly + t_rest;
+    let cycles_completed = t_sim / t_cycle;
+    let t_remain = (t_sim % t_cycle).min(t_fly);
 
-    fn play_for_points(&mut self, target_time: u32) -> u32 {
-        for i in 1..=target_time {
-            let max_distance = self.play(i);
-            self.deer
-                .iter_mut()
-                .filter(|d| d.get_distance(i) == max_distance)
-                .for_each(|d| d.points += 1)
-        }
-        // NOTE: this solution is really bad, because distance are calculated twice
-
-        return self.deer.iter().max_by_key(|d| d.points).unwrap().points;
-    }
+    v * (cycles_completed * t_fly + t_remain)
 }

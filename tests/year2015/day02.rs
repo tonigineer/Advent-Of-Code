@@ -7,11 +7,11 @@ const EXAMPLE: &str = "\
 #[test]
 fn part1_test() {
     let input = parse(EXAMPLE);
-    assert_eq!(part1(&input), 101);
+    assert_eq!(part1(input), 101);
 }
 
 #[test]
 fn part2_test() {
     let input = parse(EXAMPLE);
-    assert_eq!(part2(&input), 48);
+    assert_eq!(part2(input), 48);
 }

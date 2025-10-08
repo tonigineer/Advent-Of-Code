@@ -8,8 +8,8 @@ use std::iter::empty;
 use std::time::{Duration, Instant};
 
 struct Puzzle {
-    year: u32,
     day: u32,
+    year: u32,
     wrapper: fn(String) -> (String, String),
 }
 
@@ -24,22 +24,19 @@ fn main() {
         .chain(year2024())
         .filter(|puzzle| year.is_none_or(|y| y == puzzle.year))
         .filter(|puzzle| day.is_none_or(|d| d == puzzle.day))
-        .fold(
-            (0, Duration::ZERO),
-            |(stars, duration), Puzzle { year, day, wrapper }| {
-                if let Ok(data) = read_puzzle_input(&day, &year) {
-                    let instant = Instant::now();
-                    let (part1, part2) = wrapper(data);
-                    let elapsed = instant.elapsed();
+        .fold((0, Duration::ZERO), |(stars, duration), Puzzle { year, day, wrapper }| {
+            if let Ok(data) = read_puzzle_input(&day, &year) {
+                let instant = Instant::now();
+                let (part1, part2) = wrapper(data);
+                let elapsed = instant.elapsed();
 
-                    output_summary_line(&year, &day, &elapsed, &part1, &part2);
+                output_summary_line(&year, &day, &elapsed, &part1, &part2);
 
-                    (stars + 2, duration + elapsed)
-                } else {
-                    (stars, duration)
-                }
-            },
-        );
+                (stars + 2, duration + elapsed)
+            } else {
+                (stars, duration)
+            }
+        });
 
     println!(
         "\n\n   {BOLD}SUMMARY   {YELLOW}{}{RESET} Stars in {BOLD}{GREEN}{}{RESET} ms",
@@ -93,5 +90,8 @@ season!(year2015
 );
 
 season!(year2024
-    day01
+    day01, day02, day03, day04, day05, day06, day07, day08,
+    day09, day10, day11, day12, day13, day14, day15, day16,
+    day17, day18, day19, day20, day21, day22, day23, day24,
+    day25
 );

@@ -10,7 +10,7 @@ HOH";
 #[test]
 fn part1_test() {
     let input = parse(EXAMPLE);
-    assert_eq!(part1(&input), 4);
+    assert_eq!(part1(input), 4);
 }
 
 #[test]

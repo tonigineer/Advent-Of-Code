@@ -6,7 +6,7 @@ macro_rules! library {
 }
 
 library!(common "Utilities to solve Advent of Code."
-    ansi, input, integer, parse
+    ansi, grid, grid_legacy, input, integer, parse, position
 );
 
 library!(year2015 "Help Santa by solving puzzles to fix the weather machine's snow function."

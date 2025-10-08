@@ -1,6 +1,9 @@
 //! # Historian Hysteria
 //!
-//! A summary line was not given :(
+//! No summary line given.
+//!
+//! LEGACY: Copied without adaptation.
+//! This code works but has not been refactored for the new structure.
 
 pub fn parse(input: &str) -> (Vec<u32>, Vec<u32>) {
     let num_lines = input.lines().count();
