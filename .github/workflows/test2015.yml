@@ -1,14 +1,14 @@
-name: Tests
+name: Test 2015
 
 on:
   workflow_dispatch:
   push:
     paths:
       - "src/common/**"
-      - "src/year2024/**"
+      - "src/year2015/**"
 
 env:
-  YEAR: 2024
+  YEAR: 2015
 
 jobs:
   build:
