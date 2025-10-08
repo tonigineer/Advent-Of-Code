@@ -2,7 +2,7 @@
   🎄 Advent of Code 🎄
 </h1>
 
-[![Tests](https://github.com/tonigineer/advent-of-code/actions/workflows/build.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/build.yml) [![Checks](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/clippy.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code)
+[![Tests](https://github.com/tonigineer/advent-of-code/actions/workflows/tests.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/tests.yml) [![Checks](https://github.com/tonigineer/advent-of-code/actions/workflows/checks.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/checks.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code)
 
 > <cite> [Advent of Code](https://adventofcode.com/)
 >
@@ -28,8 +28,6 @@ Input files are downloaded automatically. To enable this, create a file named `a
 
 ### [2024](https://adventofcode.com/2024) — 50 ⭐
 
-[![CI](https://github.com/tonigineer/advent-of-code/actions/workflows/test2024.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/test2024.yml)
-
 | Day                             | Day                             | Day                             |
 | ------------------------------- | ------------------------------- | ------------------------------- |
 | [Day 01](src/year2024/day01.rs) | [Day 02](src/year2024/day02.rs) | [Day 03](src/year2024/day03.rs) |
@@ -43,8 +41,6 @@ Input files are downloaded automatically. To enable this, create a file named `a
 | [Day 25](src/year2024/day25.rs) |                                 |                                 |
 
 ### [2015](https://adventofcode.com/2015) — 50 ⭐
-
-[![CI](https://github.com/tonigineer/advent-of-code/actions/workflows/test2015.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/test2015.yml)
 
 | Day                             | Day                             | Day                             |
 | ------------------------------- | ------------------------------- | ------------------------------- |
