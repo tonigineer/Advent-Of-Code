@@ -1,6 +1,6 @@
 //! # I Was Told There Would Be No Math
 //!
-//! Straight forward OOP approach.
+//! Summary:
 
 pub fn parse(input: &str) -> &str {
     input.trim()

@@ -1,9 +1,6 @@
 //! JSAbacusFramework.io
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use serde_json::Value;
 

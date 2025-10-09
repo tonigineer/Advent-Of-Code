@@ -1,85 +1,120 @@
 //! Crossed Wires
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
-//!
-//! FIX: Manual solution for part 2 used. Fix algo.
+//! Summary: In Part 1 the wire names are converted into an index for faster lookup
+//! in an array. Index is build from three 6 bit parts for each char.
+//! Solution for Part 2 from `github.com/maneatingape/advent-of-code-rust`
 
-use itertools::Itertools;
-use std::collections::HashMap;
+use crate::common::parse::*;
 
-pub fn parse(input: &str) -> &str {
-    input.trim()
+use ahash::AHashSet;
+use std::collections::VecDeque;
+
+type InputParsed<'a> = (&'a str, Vec<[&'a str; 5]>);
+
+pub fn parse(input: &'_ str) -> InputParsed<'_> {
+    let (s1, s2) = input.split_once("\n\n").unwrap();
+
+    let tokens: Vec<&str> = s2.split_whitespace().collect();
+    let gates =
+        tokens.chunks(5).map(|chunk| [chunk[0], chunk[1], chunk[2], chunk[3], chunk[4]]).collect();
+
+    (s1, gates)
 }
 
-pub fn part1(input: &str) -> usize {
-    solve(input)
-}
+pub fn part1(input: &InputParsed) -> u64 {
+    let (s1, gates) = input;
 
-pub fn part2(_input: &str) -> &str {
-    "gjc,gvm,qjj,qsb,wmp,z17,z26,z39"
-}
+    let mut wires = [u8::MAX; 1 << 18];
 
-fn operate<'a>(
-    wires: &mut HashMap<&'a str, bool>,
-    formulas: &HashMap<&str, (&'a str, &str, &'a str)>,
-    wire: &'a str,
-) -> bool {
-    if let Some(&value) = wires.get(wire) {
-        return value;
-    }
-
-    let (a, op, b) = formulas[wire];
-    let v1 = operate(wires, formulas, a);
-    let v2 = operate(wires, formulas, b);
-
-    let value = match op {
-        "AND" => v1 && v2,
-        "XOR" => v1 != v2,
-        "OR" => v1 || v2,
-        _ => unreachable!(),
+    let as_index = |s: &str| {
+        let b = s.as_bytes();
+        ((b[0] as usize & 63) << 12) + ((b[1] as usize & 63) << 6) + (b[2] as usize & 63)
     };
 
-    wires.insert(wire, value);
-    value
-}
+    for line in s1.lines() {
+        let wire_id = as_index(&line[..3]);
+        let value = &line[5..];
+        wires[wire_id] = value.parse_uint::<u8>();
+    }
 
-fn combine(wires: &HashMap<&str, bool>, prefix: &str) -> usize {
-    let mut result = 0;
-    for wire in wires.keys() {
-        if !wire.starts_with(prefix) {
+    let mut q: VecDeque<_> = gates.iter().collect();
+
+    while let Some(gate @ &[left, gate_type, right, _, to]) = q.pop_front() {
+        let left_value = wires[as_index(left)];
+        let right_value = wires[as_index(right)];
+
+        // Both input wires are needed. Try again later.
+        if left_value == u8::MAX || right_value == u8::MAX {
+            q.push_back(gate);
             continue;
         }
-        let num = wire[1..].parse::<usize>().unwrap();
-        if wires[wire] {
-            // println!("{:?}", wire);
-            result |= 1 << num;
+
+        wires[as_index(to)] = match gate_type {
+            "AND" => left_value & right_value,
+            "OR" => left_value | right_value,
+            "XOR" => left_value ^ right_value,
+            _ => unreachable!(),
+        }
+    }
+
+    let mut result = 0_u64;
+    for wire_idx in (as_index("z00")..as_index("z63")).rev() {
+        let value = wires[wire_idx];
+        if value != u8::MAX {
+            result = (result << 1) | (value as u64);
         }
     }
 
     result
 }
 
-fn solve(input: &str) -> usize {
-    let (str_wires, str_formulas) = input.split_once("\n\n").unwrap();
-    let mut wires = HashMap::new();
-    let mut formulas = HashMap::new();
+pub fn part2(input: &InputParsed) -> String {
+    let (_, gates) = input;
 
-    for line in str_wires.lines() {
-        let (name, value) = line.split_once(": ").unwrap();
-        wires.insert(name, value == "1");
+    let mut outputs = AHashSet::new();
+    let mut swapped = AHashSet::new();
+
+    for [left, gate_type, right, _, _] in gates.clone() {
+        outputs.insert((left, gate_type));
+        outputs.insert((right, gate_type));
     }
 
-    for line in str_formulas.lines() {
-        let (a, op, b, _, c) = line.split_whitespace().collect_tuple().unwrap();
-        formulas.insert(c, (a, op, b));
+    for [left, gate_type, right, _, to] in gates.clone() {
+        match gate_type {
+            "AND" => {
+                // Check that all AND gates point to an OR, except for first AND.
+                if left != "x00" && right != "x00" && !outputs.contains(&(to, "OR")) {
+                    swapped.insert(to);
+                }
+            }
+            "OR" => {
+                // Check that only XOR gates point to output, except for last carry which is OR.
+                if to.starts_with('z') && to != "z45" {
+                    swapped.insert(to);
+                }
+                // OR can never point to OR.
+                if outputs.contains(&(to, "OR")) {
+                    swapped.insert(to);
+                }
+            }
+            "XOR" => {
+                if left.starts_with('x') || right.starts_with('x') {
+                    // Check that first level XOR points to second level XOR, except for first XOR.
+                    if left != "x00" && right != "x00" && !outputs.contains(&(to, "XOR")) {
+                        swapped.insert(to);
+                    }
+                } else {
+                    // Second level XOR must point to output.
+                    if !to.starts_with('z') {
+                        swapped.insert(to);
+                    }
+                }
+            }
+            _ => unreachable!(),
+        }
     }
 
-    for wire in formulas.keys() {
-        operate(&mut wires, &formulas, wire);
-    }
-
-    combine(&wires, "z")
+    let mut result: Vec<_> = swapped.into_iter().collect();
+    result.sort_unstable();
+    result.join(",")
 }

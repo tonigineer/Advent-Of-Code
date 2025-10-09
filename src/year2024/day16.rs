@@ -1,6 +1,6 @@
 //! Reindeer Maze
 //!
-//! BFS with binary heap to find most efficient path. Second part going backwards and checking with
+//! Summary: BFS with binary heap to find most efficient path. Second part going backwards and checking with
 //! positions on the way have the expected score.
 
 use crate::common::grid::*;

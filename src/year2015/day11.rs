@@ -1,9 +1,6 @@
 //! Corporate Policy
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use fancy_regex::Regex;
 use itertools::Itertools;

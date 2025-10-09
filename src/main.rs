@@ -31,7 +31,6 @@ fn main() {
                 let elapsed = instant.elapsed();
 
                 output_summary_line(&year, &day, &elapsed, &part1, &part2);
-
                 (stars + 2, duration + elapsed)
             } else {
                 (stars, duration)

@@ -1,9 +1,6 @@
 //! Probably a Fire Hazard
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use lazy_static::lazy_static;
 use regex::Regex;

@@ -1,9 +1,6 @@
 //! Doesn't He Have Intern-Elves For This?
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use fancy_regex::Regex;
 use lazy_static::lazy_static;

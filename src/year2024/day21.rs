@@ -1,10 +1,10 @@
 //! Keypad Conundrum
 //!
-//! Precompute the shortest way for all keypad combinations. For
-//! both pads.
+//! Summary:
 
 use crate::common::parse::*;
 use crate::common::position::*;
+
 use ahash::AHashMap;
 use std::iter::{once, repeat_n};
 

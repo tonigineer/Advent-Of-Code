@@ -1,10 +1,8 @@
 //! LAN Party
 //!
-//! Since the input is already structured in a certain `cluster`,
-//! the second part can be solved with a primitve approach. The
-//! intended approach, according to the Reddit seems to be
-//! [Bron–Kerbosch algorithm](https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm).
-//!
+//! Summary: Since the input is already structured in a certain `cluster`, the
+//! second part can be solved with a primitve approach. The intended approach,
+//! according to the Reddit seems to be [Bron–Kerbosch algorithm](https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm).
 //! Building indices from two lettered names for direct indexing.
 
 use ahash::AHashMap;

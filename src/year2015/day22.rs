@@ -1,9 +1,6 @@
 //! Wizard Simulator 20XX
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use std::collections::VecDeque;
 pub fn parse(input: &str) -> &str {

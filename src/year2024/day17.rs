@@ -1,8 +1,9 @@
 //! Chronospatial Computer
 //!
-//! The `a` register is composed of multiple 8-bit values that are shifted left by 3 bits on each computer execution step.
-//! By reconstructing each bit of the current program step in reverse, we can determine the initial
-//! value of the `a` register. This solution only works for specific inputs whose final values end with zeros.
+//! Summary: The `a` register is composed of multiple 8-bit values that are shifted left by 3 bits on
+//! each computer execution step. By reconstructing each bit of the current program step in reverse,
+//! we can determine the initial value of the `a` register. This solution only works for specific
+//! inputs whose final values end with zeros.
 
 use crate::common::parse::*;
 

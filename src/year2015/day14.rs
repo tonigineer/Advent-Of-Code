@@ -1,6 +1,6 @@
 //! Reindeer Olympics
 //!
-//! Nothing fancy here. Simlation function to get time specific results.
+//! Summary: Nothing fancy here. Simlation function to get time specific results.
 
 use crate::common::parse::*;
 use itertools::Itertools;

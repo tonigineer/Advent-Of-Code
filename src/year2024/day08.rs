@@ -1,9 +1,6 @@
 //! Resonant Collinearity
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use crate::common::grid_legacy::*;
 use std::collections::{HashMap, HashSet};

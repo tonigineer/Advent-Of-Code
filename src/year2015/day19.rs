@@ -1,9 +1,6 @@
 //! Medicine for Rudolph
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use std::collections::{HashMap, HashSet};
 

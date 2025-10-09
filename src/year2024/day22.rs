@@ -1,9 +1,9 @@
 //! Monkey Market
 //!
-//! Calculate all secrets once along with their corresponding prices.
-//! Each part then solves its respective puzzle independently.
-//! The second part could be made more efficient by converting the sequence
-//! into an index, allowing the use of direct lookup instead of a hashmap.
+//! Summary: Calculate all secrets once along with their corresponding prices. Each
+//! part then solves its respective puzzle independently. The second part could be
+//! made more efficient by converting the sequence into an index, allowing the use
+//! of direct lookup instead of a hashmap.
 
 use crate::common::parse::*;
 

@@ -1,9 +1,6 @@
 //! It Hangs in the Balance
 //!
-//! No summary line given.
-//!
-//! LEGACY: Copied without adaptation.
-//! This code works but has not been refactored for the new structure.
+//! Summary:
 
 use itertools::Itertools;
 
