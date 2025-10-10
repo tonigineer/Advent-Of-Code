@@ -5,11 +5,11 @@
 use crate::common::parse::*;
 use crate::common::position::*;
 
-use ahash::AHashMap;
+use hashbrown::HashMap;
 use std::iter::{once, repeat_n};
 
-type KeyCombiPaths = AHashMap<(char, char), Vec<String>>;
-type Cache = AHashMap<(char, char, usize), usize>;
+type KeyCombiPaths = HashMap<(char, char), Vec<String>>;
+type Cache = HashMap<(char, char, usize), usize>;
 type ParsedInput = (Vec<String>, Vec<usize>, KeyCombiPaths);
 
 pub fn parse(input: &str) -> ParsedInput {
@@ -34,7 +34,7 @@ pub fn part2(input: &ParsedInput) -> usize {
 
 fn solve(input: &ParsedInput, num_keypads: usize) -> usize {
     let (codes, nums, paths) = input;
-    let mut cache: Cache = AHashMap::new();
+    let mut cache: Cache = HashMap::new();
 
     codes.iter().zip(nums).map(|(c, n)| dfs(&mut cache, paths, c, num_keypads) * n).sum()
 }
@@ -97,7 +97,7 @@ fn process_keypads() -> KeyCombiPaths {
         ('>', Position::new(2, 1)),
     ];
 
-    let mut key_combi_paths = AHashMap::new();
+    let mut key_combi_paths = HashMap::new();
     find_keypad_paths(&mut key_combi_paths, &numeric_keys, numeric_gap);
     find_keypad_paths(&mut key_combi_paths, &directional_keys, directional_gap);
 

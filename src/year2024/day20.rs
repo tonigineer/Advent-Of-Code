@@ -5,7 +5,7 @@
 use crate::common::grid::*;
 use crate::common::position::*;
 
-use ahash::AHashMap;
+use hashbrown::HashMap;
 use itertools::Itertools;
 use std::collections::VecDeque;
 
@@ -15,7 +15,7 @@ pub fn parse(input: &str) -> (usize, usize) {
     let end = grid.search(b'E').unwrap();
 
     // BFS all positions to get distance to start
-    let mut distances = AHashMap::new();
+    let mut distances = HashMap::new();
     let mut q = VecDeque::from([(start, 0)]);
 
     while let Some((position, dist)) = q.pop_front() {

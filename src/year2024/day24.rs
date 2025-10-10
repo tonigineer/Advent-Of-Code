@@ -6,7 +6,7 @@
 
 use crate::common::parse::*;
 
-use ahash::AHashSet;
+use hashbrown::HashSet;
 use std::collections::VecDeque;
 
 type InputParsed<'a> = (&'a str, Vec<[&'a str; 5]>);
@@ -71,8 +71,8 @@ pub fn part1(input: &InputParsed) -> u64 {
 pub fn part2(input: &InputParsed) -> String {
     let (_, gates) = input;
 
-    let mut outputs = AHashSet::new();
-    let mut swapped = AHashSet::new();
+    let mut outputs = HashSet::new();
+    let mut swapped = HashSet::new();
 
     for [left, gate_type, right, _, _] in gates.clone() {
         outputs.insert((left, gate_type));

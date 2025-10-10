@@ -2,76 +2,69 @@
 //!
 //! Summary:
 
-use fancy_regex::Regex;
 use itertools::Itertools;
-use lazy_static::lazy_static;
-use std::collections::HashSet;
 
-pub fn parse(input: &str) -> &str {
-    input.trim()
+pub fn parse(input: &str) -> String {
+    solve(input.trim())
 }
 
 pub fn part1(input: &str) -> String {
-    solve(input)
+    input.to_string()
 }
 
 pub fn part2(input: &str) -> String {
-    solve(&solve(input))
-}
-
-fn is_valid(password: &str) -> bool {
-    lazy_static! {
-        static ref RE1: Regex = Regex::new(r"(.)\1").unwrap();
-        static ref RE2: Regex = Regex::new(r"[ilo]").unwrap();
-    };
-
-    // Second criteria
-    if RE2.is_match(password).unwrap() {
-        return false;
-    };
-
-    // Third criteria
-    let matches = RE1.find_iter(password).map(|m| m.unwrap().as_str()).collect::<HashSet<&str>>();
-    if matches.len() < 2 {
-        return false;
-    }
-
-    // First criteria
-    for (a, b, c) in password.chars().tuple_windows() {
-        if (c as u8 - 2 == a as u8) && (b as u8 - 1 == a as u8) {
-            return true;
-        }
-    }
-
-    false
+    solve(input)
 }
 
 fn solve(input: &str) -> String {
-    let mut flip_next = true;
-    let mut new_password: String = String::new();
-    let mut password: String = String::from(input);
+    let mut password = input.as_bytes().to_vec();
 
     loop {
-        for c in password.chars().rev() {
-            if flip_next {
-                if c == 'z' {
-                    flip_next = true;
-                    new_password.push('a')
-                } else {
-                    flip_next = false;
-                    new_password.push((c as u8 + 1) as char);
-                }
-                continue;
+        let mut i = password.len();
+        while i > 0 {
+            i -= 1;
+            if password[i] == b'z' {
+                password[i] = b'a';
+            } else {
+                password[i] += 1;
+                break;
             }
-            new_password.push(c);
-        }
-        password = new_password.chars().rev().collect::<String>();
-        if is_valid(&password) {
-            break;
         }
 
-        new_password = String::new();
-        flip_next = true;
+        let s_password = std::str::from_utf8(&password).unwrap();
+        if is_valid(s_password) {
+            return s_password.to_string();
+        }
     }
-    password
+}
+
+fn is_valid(password: &str) -> bool {
+    let mut first = false;
+    let mut pairs = 0;
+
+    let mut it = password.as_bytes().iter().tuple_windows().peekable();
+
+    while let Some((&a, &b, &c)) = it.next() {
+        // First criterion
+        if !first && a + 2 == c && b + 1 == c {
+            first = true;
+        }
+
+        // Second criterion
+        if matches!(b, b'i' | b'l' | b'o') {
+            return false;
+        }
+
+        // Third criterion
+        if a == b && b != c {
+            pairs += 1;
+            continue;
+        }
+
+        if it.peek().is_none() && b == c {
+            pairs += 1;
+        }
+    }
+
+    first && pairs >= 2
 }

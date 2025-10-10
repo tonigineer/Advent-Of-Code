@@ -7,7 +7,7 @@
 
 use crate::common::parse::*;
 
-use ahash::{AHashMap, AHashSet};
+use hashbrown::{HashMap, HashSet};
 use itertools::Itertools;
 
 type InputParsed = Vec<(i64, [i64; 2000])>;
@@ -36,8 +36,8 @@ pub fn part1(input: &InputParsed) -> i64 {
 }
 
 pub fn part2(input: &InputParsed) -> i64 {
-    let mut sequences = AHashMap::new();
-    let mut seen = AHashSet::new();
+    let mut sequences = HashMap::new();
+    let mut seen = HashSet::new();
 
     for (_, prices) in input.iter() {
         seen.clear();

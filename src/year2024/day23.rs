@@ -5,9 +5,9 @@
 //! according to the Reddit seems to be [Bron–Kerbosch algorithm](https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm).
 //! Building indices from two lettered names for direct indexing.
 
-use ahash::AHashMap;
+use hashbrown::HashMap;
 
-type ParsedInput = (AHashMap<usize, Vec<usize>>, Vec<[bool; 676]>);
+type ParsedInput = (HashMap<usize, Vec<usize>>, Vec<[bool; 676]>);
 
 fn as_usize(u: u8) -> usize {
     (u - b'a').into()
@@ -18,7 +18,7 @@ fn as_char(u: usize) -> char {
 }
 
 pub fn parse(input: &str) -> ParsedInput {
-    let mut nodes: AHashMap<_, Vec<_>> = AHashMap::new();
+    let mut nodes: HashMap<_, Vec<_>> = HashMap::new();
     let mut edges = vec![[false; 676]; 676];
 
     let to_index = |b: &[u8]| as_usize(b[0]) * 26 + as_usize(b[1]);

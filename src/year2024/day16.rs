@@ -6,7 +6,7 @@
 use crate::common::grid::*;
 use crate::common::position::*;
 
-use ahash::{AHashMap, AHashSet};
+use hashbrown::{HashMap, HashSet};
 use std::collections::{BinaryHeap, VecDeque};
 
 pub fn parse(input: &str) -> (i64, i64) {
@@ -14,10 +14,10 @@ pub fn parse(input: &str) -> (i64, i64) {
     let start = grid.search(b'S').unwrap();
     let end = grid.search(b'E').unwrap();
 
-    let (mut part1, mut part2) = (0, AHashSet::new());
+    let (mut part1, mut part2) = (0, HashSet::new());
 
     let mut q = BinaryHeap::from([(0, 0, start)]);
-    let mut seen = AHashMap::new();
+    let mut seen = HashMap::new();
 
     while let Some((score, dir, position)) = q.pop() {
         let score = -score;
