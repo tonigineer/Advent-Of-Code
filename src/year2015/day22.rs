@@ -3,6 +3,7 @@
 //! Summary:
 
 use std::collections::VecDeque;
+
 pub fn parse(input: &str) -> &str {
     input.trim()
 }

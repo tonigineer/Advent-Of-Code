@@ -1,6 +1,7 @@
 //! The Ideal Stocking Stuffer
 //!
-//! Summary:
+//! Summary: The `to_string()` in creating the bytes for `compute` is
+//! really slow.
 
 pub fn parse(input: &str) -> &str {
     input.trim()
@@ -15,15 +16,28 @@ pub fn part2(input: &str) -> u32 {
 }
 
 fn solve(input: &str, num_zeros: usize) -> u32 {
-    let mut index = 0;
+    let mut idx = 0;
+
+    let full_bytes = num_zeros / 2;
+    let half_bytes = num_zeros % 2;
+
+    let prefix = input.as_bytes();
+    let mut buf: Vec<u8> = Vec::with_capacity(prefix.len() + 20);
 
     loop {
-        let digest = md5::compute(format!("{input}{index}"));
+        buf.clear();
+        buf.extend_from_slice(prefix);
+        buf.extend_from_slice(&idx.to_string().into_bytes());
 
-        if format!("{:?}", digest)[0..num_zeros].chars().all(|c| c == '0') {
-            return index;
+        let digest = md5::compute(&buf);
+        let bytes = digest.0;
+
+        if bytes[..full_bytes].iter().all(|&b| b == 0)
+            && (half_bytes == 0 || bytes[full_bytes] & 0xF0 == 0)
+        {
+            return idx;
         }
 
-        index += 1
+        idx += 1
     }
 }

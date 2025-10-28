@@ -1,62 +1,69 @@
 //! Aunt Sue
 //!
-//! Summary:
+//! Summary: Splitting all aunts and checking things in hashmap.
 
-use std::collections::HashMap;
+use hashbrown::HashMap;
 
-pub fn parse(input: &str) -> &str {
-    input.trim()
+type InputParsed<'a> = (&'a str, HashMap<&'a str, u8>);
+
+pub fn parse(input: &'_ str) -> InputParsed<'_> {
+    let memories: HashMap<&'static str, u8> = HashMap::from([
+        ("children", 3),
+        ("cats", 7),
+        ("samoyeds", 2),
+        ("pomeranians", 3),
+        ("akitas", 0),
+        ("vizslas", 0),
+        ("goldfish", 5),
+        ("trees", 3),
+        ("cars", 2),
+        ("perfumes", 1),
+    ]);
+
+    (input.trim(), memories)
 }
 
-pub fn part1(input: &str) -> usize {
-    solve(input, false)
-}
+pub fn part1(input: &InputParsed) -> usize {
+    let (aunts, memories) = input;
 
-pub fn part2(input: &str) -> usize {
-    solve(input, true)
-}
+    for (idx, line) in aunts.trim().lines().enumerate() {
+        let (_, things) = line.split_once(":").unwrap();
 
-fn solve(input: &str, part2: bool) -> usize {
-    let mut things: HashMap<String, u32> = HashMap::new();
+        let all_match = things.split(',').all(|pair| {
+            let (k, v) = pair.split_once(":").unwrap();
+            let amount: u8 = v.trim().parse().unwrap();
+            &amount == memories.get(k.trim()).unwrap()
+        });
 
-    things.insert("children".to_string(), 3);
-    things.insert("cats".to_string(), 7);
-    things.insert("samoyeds".to_string(), 2);
-    things.insert("pomeranians".to_string(), 3);
-    things.insert("akitas".to_string(), 0);
-    things.insert("vizslas".to_string(), 0);
-    things.insert("goldfish".to_string(), 5);
-    things.insert("trees".to_string(), 3);
-    things.insert("cars".to_string(), 2);
-    things.insert("perfumes".to_string(), 1);
-
-    for (idx, line) in input.lines().enumerate() {
-        let modded_line = line.replace(",", "").replace(":", "");
-        let token = modded_line.split(" ").collect::<Vec<&str>>();
-        let mut found = true;
-
-        for i in (2..=7).step_by(2) {
-            let target = things.get(token[i]).unwrap();
-            let actual = token[i + 1].parse::<u32>().unwrap();
-
-            // More nesting! :D
-            if part2 {
-                if ["cats", "trees"].contains(&token[i]) && *target >= actual {
-                    found = false;
-                } else if ["pomeranians", "goldfish"].contains(&token[i]) {
-                    if *target <= actual {
-                        found = false;
-                    }
-                } else if *target != actual {
-                    found = false;
-                }
-            } else if *target != actual {
-                found = false;
-            }
-        }
-        if found {
+        if all_match {
             return idx + 1;
         }
     }
-    panic!("No solution found, something's fishy.")
+
+    unreachable!()
+}
+
+pub fn part2(input: &InputParsed) -> usize {
+    let (aunts, memories) = input;
+
+    for (idx, line) in aunts.trim().lines().enumerate() {
+        let (_, things) = line.split_once(":").unwrap();
+
+        let all_match = things.split(',').all(|pair| {
+            let (k, v) = pair.split_once(":").unwrap();
+            let k = k.trim();
+            let amount: u8 = v.trim().parse().unwrap();
+            match k {
+                "cats" | "trees" => &amount > memories.get(k.trim()).unwrap(),
+                "pomeranians" | "goldfish" => &amount < memories.get(k.trim()).unwrap(),
+                _ => &amount == memories.get(k.trim()).unwrap(),
+            }
+        });
+
+        if all_match {
+            return idx + 1;
+        }
+    }
+
+    unreachable!()
 }

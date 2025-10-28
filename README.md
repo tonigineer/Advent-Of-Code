@@ -24,32 +24,36 @@ make bench YEAR=2024          # Benchmark entire Year
 make checks                   # Run clippy and fmt with cargo
 ```
 
-Input files are downloaded automatically. To enable this, create a file named `adventofcode.session` in the project root containing your Advent of Code session cookie.
+Input files are downloaded automatically. To enable this, create a file named
+`adventofcode.session` in the project root containing your Advent of Code session
+cookie. Timings are `cargo bench` averages measured on an Intel Core i9-13900K.
 
 ### [2024](https://adventofcode.com/2024) — 50 ⭐
 
-| Day                             | Day                             | Day                             |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| [Day 01](src/year2024/day01.rs) | [Day 02](src/year2024/day02.rs) | [Day 03](src/year2024/day03.rs) |
-| [Day 04](src/year2024/day04.rs) | [Day 05](src/year2024/day05.rs) | [Day 06](src/year2024/day06.rs) |
-| [Day 07](src/year2024/day07.rs) | [Day 08](src/year2024/day08.rs) | [Day 09](src/year2024/day09.rs) |
-| [Day 10](src/year2024/day10.rs) | [Day 11](src/year2024/day11.rs) | [Day 12](src/year2024/day12.rs) |
-| [Day 13](src/year2024/day13.rs) | [Day 14](src/year2024/day14.rs) | [Day 15](src/year2024/day15.rs) |
-| [Day 16](src/year2024/day16.rs) | [Day 17](src/year2024/day17.rs) | [Day 18](src/year2024/day18.rs) |
-| [Day 19](src/year2024/day19.rs) | [Day 20](src/year2024/day20.rs) | [Day 21](src/year2024/day21.rs) |
-| [Day 22](src/year2024/day22.rs) | [Day 23](src/year2024/day23.rs) | [Day 24](src/year2024/day24.rs) |
-| [Day 25](src/year2024/day25.rs) |                                 |                                 |
+| Day                                         | Day                                         | Day                                         |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| [Day 01](src/year2024/day01.rs) [37.42 µs]  | [Day 02](src/year2024/day02.rs) [331.92 µs] | [Day 03](src/year2024/day03.rs) [387.15 µs] |
+| [Day 04](src/year2024/day04.rs) [707.99 µs] | [Day 05](src/year2024/day05.rs) [502.97 µs] | [Day 06](src/year2024/day06.rs) [4.00 s]    |
+| [Day 07](src/year2024/day07.rs) [1.36 ms]   | [Day 08](src/year2024/day08.rs) [153.71 µs] | [Day 09](src/year2024/day09.rs) [29.94 ms]  |
+| [Day 10](src/year2024/day10.rs) [446.78 µs] | [Day 11](src/year2024/day11.rs) [245.31 ns] | [Day 12](src/year2024/day12.rs) [112.75 ms] |
+| [Day 13](src/year2024/day13.rs) [68.61 µs]  | [Day 14](src/year2024/day14.rs) [62.28 µs]  | [Day 15](src/year2024/day15.rs) [3.74 ms]   |
+| [Day 16](src/year2024/day16.rs) [1.50 ns]   | [Day 17](src/year2024/day17.rs) [1.99 µs]   | [Day 18](src/year2024/day18.rs) [42.21 ms]  |
+| [Day 19](src/year2024/day19.rs) [29.82 ms]  | [Day 20](src/year2024/day20.rs) [1.29 ns]   | [Day 21](src/year2024/day21.rs) [16.51 µs]  |
+| [Day 22](src/year2024/day22.rs) [41.99 ms]  | [Day 23](src/year2024/day23.rs) [5.21 µs]   | [Day 24](src/year2024/day24.rs) [18.34 µs]  |
+| [Day 25](src/year2024/day25.rs) [1.34 ms]   |                                             |                                             |
+
+
 
 ### [2015](https://adventofcode.com/2015) — 50 ⭐
 
-| Day                             | Day                             | Day                             |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| [Day 01](src/year2015/day01.rs) | [Day 02](src/year2015/day02.rs) | [Day 03](src/year2015/day03.rs) |
-| [Day 04](src/year2015/day04.rs) | [Day 05](src/year2015/day05.rs) | [Day 06](src/year2015/day06.rs) |
-| [Day 07](src/year2015/day07.rs) | [Day 08](src/year2015/day08.rs) | [Day 09](src/year2015/day09.rs) |
-| [Day 10](src/year2015/day10.rs) | [Day 11](src/year2015/day11.rs) | [Day 12](src/year2015/day12.rs) |
-| [Day 13](src/year2015/day13.rs) | [Day 14](src/year2015/day14.rs) | [Day 15](src/year2015/day15.rs) |
-| [Day 16](src/year2015/day16.rs) | [Day 17](src/year2015/day17.rs) | [Day 18](src/year2015/day18.rs) |
-| [Day 19](src/year2015/day19.rs) | [Day 20](src/year2015/day20.rs) | [Day 21](src/year2015/day21.rs) |
-| [Day 22](src/year2015/day22.rs) | [Day 23](src/year2015/day23.rs) | [Day 24](src/year2015/day24.rs) |
-| [Day 25](src/year2015/day25.rs) |                                 |                                 |
+| Day                                         | Day                                         | Day                                         |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| [Day 01](src/year2015/day01.rs) [12.58 µs]  | [Day 02](src/year2015/day02.rs) [91.58 µs]  | [Day 03](src/year2015/day03.rs) [602.51 µs] |
+| [Day 04](src/year2015/day04.rs) [1.02 s]    | [Day 05](src/year2015/day05.rs) [1.37 ns]   | [Day 06](src/year2015/day06.rs) [42.49 ms]  |
+| [Day 07](src/year2015/day07.rs) [256.92 µs] | [Day 08](src/year2015/day08.rs) [172.80 µs] | [Day 09](src/year2015/day09.rs) [11.84 ms]  |
+| [Day 10](src/year2015/day10.rs) [251.81 ms] | [Day 11](src/year2015/day11.rs) [12.75 ms]  | [Day 12](src/year2015/day12.rs) [2.35 ms]   |
+| [Day 13](src/year2015/day13.rs) [282.87 ms] | [Day 14](src/year2015/day14.rs) [30.92 µs]  | [Day 15](src/year2015/day15.rs) [231.61 ms] |
+| [Day 16](src/year2015/day16.rs) [33.49 µs]  | [Day 17](src/year2015/day17.rs) [13.66 ms]  | [Day 18](src/year2015/day18.rs) [270.21 ms] |
+| [Day 19](src/year2015/day19.rs) [501.76 µs] | [Day 20](src/year2015/day20.rs) [50.88 ms]  | [Day 21](src/year2015/day21.rs) [14.78 µs]  |
+| [Day 22](src/year2015/day22.rs) [7.67 ms]   | [Day 23](src/year2015/day23.rs) [4.39 µs]   | [Day 24](src/year2015/day24.rs) [7.53 ms]   |
+| [Day 25](src/year2015/day25.rs) [50.10 ms]  |                                             |                                             |
