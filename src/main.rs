@@ -22,6 +22,7 @@ fn main() {
     let (stars, duration) = empty()
         .chain(year2015())
         .chain(year2024())
+        .chain(year2025())
         .filter(|puzzle| year.is_none_or(|y| y == puzzle.year))
         .filter(|puzzle| day.is_none_or(|d| d == puzzle.day))
         .fold((0, Duration::ZERO), |(stars, duration), Puzzle { year, day, wrapper }| {
@@ -93,4 +94,8 @@ season!(year2024
     day09, day10, day11, day12, day13, day14, day15, day16,
     day17, day18, day19, day20, day21, day22, day23, day24,
     day25
+);
+
+season!(year2025
+    day01, day02
 );

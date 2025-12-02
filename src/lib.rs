@@ -22,3 +22,7 @@ library!(year2024 "Locate the Chief Historian in time for the big Christmas slei
     day17, day18, day19, day20, day21, day22, day23, day24,
     day25
 );
+
+library!(year2025 "Finish decorating the North Pole by December 12th."
+    day01, day02
+);
