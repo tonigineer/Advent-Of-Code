@@ -1,12 +1,13 @@
-[![Rust](https://img.shields.io/badge/Rust-DEA584?style=flat&logo=Rust&logoColor=black)](https://www.rust-lang.org/)
-![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Ftonigineer22%2FAdvent-Of-Code&label=Hits&icon=github&color=%2320c997&message=&style=flat&tz=UTC)
-![Repo Size](https://img.shields.io/github/repo-size/tonigineer/Advent-Of-Code)
-
 <h1 align="center">
   🎄 Advent of Code 🎄
 </h1>
 
-[![Tests](https://github.com/tonigineer/advent-of-code/actions/workflows/tests.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/tests.yml) [![Checks](https://github.com/tonigineer/advent-of-code/actions/workflows/checks.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/checks.yml) ![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code)
+[![Rust](https://img.shields.io/badge/Rust-DEA584?style=flat&logo=Rust&logoColor=black)](https://www.rust-lang.org/)
+[![Tests](https://github.com/tonigineer/advent-of-code/actions/workflows/tests.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/tests.yml)
+[![Checks](https://github.com/tonigineer/advent-of-code/actions/workflows/checks.yml/badge.svg)](https://github.com/tonigineer/advent-of-code/actions/workflows/checks.yml) 
+![GitHub last commit](https://img.shields.io/github/last-commit/tonigineer/advent-of-code)
+![Repo Size](https://img.shields.io/github/repo-size/tonigineer/Advent-Of-Code)
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Ftonigineer22%2FAdvent-Of-Code&label=Hits&icon=github&color=%2320c997&message=&style=flat&tz=UTC)
 
 > <cite> [Advent of Code](https://adventofcode.com/)
 >
