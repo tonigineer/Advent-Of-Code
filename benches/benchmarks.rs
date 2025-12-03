@@ -49,7 +49,12 @@ benchmark!(year2024
     day25
 );
 
+benchmark!(year2025
+    day01, day02, day03
+);
+
 criterion_group!(year2015_group, year2015);
 criterion_group!(year2024_group, year2024);
+criterion_group!(year2025_group, year2025);
 
-criterion_main!(year2015_group, year2024_group);
+criterion_main!(year2015_group, year2024_group, year2025_group);

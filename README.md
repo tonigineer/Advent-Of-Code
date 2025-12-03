@@ -1,3 +1,7 @@
+[![Rust](https://img.shields.io/badge/Rust-DEA584?style=flat&logo=Rust&logoColor=black)](https://www.rust-lang.org/)
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Ftonigineer22%2FAdvent-Of-Code&label=Hits&icon=github&color=%2320c997&message=&style=flat&tz=UTC)
+![Repo Size](https://img.shields.io/github/repo-size/tonigineer/Advent-Of-Code)
+
 <h1 align="center">
   🎄 Advent of Code 🎄
 </h1>
@@ -27,6 +31,14 @@ make checks                   # Run clippy and fmt with cargo
 Input files are downloaded automatically. To enable this, create a file named
 `adventofcode.session` in the project root containing your Advent of Code session
 cookie. Timings are `cargo bench` averages measured on an Intel Core i9-13900K.
+
+### [2025](https://adventofcode.com/2025) — 6 ⭐
+
+| Day                                         | Day                                         | Day                                         |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| [Day 01](src/year2025/day01.rs) [88.289 µs]  | [Day 02](src/year2025/day02.rs) [136.87 ms] | [Day 03](src/year2025/day03.rs) [54.877 µs] |
+
+
 
 ### [2024](https://adventofcode.com/2024) — 50 ⭐
 
