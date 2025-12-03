@@ -31,13 +31,13 @@ const EXAMPLE: &str = \"\";\n\
 #[test]\n\
 fn part1_test() {\n\
     let input = parse(EXAMPLE);\n\
-    assert_eq!(part1(&input), 0);\n\
+    assert_eq!(part1(&input), 42);\n\
 }\n\
 \n\
 #[test]\n\
 fn part2_test() {\n\
     let input = parse(EXAMPLE);\n\
-    assert_eq!(part2(&input), 0);\n\
+    assert_eq!(part2(&input), 42);\n\
 }\n" > "$@";
 		echo "Created $@";
 	fi
@@ -52,15 +52,15 @@ src/year$(YEAR)/day%.rs:
 //! FIX: Summary line.\n\
 \n\
 pub fn parse(input: &str) -> &str {\n\
-    input\n\
+    input.trim()\n\
 }\n\
 \n\
 pub fn part1(input: &str) -> u32 {\n\
-    13\n\
+    42\n\
 }\n\
 \n\
 pub fn part2(input: &str) -> u32 {\n\
-    13\n\
+    42\n\
 }\n" > "$@";
 		echo "Created $@";
 	fi
@@ -138,4 +138,3 @@ help:
 	@echo
 
 .PHONY: $(POSSIBLE_DAYS) bench checks clean help new solve test
-

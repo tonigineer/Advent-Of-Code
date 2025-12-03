@@ -97,5 +97,5 @@ season!(year2024
 );
 
 season!(year2025
-    day01, day02
+    day01, day02, day03
 );

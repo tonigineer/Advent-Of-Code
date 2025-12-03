@@ -15,8 +15,12 @@ pub fn part1(input: &str) -> u64 {
         let end = s_end.parse::<u64>().unwrap();
 
         for num in start..=end {
-            let s = num.to_string();
-            let (left, right) = s.split_at(s.len() / 2);
+            let n_digits = num.ilog10() + 1;
+            let mask: u64 = 10u64.pow((n_digits / 2) as u32);
+
+            let left = num / mask;
+            let right = num % mask;
+
             if left == right {
                 result += num;
             }
