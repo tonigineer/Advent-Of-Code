@@ -6,6 +6,7 @@ use std::ops::{Index, IndexMut};
 /// The grid has a fixed [`width`](Grid::width) and [`height`](Grid::height),
 /// and its elements are stored in a flat [`Vec<T>`] in row-major order:
 /// all elements of row `0` first, followed by row `1`, etc.
+#[derive(Clone)]
 pub struct Grid<T> {
     width: i32,
     height: i32,
