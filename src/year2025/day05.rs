@@ -2,66 +2,50 @@
 //!
 //!
 
-use crate::common::parse::{ParseInteger, ParseUnsigned};
+use crate::common::parse::ParseInteger;
 
-pub fn parse(input: &str) -> &str {
-    input.trim()
+type InputParsed<'a> = (Vec<(u64, u64)>, &'a str);
+
+pub fn parse<'a>(input: &'a str) -> InputParsed<'a> {
+    let (top, bottom) = input.trim().split_once("\n\n").unwrap();
+
+    let ranges = top
+        .lines()
+        .map(|l| {
+            let (s, e) = l.split_once('-').unwrap();
+            (s.parse::<u64>().unwrap(), e.parse::<u64>().unwrap())
+        })
+        .collect();
+
+    (ranges, bottom)
 }
 
-pub fn part1(input: &str) -> u32 {
-    let (fresh, ingredients) = input.trim().split_once("\n\n").unwrap();
+pub fn part1(input: &InputParsed) -> usize {
+    let (ranges, bottom_str) = input;
+    let ingredients = bottom_str.parse_uint_iter::<u64>();
 
-    let mut fresh_ranges = Vec::new();
-
-    for f in fresh.lines() {
-        let (start, end) = f.split_once('-').unwrap();
-        let start = start.parse::<u64>().unwrap();
-        let end = end.parse::<u64>().unwrap();
-        fresh_ranges.push((start, end));
-    }
-
-    let ingredients = ingredients.parse_uint_iter::<u64>();
-
-    // dbg!(fresh_ranges);
-    let mut result = 0;
-    for i in ingredients {
-        for range in fresh_ranges.iter() {
-            if i >= range.0 && i <= range.1 {
-                result += 1;
-                break;
-            }
-        }
-    }
-
-    result
+    ingredients.filter(|&ing| ranges.iter().any(|&(start, end)| ing >= start && ing <= end)).count()
 }
 
-pub fn part2(input: &str) -> u64 {
-    let (fresh, ingredients) = input.trim().split_once("\n\n").unwrap();
+pub fn part2(input: &InputParsed) -> u64 {
+    let mut ranges = input.0.clone();
+    ranges.sort_unstable();
 
-    let mut fresh_ranges = Vec::new();
+    let last = (ranges[0].0, ranges[0].1);
 
-    for f in fresh.lines() {
-        let (start, end) = f.split_once('-').unwrap();
-        let start = start.parse::<u64>().unwrap();
-        let end = end.parse::<u64>().unwrap();
-        fresh_ranges.push((start, end));
-    }
+    let (result, last) = ranges.iter().skip(1).fold((0, last), |acc, &range| {
+        let mut result = acc.0;
+        let mut last = acc.1;
 
-    let ingredients = ingredients.parse_uint_iter::<u64>();
-
-    fresh_ranges.sort_unstable();
-    let mut result = 0;
-    let mut last = *fresh_ranges.iter().nth(0).unwrap();
-    for range in fresh_ranges.iter().skip(1) {
         if last.1 < range.0 {
             result += last.1 - last.0 + 1;
-            last = *range;
+            last = range;
         } else {
             last.1 = last.1.max(range.1);
         }
-    }
 
-    result += last.1 - last.0 + 1;
-    result
+        (result, last)
+    });
+
+    result + last.1 - last.0 + 1
 }
