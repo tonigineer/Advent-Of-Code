@@ -31,7 +31,7 @@ pub fn part2(input: &InputParsed) -> u64 {
     let mut ranges = input.0.clone();
     ranges.sort_unstable();
 
-    let last = (ranges[0].0, ranges[0].1);
+    let last = ranges[0];
 
     let (result, last) = ranges.iter().skip(1).fold((0, last), |acc, &range| {
         let mut result = acc.0;
