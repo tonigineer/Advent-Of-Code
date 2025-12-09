@@ -55,11 +55,11 @@ pub fn parse(input: &str) -> &str {\n\
     input.trim()\n\
 }\n\
 \n\
-pub fn part1(input: &str) -> u32 {\n\
+pub fn part1(input: &str) -> u64 {\n\
     42\n\
 }\n\
 \n\
-pub fn part2(input: &str) -> u32 {\n\
+pub fn part2(input: &str) -> u64 {\n\
     42\n\
 }\n" > "$@";
 		echo "Created $@";
