@@ -1,6 +1,6 @@
 //! # Trash Compactor
 //!
-//!
+//! TODO: Refactor and optimize
 
 pub fn parse(input: &str) -> &str {
     input
