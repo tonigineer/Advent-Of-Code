@@ -20,7 +20,7 @@ pub fn parse(input: &str) -> Vec<(i64, i64)> {
 
 fn point_within_polygon(
     cache: &mut HashMap<(i64, i64), bool>,
-    tiles: &Vec<(i64, i64)>,
+    tiles: &[(i64, i64)],
     point: (i64, i64),
 ) -> bool {
     if let Some(&b) = cache.get(&point) {
@@ -57,18 +57,13 @@ fn edge_intersects_rect(edge: ((i64, i64), (i64, i64)), rect: ((i64, i64), (i64,
     let (rx1, ry1) = rect.0;
     let (rx2, ry2) = rect.1;
 
-    if y1 == y2 && (ry1 < y1 && y1 < ry2) && (x1.max(x2) > rx1 && x1.min(x2) < rx2) {
-        return true;
-    } else if (rx1 < x1 && x1 < rx2) && (y1.max(y2) > ry1 && y1.min(y2) < ry2) {
-        return true;
-    }
-
-    false
+    y1 == y2 && (ry1 < y1 && y1 < ry2) && (x1.max(x2) > rx1 && x1.min(x2) < rx2)
+        || (rx1 < x1 && x1 < rx2) && (y1.max(y2) > ry1 && y1.min(y2) < ry2)
 }
 
 fn is_valid(
     cache: &mut HashMap<(i64, i64), bool>,
-    tiles: &Vec<(i64, i64)>,
+    tiles: &[(i64, i64)],
     p1: &(i64, i64),
     p2: &(i64, i64),
 ) -> bool {
@@ -100,7 +95,7 @@ fn is_valid(
     true
 }
 
-pub fn part1(tiles: &Vec<(i64, i64)>) -> u64 {
+pub fn part1(tiles: &[(i64, i64)]) -> u64 {
     tiles
         .iter()
         .tuple_combinations()
@@ -109,7 +104,7 @@ pub fn part1(tiles: &Vec<(i64, i64)>) -> u64 {
         .unwrap()
 }
 
-pub fn part2(tiles: &Vec<(i64, i64)>) -> u64 {
+pub fn part2(tiles: &[(i64, i64)]) -> u64 {
     let mut cache = HashMap::new();
 
     tiles.iter().tuple_combinations().fold(0, |mut acc, x: (&(i64, i64), &(i64, i64))| {
@@ -118,7 +113,7 @@ pub fn part2(tiles: &Vec<(i64, i64)>) -> u64 {
 
         let size = (p1.0.abs_diff(p2.0) + 1) * (p1.1.abs_diff(p2.1) + 1);
 
-        if size > acc && is_valid(&mut cache, &tiles, &p1, &p2) {
+        if size > acc && is_valid(&mut cache, tiles, p1, p2) {
             acc = size;
         }
 

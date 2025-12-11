@@ -5,13 +5,13 @@
 //! Linear problem Ax = b can be solved by reducing solution space via Gaussian Elimination and then brute force
 //! all remaining solutions for find optimum.
 
-use good_lp::{Expression, Solution, SolverModel, coin_cbc, constraint, variable, variables};
+use good_lp::{Expression, Solution, SolverModel, constraint, microlp, variable, variables};
 use std::collections::{HashSet, VecDeque};
 
 use crate::common::parse::ParseInteger;
 
 pub fn parse(input: &str) -> Vec<Machine> {
-    input.trim().lines().map(|l| Machine::new(l)).collect()
+    input.trim().lines().map(Machine::new).collect()
 }
 
 #[derive(Debug)]
@@ -118,7 +118,7 @@ pub fn part2(machines: &Vec<Machine>) -> u32 {
 
         // Minimize for sum of all buttons
         let buttons_sum = buttons.iter().sum::<Expression>();
-        let mut solver = vars.minimise(buttons_sum).using(coin_cbc);
+        let mut solver = vars.minimise(buttons_sum).using(microlp);
 
         // Build constraints with buttons that affect joltage to meet target joltage
         for (idx, target) in machine.joltage.iter().enumerate() {

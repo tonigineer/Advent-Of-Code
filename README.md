@@ -33,13 +33,14 @@ Input files are downloaded automatically. To enable this, create a file named
 `adventofcode.session` in the project root containing your Advent of Code session
 cookie. Timings are `cargo bench` averages measured on an Intel Core i9-13900K.
 
-### [2025](https://adventofcode.com/2025) — 16 ⭐
+### [2025](https://adventofcode.com/2025) — 22 ⭐
 
 | Day                                         | Day                                          | Day                                         |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | [Day 01](src/year2025/day01.rs) [88.289 µs] | [Day 02](src/year2025/day02.rs) [136.87 ms] | [Day 03](src/year2025/day03.rs) [54.877 µs] |
 | [Day 04](src/year2025/day04.rs) [3.4336 ms] | [Day 05](src/year2025/day05.rs) [75.831 µs] | [Day 06](src/year2025/day06.rs) [126.38 µs] |
-| [Day 07](src/year2025/day07.rs) [391.79 µs] | [Day 08](src/year2025/day08.rs) [73.267 µs] |                                              |
+| [Day 07](src/year2025/day07.rs) [391.79 µs] | [Day 08](src/year2025/day08.rs) [73.267 µs] | [Day 09](src/year2025/day09.rs) [23.739 ms]  |
+| [Day 10](src/year2025/day10.rs) [8.3898 ms] | [Day 11](src/year2025/day11.rs) [136.06 µs]                                               |
 
 
 
