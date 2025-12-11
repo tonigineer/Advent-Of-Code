@@ -1,8 +1,8 @@
 //! # Reactor
 //!
-//
+// TODO: Avoid using string slices.
 
-use std::collections::{HashMap, VecDeque};
+use std::collections::HashMap;
 
 pub fn parse(input: &str) -> HashMap<&str, Vec<&str>> {
     input
@@ -18,57 +18,36 @@ pub fn parse(input: &str) -> HashMap<&str, Vec<&str>> {
 }
 
 pub fn part1(nodes: &HashMap<&str, Vec<&str>>) -> u64 {
-    let mut result = 0;
-
-    let start = "you";
-    let mut q = VecDeque::from([start]);
-
-    while let Some(n) = q.pop_front() {
-        if n == "out" {
-            result += 1;
-            continue;
-        }
-
-        nodes.get(n).unwrap().iter().for_each(|o| q.push_back(o));
-    }
-
-    result
+    dfs(&mut HashMap::new(), nodes, "you", true, true)
 }
 
 pub fn part2(nodes: &HashMap<&str, Vec<&str>>) -> u64 {
-    let start = "svr";
-    let mut seen = HashMap::new();
-    let visited = [false, false];
-
-    solve(&mut seen, nodes, start, visited)
+    dfs(&mut HashMap::new(), nodes, "svr", false, false)
 }
 
-fn solve<'a>(
-    seen: &mut HashMap<(&'a str, [bool; 2]), u64>,
+fn dfs<'a>(
+    seen: &mut HashMap<(&'a str, bool, bool), u64>,
     nodes: &HashMap<&'a str, Vec<&'a str>>,
     node: &'a str,
-    mut visited: [bool; 2],
+    mut fft: bool,
+    mut dac: bool,
 ) -> u64 {
     if node == "out" {
-        if visited[0] && visited[1] {
+        if fft && dac {
             return 1;
         }
         return 0;
     }
 
-    if node == "fft" {
-        visited[0] = true;
-    }
-    if node == "dac" {
-        visited[1] = true;
-    }
-
-    if let Some(&r) = seen.get(&(node, visited)) {
+    if let Some(&r) = seen.get(&(node, fft, dac)) {
         return r;
     }
 
-    let result = nodes.get(node).unwrap().iter().map(|n| solve(seen, nodes, n, visited)).sum();
-    seen.insert((node, visited), result);
+    fft |= node == "fft";
+    dac |= node == "dac";
+
+    let result = nodes.get(node).unwrap().iter().map(|n| dfs(seen, nodes, n, fft, dac)).sum();
+    seen.insert((node, fft, dac), result);
 
     result
 }
