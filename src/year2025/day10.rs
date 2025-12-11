@@ -1,11 +1,12 @@
 //! # Factory
 //!
-//! Refactor and optimize.
+//! TODO: Avoid using external library.
 //!
-//! TODO: Get rid of external library by using Gaussian Elimination to reduze solution space for Ax=b and then DFS it.
+//! Linear problem Ax = b can be solved by reducing solution space via Gaussian Elimination and then brute force
+//! all remaining solutions for find optimum.
 
 use good_lp::{Expression, Solution, SolverModel, coin_cbc, constraint, variable, variables};
-use std::collections::{BinaryHeap, HashSet};
+use std::collections::{HashSet, VecDeque};
 
 use crate::common::parse::ParseInteger;
 
@@ -16,8 +17,8 @@ pub fn parse(input: &str) -> Vec<Machine> {
 #[derive(Debug)]
 pub struct Machine {
     indicator_lights: u16,
-    buttons: Vec<u16>,
-    buttons2: Vec<Vec<usize>>,
+    buttons: Vec<Vec<usize>>,
+    button_masks: Vec<u16>,
     joltage: Vec<u32>,
 }
 
@@ -25,7 +26,7 @@ impl Machine {
     fn new(line: &str) -> Self {
         let mut indicator_lights = 0;
         let mut buttons = Vec::new();
-        let mut buttons2 = Vec::new();
+        let mut button_masks = Vec::new();
 
         // Indicator lights
         let (head, tail) = line.split_once("] (").unwrap();
@@ -39,21 +40,22 @@ impl Machine {
         // Buttons
         let (head, tail) = tail.split_once(") {").unwrap();
         for button_str in head.split_whitespace() {
-            let mut b = 0;
-            let mut b2 = Vec::new();
+            let mut mask = 0;
+            let mut button = Vec::new();
 
             for value in button_str.parse_uint_iter::<u16>() {
-                b ^= 1 << value;
-                b2.push(value as usize);
+                mask ^= 1 << value;
+                button.push(value as usize);
             }
-            buttons.push(b);
-            buttons2.push(b2);
+
+            button_masks.push(mask);
+            buttons.push(button);
         }
 
         // Joltage
         let joltage = tail.parse_uint_iter().collect();
 
-        Self { indicator_lights, buttons, buttons2, joltage }
+        Self { indicator_lights, button_masks, buttons, joltage }
     }
 }
 
@@ -63,10 +65,10 @@ pub fn part1(machines: &Vec<Machine>) -> i16 {
     for machine in machines {
         let mut seen = HashSet::new();
 
-        let mut heap: BinaryHeap<(i16, u16)> = BinaryHeap::new();
-        heap.push((0, 0));
+        let mut q: VecDeque<(i16, u16)> = VecDeque::new();
+        q.push_back((0, 0));
 
-        while let Some((steps, indicator)) = heap.pop() {
+        while let Some((steps, indicator)) = q.pop_front() {
             if indicator == machine.indicator_lights {
                 result -= steps;
                 break;
@@ -76,8 +78,8 @@ pub fn part1(machines: &Vec<Machine>) -> i16 {
                 continue;
             }
 
-            for b in &machine.buttons {
-                heap.push((steps - 1, indicator ^ b));
+            for mask in &machine.button_masks {
+                q.push_back((steps - 1, indicator ^ mask));
             }
         }
     }
@@ -97,7 +99,7 @@ pub fn part2(machines: &Vec<Machine>) -> u32 {
     // b2 * x2 + b3 * x3 + b4 * x4  = 4
     // b0 * x0 + b1 * x1 + b3 * x3  = 7
     //
-    // Sum expressions defined for solver look like:
+    // Sum expressions (joltage) defined for solver look like:
     //
     // &sum = v5 + v4
     // &sum = v1 + v5
@@ -110,7 +112,7 @@ pub fn part2(machines: &Vec<Machine>) -> u32 {
         let mut vars = variables!();
 
         // Init a variable for each button
-        let buttons = (0..machine.buttons2.len())
+        let buttons = (0..machine.buttons.len())
             .map(|_| vars.add(variable().min(0).integer()))
             .collect::<Vec<_>>();
 
@@ -120,7 +122,7 @@ pub fn part2(machines: &Vec<Machine>) -> u32 {
 
         // Build constraints with buttons that affect joltage to meet target joltage
         for (idx, target) in machine.joltage.iter().enumerate() {
-            let joltage = (machine.buttons2.iter().enumerate())
+            let joltage = (machine.buttons.iter().enumerate())
                 .filter(|(_, x)| x.contains(&idx))
                 .map(|(i, _)| buttons[i])
                 .sum::<Expression>();
