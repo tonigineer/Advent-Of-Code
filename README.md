@@ -33,20 +33,20 @@ Input files are downloaded automatically. To enable this, create a file named
 `adventofcode.session` in the project root containing your Advent of Code session
 cookie. Timings are `cargo bench` averages measured on an Intel Core i9-13900K.
 
-### [2025](https://adventofcode.com/2025) — 22 ⭐
+### [2025](https://adventofcode.com/2025) — 24 ⭐
 
 | Day                                         | Day                                          | Day                                         |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | [Day 01](src/year2025/day01.rs) [88.289 µs] | [Day 02](src/year2025/day02.rs) [136.87 ms] | [Day 03](src/year2025/day03.rs) [54.877 µs] |
 | [Day 04](src/year2025/day04.rs) [3.4336 ms] | [Day 05](src/year2025/day05.rs) [75.831 µs] | [Day 06](src/year2025/day06.rs) [126.38 µs] |
-| [Day 07](src/year2025/day07.rs) [391.79 µs] | [Day 08](src/year2025/day08.rs) [73.267 µs] | [Day 09](src/year2025/day09.rs) [23.739 ms]  |
-| [Day 10](src/year2025/day10.rs) [8.3898 ms] | [Day 11](src/year2025/day11.rs) [136.06 µs]                                               |
+| [Day 07](src/year2025/day07.rs) [391.79 µs] | [Day 08](src/year2025/day08.rs) [73.267 µs] | [Day 09](src/year2025/day09.rs) [23.739 ms] |
+| [Day 10](src/year2025/day10.rs) [8.3898 ms] | [Day 11](src/year2025/day11.rs) [136.06 µs] | [Day 12](src/year2025/day12.rs) [3.8818 µs] |
 
 
 
 ### [2024](https://adventofcode.com/2024) — 50 ⭐
 
-| Day                                         | Day                                         | Day                                         |
+| Day                                         | Day                                         | Day                                          |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | [Day 01](src/year2024/day01.rs) [37.42 µs]  | [Day 02](src/year2024/day02.rs) [331.92 µs] | [Day 03](src/year2024/day03.rs) [387.15 µs] |
 | [Day 04](src/year2024/day04.rs) [707.99 µs] | [Day 05](src/year2024/day05.rs) [502.97 µs] | [Day 06](src/year2024/day06.rs) [4.00 s]    |
@@ -56,13 +56,13 @@ cookie. Timings are `cargo bench` averages measured on an Intel Core i9-13900K.
 | [Day 16](src/year2024/day16.rs) [1.50 ns]   | [Day 17](src/year2024/day17.rs) [1.99 µs]   | [Day 18](src/year2024/day18.rs) [42.21 ms]  |
 | [Day 19](src/year2024/day19.rs) [29.82 ms]  | [Day 20](src/year2024/day20.rs) [1.29 ns]   | [Day 21](src/year2024/day21.rs) [16.51 µs]  |
 | [Day 22](src/year2024/day22.rs) [41.99 ms]  | [Day 23](src/year2024/day23.rs) [5.21 µs]   | [Day 24](src/year2024/day24.rs) [18.34 µs]  |
-| [Day 25](src/year2024/day25.rs) [1.34 ms]   |                                             |                                             |
+| [Day 25](src/year2024/day25.rs) [1.34 ms]   |                                             |                                              |
 
 
 
 ### [2015](https://adventofcode.com/2015) — 50 ⭐
 
-| Day                                         | Day                                         | Day                                         |
+| Day                                         | Day                                         | Day                                          |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | [Day 01](src/year2015/day01.rs) [12.58 µs]  | [Day 02](src/year2015/day02.rs) [91.58 µs]  | [Day 03](src/year2015/day03.rs) [602.51 µs] |
 | [Day 04](src/year2015/day04.rs) [1.02 s]    | [Day 05](src/year2015/day05.rs) [1.37 ns]   | [Day 06](src/year2015/day06.rs) [42.49 ms]  |
@@ -72,4 +72,4 @@ cookie. Timings are `cargo bench` averages measured on an Intel Core i9-13900K.
 | [Day 16](src/year2015/day16.rs) [33.49 µs]  | [Day 17](src/year2015/day17.rs) [13.66 ms]  | [Day 18](src/year2015/day18.rs) [270.21 ms] |
 | [Day 19](src/year2015/day19.rs) [501.76 µs] | [Day 20](src/year2015/day20.rs) [50.88 ms]  | [Day 21](src/year2015/day21.rs) [14.78 µs]  |
 | [Day 22](src/year2015/day22.rs) [7.67 ms]   | [Day 23](src/year2015/day23.rs) [4.39 µs]   | [Day 24](src/year2015/day24.rs) [7.53 ms]   |
-| [Day 25](src/year2015/day25.rs) [50.10 ms]  |                                             |                                             |
+| [Day 25](src/year2015/day25.rs) [50.10 ms]  |                                             |                                              |
